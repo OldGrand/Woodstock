@@ -1,32 +1,86 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Woodstock.DAL;
+using Woodstock.DAL.Entities;
 
 namespace Woodstock
 {
     public class Startup
     {
+        private IConfiguration _configuration { get; set; }
+
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            _configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<WoodstockDbContext>(options =>
+            {
+                options.UseLazyLoadingProxies();
+                options.UseSqlServer(_configuration.GetConnectionString("DefaultConnection"));
+            });
+
+            services.AddIdentity<User, IdentityRole<int>>(config =>
+            {
+                config.Password.RequireDigit = false;
+                config.Password.RequireLowercase = false;
+                config.Password.RequireNonAlphanumeric = false;
+                config.Password.RequireUppercase = false;
+                config.Password.RequiredLength = 8;
+
+                config.User.RequireUniqueEmail = true;
+                config.SignIn.RequireConfirmedEmail = false;
+            })
+                .AddEntityFrameworkStores<WoodstockDbContext>()
+                .AddDefaultTokenProviders();
+
+            services.AddAuthentication()
+                .AddCookie(config =>
+                {
+                    config.LoginPath = "/Account/Login";
+                    config.AccessDeniedPath = "/Home/AccessDenied";
+                })
+                .AddFacebook(config =>
+                {
+                    config.AppId = _configuration["Authentication:Facebook:AppId"];
+                    config.AppSecret = _configuration["Authentication:Facebook:AppSecret"];
+                })
+                .AddVkontakte(config =>
+                {
+                    config.ClientId = _configuration["Authentication:VK:AppId"];
+                    config.ClientSecret = _configuration["Authentication:VK:AppSecret"];
+                })
+                .AddGoogle(config =>
+                {
+                    config.ClientId = _configuration["Authentication:Google:AppId"];
+                    config.ClientSecret = _configuration["Authentication:Google:AppSecret"];
+                });
+
+            services.AddAuthorization(config =>
+            {
+                config.AddPolicy("Admin", builder =>
+                {
+                    builder.RequireRole(ClaimRoles.Admin);
+                });
+
+                config.AddPolicy("User", builder =>
+                {
+                    builder.RequireRole(ClaimRoles.User);
+                });
+
+            });
+
             services.AddControllersWithViews();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -35,8 +89,6 @@ namespace Woodstock
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
@@ -44,13 +96,12 @@ namespace Woodstock
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapDefaultControllerRoute();
             });
         }
     }
