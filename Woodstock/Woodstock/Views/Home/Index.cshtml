@@ -1,8 +1,157 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewBag.Title = "Woodstock Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="slider__wrapper">
+    <div id="slider">
+        <div class="slider-inner">
+            <div id="slider-content">
+                <div class="meta">Species</div>
+                <h2 id="slide-title">Amur <br>Leopard</h2>
+                <span data-slide-title="0">Amur <br>Leopard</span>
+                <span data-slide-title="1">Asiatic <br>Lion</span>
+                <span data-slide-title="2">Siberian <br>Tiger</span>
+                <span data-slide-title="3">Brown <br>Bear</span>
+                <div class="meta">Status</div>
+                <div id="slide-status">Critically Endangered</div>
+                <span data-slide-status="0">Critically Endangered</span>
+                <span data-slide-status="1">Endangered</span>
+                <span data-slide-status="2">Endangered</span>
+                <span data-slide-status="3">Least Concern</span>
+            </div>
+        </div>
+
+        <img src="/images/watches/1.png" class="image" />
+        <img src="/images/watches/2.png" class="image" />
+        <img src="/images/watches/3.png" class="image" />
+        <img src="/images/watches/4.png" class="image" />
+
+        <div id="pagination">
+            <button class="active" data-slide="0"></button>
+            <button data-slide="1"></button>
+            <button data-slide="2"></button>
+            <button data-slide="3"></button>
+        </div>
+
+    </div>
+</div>
+
+<div class="intro">
+    <div class="intro__media">
+        <video class="intro__media-video" src="./images/video.mp4" autoplay muted loop></video>
+    </div>
+    <div class="intro__content">
+        <div class="content__title">
+            <h2>Why Us</h2>
+        </div>
+        <div class="content__container">
+            <div class="content">
+                <div class="content__wrapper">
+                    <h2 class="content__name">Lorem ipsum</h2>
+                    <p class="content__descr">Lorem ipsum dolor sit amet, orci libero suspendisse lacus, feugiat lacus quo at vel, quam at lorem vel metus massa</p>
+                </div>
+
+                <div class="author">
+                    <img src="/images/author.jpg" alt="author" class="author__portrait">
+                    <div class="author__info">
+                        <span class="author__name">
+                            Random Name
+                        </span>
+                        <span class="author__position">
+                            C.E.O. - Up Solution
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="content">
+                <div class="content__wrapper">
+                    <h2 class="content__name">Lorem ipsum</h2>
+                    <p class="content__descr">Lorem ipsum dolor sit amet, orci libero suspendisse lacus, feugiat lacus quo at vel, quam at lorem vel metus massa</p>
+                </div>
+
+                <div class="author">
+                    <img src="/images/author.jpg" alt="author" class="author__portrait">
+                    <div class="author__info">
+                        <span class="author__name">
+                            Random Name
+                        </span>
+                        <span class="author__position">
+                            C.F.O. - Up Solution
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="content">
+                <div class="content__wrapper">
+                    <h2 class="content__name">Lorem ipsum</h2>
+                    <p class="content__descr">Lorem ipsum dolor sit amet, orci libero suspendisse lacus, feugiat lacus quo at vel, quam at lorem vel metus massa</p>
+                </div>
+
+                <div class="author">
+                    <img src="/images/author.jpg" alt="author" class="author__portrait">
+                    <div class="author__info">
+                        <span class="author__name">
+                            Random Billy
+                        </span>
+                        <span class="author__position">
+                            C.V.O. - Up Solution
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="news">
+    <div class="news__container">
+        <div class="news__content">
+            <div class="Modern-Slider">
+                <div class="item">
+                    <div class="img-fill">
+                        <video class="intro__media-video" src="./images/watches/Новая папка/1.mp4" autoplay muted loop></video>
+                        <div class="info">
+                            <div>
+                                <h3>Full Width Slider With Layers</h3>
+                                <h5>You can easily add image, html formatted texts and video layers over each slide and each layer accepts unique animation.</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="img-fill">
+                        <video class="intro__media-video" src="./images/watches/Новая папка/2.mp4" autoplay muted loop></video>
+                        <div class="info">
+                            <div>
+                                <h3>Fully responsive Scales with its container</h3>
+                                <h5>Donec id ornare dui. Aenean tristique condimentum elit, quis blandit nisl varius sit amet. Sed eleifend felis quis massa viverra</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="img-fill">
+                        <video class="intro__media-video" src="./images/watches/Новая папка/3.mp4" autoplay muted loop></video>
+                        <div class="info">
+                            <div>
+                                <h3>Awesome Transtions With CSS3</h3>
+                                <h5>Donec id ornare dui. Aenean tristique condimentum elit, quis blandit nisl varius sit amet. Sed eleifend felis quis massa viverra</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="img-fill">
+                        <video class="intro__media-video" src="./images/watches/Новая папка/4.mp4" autoplay muted loop></video>
+                        <div class="info">
+                            <div>
+                                <h3>Separate settings per breakpoint</h3>
+                                <h5>Donec id ornare dui. Aenean tristique condimentum elit, quis blandit nisl varius sit amet. Sed eleifend felis quis massa viverra</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

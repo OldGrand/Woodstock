@@ -11,23 +11,16 @@ namespace Woodstock.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
         private readonly WoodstockDbContext woodstockDbContext;
 
-        public HomeController(ILogger<HomeController> logger, WoodstockDbContext woodstockDbContext)
+        public HomeController(WoodstockDbContext woodstockDbContext)
         {
-            _logger = logger;
             this.woodstockDbContext = woodstockDbContext;
         }
 
         public IActionResult Index()
         {
-            woodstockDbContext.Users.ToList();
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
+            //woodstockDbContext.Users.ToList();
             return View();
         }
     }

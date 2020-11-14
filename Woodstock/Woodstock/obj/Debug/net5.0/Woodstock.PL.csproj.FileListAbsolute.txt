@@ -62,7 +62,6 @@ C:\Users\Sergey\Desktop\Woodstock\Woodstock\Woodstock\obj\Debug\net5.0\Woodstock
 C:\Users\Sergey\Desktop\Woodstock\Woodstock\Woodstock\obj\Debug\net5.0\Woodstock.PL.TagHelpers.output.cache
 C:\Users\Sergey\Desktop\Woodstock\Woodstock\Woodstock\obj\Debug\net5.0\Woodstock.PL.RazorCoreGenerate.cache
 C:\Users\Sergey\Desktop\Woodstock\Woodstock\Woodstock\obj\Debug\net5.0\Razor\Views\Home\Index.cshtml.g.cs
-C:\Users\Sergey\Desktop\Woodstock\Woodstock\Woodstock\obj\Debug\net5.0\Razor\Views\Home\Privacy.cshtml.g.cs
 C:\Users\Sergey\Desktop\Woodstock\Woodstock\Woodstock\obj\Debug\net5.0\Razor\Views\Shared\_Layout.cshtml.g.cs
 C:\Users\Sergey\Desktop\Woodstock\Woodstock\Woodstock\obj\Debug\net5.0\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
 C:\Users\Sergey\Desktop\Woodstock\Woodstock\Woodstock\obj\Debug\net5.0\Razor\Views\_ViewImports.cshtml.g.cs
