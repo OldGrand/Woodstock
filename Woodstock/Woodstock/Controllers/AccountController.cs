@@ -63,15 +63,7 @@ namespace Woodstock.PL.Controllers
                 return View(nameof(LoginRegister), loginRegisterBM);
             }
 
-            var confirmToken = await _accountService.RequestEmailConfirmationAsync(userDTO);
-            var callbackUrl = Url.Action("ConfirmEmail", "Account", 
-                                         new { userDTO.Email, confirmToken, loginRegisterBM.ReturnUrl }, 
-                                         HttpContext.Request.Scheme);
-
-            await _emailService.SendEmailAsync(userDTO.Email, "Confirm your account",
-                $"Чтобы закончить регистрацию - перейдите по <a href='{callbackUrl}'>ссылке</a>");
-
-            return PartialView("_NotificationPartial", "Check your email");
+            return await SendEmailAsync(userDTO, loginRegisterBM.Register.Email, loginRegisterBM.ReturnUrl);
         }
 
         [HttpGet]
@@ -94,6 +86,52 @@ namespace Woodstock.PL.Controllers
         {
             await _accountService.LogoutAsync();
             return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult ExternalLogin(string provider, string returnUrl)
+        {
+            var redirectUrl = Url.Action(nameof(ExternalSignIn), "Account", new { returnUrl });
+            var properties = _accountService.ConfigureExternalAuthentication(provider, redirectUrl);
+            return Challenge(properties, provider);
+        }
+
+        public async Task<IActionResult> ExternalSignIn(string returnUrl)
+        {
+            var signInResult = await _accountService.ExternalLoginAsync();
+
+            if (signInResult.Succeeded)
+                return Redirect(returnUrl);
+            return View(nameof(ExternalRegistration), new ExternalRegisterBindingModel { ReturnUrl = returnUrl });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ExternalRegistration(ExternalRegisterBindingModel extRegisterBM)
+        {
+            var userDTO = _mapper.Map<UserDTO>(extRegisterBM);
+            var extRegisterIdentityResult = await _accountService.ExternalRegisterAsync(userDTO);
+
+            if (!extRegisterIdentityResult.Succeeded)
+            {
+                foreach (var error in extRegisterIdentityResult.Errors)
+                    ModelState.AddModelError(string.Empty, error.Description);
+                return View(extRegisterBM);
+            }
+
+            return await SendEmailAsync(userDTO, extRegisterBM.Email, extRegisterBM.ReturnUrl);
+        }
+
+        private async Task<IActionResult> SendEmailAsync(UserDTO userDTO, string email, string returnUrl)
+        {
+            var confirmToken = await _accountService.RequestEmailConfirmationAsync(userDTO);
+            var callbackUrl = Url.Action("ConfirmEmail", "Account",
+                                         new { email, confirmToken, returnUrl },
+                                         HttpContext.Request.Scheme);
+
+            await _emailService.SendEmailAsync(email, "Confirm your account",
+                $"Чтобы закончить регистрацию - перейдите по <a href='{callbackUrl}'>ссылке</a>");
+
+            return PartialView("_NotificationPartial", "Check your email");
         }
     }
 }

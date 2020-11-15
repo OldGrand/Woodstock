@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Linq;
@@ -57,6 +58,33 @@ namespace Woodstock.BLL.Services
         public async Task LogoutAsync()
         {
             await _signInManager.SignOutAsync();
+        }
+
+        public AuthenticationProperties ConfigureExternalAuthentication(string provider, string redirectUrl)
+        {
+            return _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
+        }
+
+        public async Task<SignInResult> ExternalLoginAsync()
+        {
+            var externalLoginInfo = await _signInManager.GetExternalLoginInfoAsync();
+            return await _signInManager.ExternalLoginSignInAsync(externalLoginInfo.LoginProvider, 
+                                                                 externalLoginInfo.ProviderKey, 
+                                                                 false, false);
+        }
+
+        public async Task<IdentityResult> ExternalRegisterAsync(UserDTO userDTO)
+        {
+            var externalLoginInfo = await _signInManager.GetExternalLoginInfoAsync();
+            var user = await _userManager.FindByEmailAsync(userDTO.Email);
+
+            if (user is null)
+            {
+                user = _mapper.Map<User>(userDTO);
+                await _userManager.CreateAsync(user);
+            }
+
+            return await _userManager.AddLoginAsync(user, externalLoginInfo);
         }
     }
 }

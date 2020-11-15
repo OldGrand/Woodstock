@@ -19,8 +19,29 @@ using Woodstock.PL.Models.BindingModels;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 2 "C:\Users\Sergey\Desktop\Woodstock\Woodstock\Woodstock\Views\_ViewImports.cshtml"
+using Microsoft.AspNetCore.Authentication.Facebook;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 3 "C:\Users\Sergey\Desktop\Woodstock\Woodstock\Woodstock\Views\_ViewImports.cshtml"
+using AspNet.Security.OAuth.Vkontakte;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 4 "C:\Users\Sergey\Desktop\Woodstock\Woodstock\Woodstock\Views\_ViewImports.cshtml"
+using Microsoft.AspNetCore.Authentication.Google;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"c48a3a1c56eb463e2b58424deb53d2c6110ab670", @"/Views/Shared/_NotificationPartial.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"73b6f99c898d592520f1be5849673b5c2b720d2c", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"73d781db4523ef8ccd5e43fc850e15c81aca08c4", @"/Views/_ViewImports.cshtml")]
     public class Views_Shared__NotificationPartial : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<string>
     {
         #pragma warning disable 1998

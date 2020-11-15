@@ -1,0 +1,14 @@
+﻿@model ExternalRegisterBindingModel
+
+<h1>Для продолжения введите Email</h1>
+<form asp-controller="Account" asp-action="ExternalRegistration" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+    <div asp-validation-summary="ModelOnly"></div>
+    <div>
+        <label asp-for="Email"></label>
+        <input asp-for="Email" />
+        <span asp-validation-for="Email"></span>
+    </div>
+    <div>
+        <input type="submit" value="Save" />
+    </div>
+</form>

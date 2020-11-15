@@ -19,8 +19,29 @@ using Woodstock.PL.Models.BindingModels;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 2 "C:\Users\Sergey\Desktop\Woodstock\Woodstock\Woodstock\Views\_ViewImports.cshtml"
+using Microsoft.AspNetCore.Authentication.Facebook;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 3 "C:\Users\Sergey\Desktop\Woodstock\Woodstock\Woodstock\Views\_ViewImports.cshtml"
+using AspNet.Security.OAuth.Vkontakte;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 4 "C:\Users\Sergey\Desktop\Woodstock\Woodstock\Woodstock\Views\_ViewImports.cshtml"
+using Microsoft.AspNetCore.Authentication.Google;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"7091c65830b0329e613be026ede8a57552863778", @"/Views/_ViewStart.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"73b6f99c898d592520f1be5849673b5c2b720d2c", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"73d781db4523ef8ccd5e43fc850e15c81aca08c4", @"/Views/_ViewImports.cshtml")]
     public class Views__ViewStart : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         #pragma warning disable 1998
