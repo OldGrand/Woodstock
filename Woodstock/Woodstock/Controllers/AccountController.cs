@@ -35,9 +35,9 @@ namespace Woodstock.PL.Controllers
                 return View(nameof(LoginRegister), loginRegisterBM);
 
             var userDTO = _mapper.Map<UserDTO>(loginRegisterBM.Login);
-            var signInResult = await _accountService.LoginAsync(userDTO, loginRegisterBM.Login.RememberMe, false);
-
-            if (!signInResult.Succeeded)
+            var signInResultDTO = await _accountService.LoginAsync(userDTO, loginRegisterBM.Login.RememberMe, false);
+            
+            if (!signInResultDTO.Succeeded)
             {
                 ModelState.AddModelError(string.Empty, "Неверный логин или пароль");
                 return View(nameof(LoginRegister), loginRegisterBM);
@@ -55,7 +55,7 @@ namespace Woodstock.PL.Controllers
 
             var userDTO = _mapper.Map<UserDTO>(loginRegisterBM.Register);
             var identityResult = await _accountService.RegisterAsync(userDTO, ClaimRoles.User);
-
+            
             if (!identityResult.Succeeded)
             {
                 foreach (var error in identityResult.Errors)
@@ -101,6 +101,7 @@ namespace Woodstock.PL.Controllers
         {
             var redirectUrl = Url.Action(nameof(ExternalSignIn), "Account", new { returnUrl });
             var properties = _accountService.ConfigureExternalAuthentication(provider, redirectUrl);
+            
             return Challenge(properties, provider);
         }
 

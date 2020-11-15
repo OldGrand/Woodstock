@@ -31,7 +31,7 @@ namespace Woodstock
                 options.UseSqlServer(_configuration.GetConnectionString("DefaultConnection"));
             });
 
-            services.AddAutoMapper(typeof(ProfileBLL));
+            services.AddAutoMapper(typeof(ProfileBLL), typeof(ProfilePL));
             services.AddUnitOfWork();
             services.AddBusinessLogicLayerServices();
 

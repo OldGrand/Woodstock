@@ -25,21 +25,25 @@ namespace Woodstock.BLL.Services
             _mapper = mapper;
         }
 
-        public async Task<SignInResult> LoginAsync(UserDTO userDTO, bool isPersistent, bool lockoutOnFailure)
+        public async Task<SignInResultDTO> LoginAsync(UserDTO userDTO, bool isPersistent, bool lockoutOnFailure)
         {
             var user = await _userManager.FindByEmailAsync(userDTO.Email);
 
             if (user is null)
                 user = _mapper.Map<User>(userDTO);
             
-            return await _signInManager.PasswordSignInAsync(user, userDTO.Password, isPersistent, lockoutOnFailure);
+            var signInResult = await _signInManager.PasswordSignInAsync(user, userDTO.Password, 
+                                                                        isPersistent, lockoutOnFailure);
+
+            return _mapper.Map<SignInResultDTO>(signInResult);
         }
 
-        public async Task<IdentityResult> RegisterAsync(UserDTO userDTO, string claimRole)
+        public async Task<IdentityResultDTO> RegisterAsync(UserDTO userDTO, string claimRole)
         {
             var user = _mapper.Map<User>(userDTO);
             await _userManager.CreateAsync(user, userDTO.Password);
-            return await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, claimRole));
+            var identityResult = await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, claimRole));
+            return _mapper.Map<IdentityResultDTO>(identityResult);
         }
 
         public async Task CompleteEmailConfirmationAsync(string email, string confirmToken)
@@ -63,15 +67,16 @@ namespace Woodstock.BLL.Services
             return _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
         }
 
-        public async Task<SignInResult> ExternalLoginAsync()
+        public async Task<SignInResultDTO> ExternalLoginAsync()
         {
             var externalLoginInfo = await _signInManager.GetExternalLoginInfoAsync();
-            return await _signInManager.ExternalLoginSignInAsync(externalLoginInfo.LoginProvider, 
+            var signInResult = await _signInManager.ExternalLoginSignInAsync(externalLoginInfo.LoginProvider, 
                                                                  externalLoginInfo.ProviderKey, 
                                                                  false, false);
+            return _mapper.Map<SignInResultDTO>(signInResult);
         }
 
-        public async Task<IdentityResult> ExternalRegisterAsync(UserDTO userDTO)
+        public async Task<IdentityResultDTO> ExternalRegisterAsync(UserDTO userDTO)
         {
             var externalLoginInfo = await _signInManager.GetExternalLoginInfoAsync();
             var user = await _userManager.FindByEmailAsync(userDTO.Email);
@@ -82,7 +87,8 @@ namespace Woodstock.BLL.Services
                 await _userManager.CreateAsync(user);
             }
 
-            return await _userManager.AddLoginAsync(user, externalLoginInfo);
+            var identityResult = await _userManager.AddLoginAsync(user, externalLoginInfo);
+            return _mapper.Map<IdentityResultDTO>(identityResult);
         }
 
         public async Task<string> GeneratePasswordResetTokenAsync(string email)
@@ -105,10 +111,11 @@ namespace Woodstock.BLL.Services
             return await _userManager.GenerateEmailConfirmationTokenAsync(user);
         }
 
-        public async Task<IdentityResult> ResetPasswordAsync(ResetPasswordDTO resetPasswordDTO)
+        public async Task<IdentityResultDTO> ResetPasswordAsync(ResetPasswordDTO resetPasswordDTO)
         {
             var user = await _userManager.FindByEmailAsync(resetPasswordDTO.Email);
-            return await _userManager.ResetPasswordAsync(user, resetPasswordDTO.ResetToken, resetPasswordDTO.Password);
+            var identityResult = await _userManager.ResetPasswordAsync(user, resetPasswordDTO.ResetToken, resetPasswordDTO.Password);
+            return _mapper.Map<IdentityResultDTO>(identityResult);
         }
     }
 }
