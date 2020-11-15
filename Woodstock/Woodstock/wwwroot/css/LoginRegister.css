@@ -1,0 +1,155 @@
+﻿.login-register {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #242424;
+    width: 100vw;
+    height: 100vh;
+}
+
+.login-register__container {
+    display: flex;
+    flex-direction: column;
+    width: 700px;
+    height: 300px;
+    border: 3px dashed #2f2f2f;
+    border-radius: 7px;
+    padding: 20px;
+}
+
+.login-register__header {
+    display: flex;
+    width: 70%;
+    margin: auto;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.login-register__title {
+    font-family: "Playfair Display";
+    font-weight: 300;
+    font-size: 30px;
+    color: #616161;
+    text-transform: capitalize;
+    cursor: pointer;
+    transition: color ease .2s;
+}
+
+.login-register__title:hover {
+    color: #fff;
+}
+
+.title_active {
+    font-weight: 700;
+    color: #fff;
+}
+
+.login-register__froms {
+    flex-grow: 1;
+    position: relative;
+}
+
+.validation-summary-errors > ul {
+    list-style: none;
+    color: red;
+    padding-left: 0;
+}
+
+.form {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    transition: all ease-out .2s;
+}
+
+.form_invisible {
+    display: none;
+}
+
+.form-span {
+    color: red;
+    font-weight: 300;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.control-label {
+    font: 12px/24px "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.form-input { 
+/*input[type="text"],
+input[type="password"] {*/
+    border-radius: 3px;
+    background-color: #2f2f2f;
+    border-style: none;
+    font-size: 0.875rem;
+    padding: 0rem 0.9375rem;
+    height: 2.8125rem;
+    font-family: 'Lato';
+    color: #fff;
+    font-weight: 300;
+}
+
+.form-submit {
+    background-color: #cb9400;
+    border-style: none;
+    border-radius: 3px;
+    padding: 5px 10px;
+    text-transform: uppercase;
+    color: #fff;
+    transition: background-color ease .2s;
+    font-size: 13px;
+    font-weight: 300;
+    width: 140px;
+    height: 45px;
+    font-family: 'Playfair Display';
+    margin-top: 15px;
+}
+
+.form-submit:hover {
+    background-color: #e9ab00;
+}
+
+.extended-group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+}
+
+.form-socials {
+    display: flex;
+    align-items: center;
+    margin-top: 16px;
+}
+
+.svg__fb_color,
+.svg__google_color,
+.svg__vk_color {
+    width: 40px;
+    height: 40px;
+    transition: fill ease .2s;
+}
+
+.social-form__link + .social-form__link {
+    margin-left: 15px;
+}
+
+.svg__fb_color:hover,
+.svg__google_color:hover,
+.svg__vk_color:hover {
+    fill-opacity: .5;
+}

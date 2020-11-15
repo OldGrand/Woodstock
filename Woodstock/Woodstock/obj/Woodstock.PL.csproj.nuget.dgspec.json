@@ -62,6 +62,94 @@
         }
       }
     },
+    "C:\\Users\\Sergey\\Desktop\\Woodstock\\Woodstock\\Woodstock.BLL\\Woodstock.BLL.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Sergey\\Desktop\\Woodstock\\Woodstock\\Woodstock.BLL\\Woodstock.BLL.csproj",
+        "projectName": "Woodstock.BLL",
+        "projectPath": "C:\\Users\\Sergey\\Desktop\\Woodstock\\Woodstock\\Woodstock.BLL\\Woodstock.BLL.csproj",
+        "packagesPath": "C:\\Users\\Sergey\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Sergey\\Desktop\\Woodstock\\Woodstock\\Woodstock.BLL\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Sergey\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "C:\\Users\\Sergey\\Desktop\\Woodstock\\Woodstock\\Woodstock.DAL\\Woodstock.DAL.csproj": {
+                "projectPath": "C:\\Users\\Sergey\\Desktop\\Woodstock\\Woodstock\\Woodstock.DAL\\Woodstock.DAL.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[10.1.1, )"
+            },
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[8.1.0, )"
+            },
+            "MailKit": {
+              "target": "Package",
+              "version": "[2.9.0, )"
+            },
+            "Microsoft.AspNetCore.Identity": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.Extensions.Identity.Core": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "MimeKit": {
+              "target": "Package",
+              "version": "[2.9.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
     "C:\\Users\\Sergey\\Desktop\\Woodstock\\Woodstock\\Woodstock.DAL\\Woodstock.DAL.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -161,6 +249,9 @@
               "C:\\Users\\Sergey\\Desktop\\Woodstock\\Woodstock\\Infrastructure\\Infrastructure.csproj": {
                 "projectPath": "C:\\Users\\Sergey\\Desktop\\Woodstock\\Woodstock\\Infrastructure\\Infrastructure.csproj"
               },
+              "C:\\Users\\Sergey\\Desktop\\Woodstock\\Woodstock\\Woodstock.BLL\\Woodstock.BLL.csproj": {
+                "projectPath": "C:\\Users\\Sergey\\Desktop\\Woodstock\\Woodstock\\Woodstock.BLL\\Woodstock.BLL.csproj"
+              },
               "C:\\Users\\Sergey\\Desktop\\Woodstock\\Woodstock\\Woodstock.DAL\\Woodstock.DAL.csproj": {
                 "projectPath": "C:\\Users\\Sergey\\Desktop\\Woodstock\\Woodstock\\Woodstock.DAL\\Woodstock.DAL.csproj"
               }
@@ -180,6 +271,14 @@
             "AspNet.Security.OAuth.Vkontakte": {
               "target": "Package",
               "version": "[5.0.0, )"
+            },
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[10.1.1, )"
+            },
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[8.1.0, )"
             },
             "Microsoft.AspNetCore.Authentication.Facebook": {
               "target": "Package",

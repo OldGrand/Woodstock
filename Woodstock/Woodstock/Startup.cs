@@ -1,3 +1,4 @@
+using AutoMapper;
 using Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -8,6 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Woodstock.DAL;
 using Woodstock.DAL.Entities;
+using Woodstock.PL.Extensions;
+using Woodstock.PL.Profiles;
 
 namespace Woodstock
 {
@@ -28,6 +31,10 @@ namespace Woodstock
                 options.UseSqlServer(_configuration.GetConnectionString("DefaultConnection"));
             });
 
+            services.AddAutoMapper(typeof(ProfileBLL));
+            services.AddUnitOfWork();
+            services.AddBusinessLogicLayerServices();
+
             services.AddIdentity<User, IdentityRole<int>>(config =>
             {
                 config.Password.RequireDigit = false;
@@ -42,12 +49,14 @@ namespace Woodstock
                 .AddEntityFrameworkStores<WoodstockDbContext>()
                 .AddDefaultTokenProviders();
 
+            services.ConfigureApplicationCookie(config =>
+            {
+                config.LoginPath = "/Account/LoginRegister";
+                config.AccessDeniedPath = "/Home/AccessDenied";
+                config.LogoutPath = "/Account/Logout";
+            });
+
             services.AddAuthentication()
-                .AddCookie(config =>
-                {
-                    config.LoginPath = "/Account/Login";
-                    config.AccessDeniedPath = "/Home/AccessDenied";
-                })
                 .AddFacebook(config =>
                 {
                     config.AppId = _configuration["Authentication:Facebook:AppId"];

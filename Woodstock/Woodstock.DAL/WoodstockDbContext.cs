@@ -22,7 +22,7 @@ namespace Woodstock.DAL
 
         public WoodstockDbContext(DbContextOptions options) : base(options)
         {
-            Database.EnsureDeleted();
+            //Database.EnsureDeleted();
             Database.EnsureCreated();
         }
 

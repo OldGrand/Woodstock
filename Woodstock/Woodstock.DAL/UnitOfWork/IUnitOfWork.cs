@@ -7,7 +7,6 @@ namespace Woodstock.DAL.Interfaces
 {
     public interface IUnitOfWork : IDisposable
     {
-        public IQueryable<User> UserRepository { get; }
         public IQueryable<BodyMaterial> BodyMaterialRepository { get; }
         public IQueryable<Color> ColorRepository { get; }
         public IQueryable<Country> CountryRepository { get; }

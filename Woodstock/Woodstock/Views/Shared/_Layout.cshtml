@@ -33,12 +33,24 @@
                     <div class="topbar__list-right">
                         <ul class="list">
                             <li class="list__item">
-                                <a href="" class="list__link">
-                                    <svg class="login-svg svg" viewBox="0 0 512 512">
-                                        <use xlink:href="/images/icons/login.svg#login"></use>
-                                    </svg>
-                                    LOGIN / REGISTER
-                                </a>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <a class="list__link">
+                                        @User.Identity.Name
+                                    </a>
+                                    <form asp-controller="Account" asp-action="Logout" method="post">
+                                        <input type="submit" value="Выйти" class="list__link" />
+                                    </form>
+                                }
+                                else
+                                {
+                                    <a asp-controller="Account" asp-action="LoginRegister" class="list__link">
+                                        <svg class="login-svg svg" viewBox="0 0 512 512">
+                                            <use xlink:href="/images/icons/login.svg#login"></use>
+                                        </svg>
+                                        LOGIN / REGISTER
+                                    </a>
+                                }
                             </li>
                             <li class="list__item">
                                 <a href="" class="list__link">
@@ -88,7 +100,7 @@
                     </div>
 
                     <div class="logo">
-                        <a href="" class="logo__link">
+                        <a asp-controller="Home" asp-action="Index" class="logo__link">
                             <img src="/images/woodstock-logo.png" alt="Logo" class="logo__img">
                         </a>
                     </div>
@@ -278,18 +290,13 @@
             </p>
 
             <div class="copyright__addition">
-                <img src="./images/payment_cards.png" alt="payment cards">
+                <img src="~/images/payment_cards.png" alt="payment cards">
             </div>
         </div>
     </footer>
 
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-    <script src='https://kenwheeler.github.io/slick/slick/slick.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/r83/three.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.4/TweenMax.min.js'></script>
     <script src="~/js/script.js"></script>
-    <script src="~/js/footerSlider.js"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

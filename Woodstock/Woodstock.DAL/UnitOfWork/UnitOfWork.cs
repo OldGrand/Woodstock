@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Woodstock.DAL.Entities;
@@ -9,7 +8,7 @@ namespace Woodstock.DAL.UnitOfWork
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private DbContext _context;
+        private WoodstockDbContext _context;
 
         private IQueryable<User> _userRepository;
         private IQueryable<BodyMaterial> _bodyMaterialRepository;
@@ -39,7 +38,7 @@ namespace Woodstock.DAL.UnitOfWork
         public IQueryable<StrapMaterial> StrapMaterialRepository => _strapMaterialRepository ??= _context.Set<StrapMaterial>();
         public IQueryable<Watch> WatchRepository => _watchRepository ??= _context.Set<Watch>();
 
-        public UnitOfWork(DbContext context)
+        public UnitOfWork(WoodstockDbContext context)
         {
             _context = context;
         }
