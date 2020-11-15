@@ -9,11 +9,13 @@ namespace Woodstock.BLL.Interfaces
     {
         Task<SignInResult> LoginAsync(UserDTO userDTO, bool isPersistent, bool lockoutOnFailure);
         Task<IdentityResult> RegisterAsync(UserDTO userDTO, string claimRole);
-        Task<string> RequestEmailConfirmationAsync(UserDTO userDTO);
         Task CompleteEmailConfirmationAsync(string email, string confirmToken);
         Task LogoutAsync();
         AuthenticationProperties ConfigureExternalAuthentication(string provider, string redirectUrl);
         Task<SignInResult> ExternalLoginAsync();
         Task<IdentityResult> ExternalRegisterAsync(UserDTO userDTO);
+        Task<string> GenerateEmailConfirmationAsync(string email);
+        Task<string> GeneratePasswordResetTokenAsync(string email);
+        Task<IdentityResult> ResetPasswordAsync(ResetPasswordDTO resetPasswordDTO);
     }
 }

@@ -25,6 +25,13 @@ namespace Woodstock.PL.Profiles
                 .ForMember(dst => dst.Email, src => src.MapFrom(_ => _.Email))
                 .ForMember(dst => dst.UserName, src => src.MapFrom(_ => _.Email))
                 .ReverseMap();
+
+            CreateMap<ExternalRegisterBindingModel, UserDTO>()
+                .ForMember(dst => dst.Email, src => src.MapFrom(_ => _.Email))
+                .ForMember(dst => dst.UserName, src => src.MapFrom(_ => _.Email))
+                .ReverseMap();
+
+            CreateMap<ResetPasswordDTO, ResetPasswordBindingModel>().ReverseMap();
         }
     }
 }

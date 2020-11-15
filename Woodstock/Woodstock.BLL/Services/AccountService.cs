@@ -28,6 +28,10 @@ namespace Woodstock.BLL.Services
         public async Task<SignInResult> LoginAsync(UserDTO userDTO, bool isPersistent, bool lockoutOnFailure)
         {
             var user = await _userManager.FindByEmailAsync(userDTO.Email);
+
+            if (user is null)
+                user = _mapper.Map<User>(userDTO);
+            
             return await _signInManager.PasswordSignInAsync(user, userDTO.Password, isPersistent, lockoutOnFailure);
         }
 
@@ -36,12 +40,6 @@ namespace Woodstock.BLL.Services
             var user = _mapper.Map<User>(userDTO);
             await _userManager.CreateAsync(user, userDTO.Password);
             return await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, claimRole));
-        }
-
-        public async Task<string> RequestEmailConfirmationAsync(UserDTO userDTO)
-        {
-            var user = await _userManager.FindByEmailAsync(userDTO.Email);
-            return await _userManager.GenerateEmailConfirmationTokenAsync(user);
         }
 
         public async Task CompleteEmailConfirmationAsync(string email, string confirmToken)
@@ -85,6 +83,32 @@ namespace Woodstock.BLL.Services
             }
 
             return await _userManager.AddLoginAsync(user, externalLoginInfo);
+        }
+
+        public async Task<string> GeneratePasswordResetTokenAsync(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+
+            if (user is null || !await _userManager.IsEmailConfirmedAsync(user))
+                throw new Exception("Пользователь с указанной почтой не найден");
+
+            return await _userManager.GeneratePasswordResetTokenAsync(user);
+        }
+
+        public async Task<string> GenerateEmailConfirmationAsync(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+
+            if (user is null)
+                throw new Exception("Пользователь с указанной почтой не найден");
+
+            return await _userManager.GenerateEmailConfirmationTokenAsync(user);
+        }
+
+        public async Task<IdentityResult> ResetPasswordAsync(ResetPasswordDTO resetPasswordDTO)
+        {
+            var user = await _userManager.FindByEmailAsync(resetPasswordDTO.Email);
+            return await _userManager.ResetPasswordAsync(user, resetPasswordDTO.ResetToken, resetPasswordDTO.Password);
         }
     }
 }

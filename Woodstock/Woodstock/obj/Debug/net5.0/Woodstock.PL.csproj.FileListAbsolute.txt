@@ -83,3 +83,6 @@ C:\Users\Sergey\Desktop\Woodstock\Woodstock\Woodstock\bin\Debug\net5.0\BouncyCas
 C:\Users\Sergey\Desktop\Woodstock\Woodstock\Woodstock\bin\Debug\net5.0\Woodstock.BLL.dll
 C:\Users\Sergey\Desktop\Woodstock\Woodstock\Woodstock\bin\Debug\net5.0\Woodstock.BLL.pdb
 C:\Users\Sergey\Desktop\Woodstock\Woodstock\Woodstock\obj\Debug\net5.0\Razor\Views\Shared\_NotificationPartial.cshtml.g.cs
+C:\Users\Sergey\Desktop\Woodstock\Woodstock\Woodstock\obj\Debug\net5.0\Razor\Views\Account\ExternalRegistration.cshtml.g.cs
+C:\Users\Sergey\Desktop\Woodstock\Woodstock\Woodstock\obj\Debug\net5.0\Razor\Views\Account\ForgotPassword.cshtml.g.cs
+C:\Users\Sergey\Desktop\Woodstock\Woodstock\Woodstock\obj\Debug\net5.0\Razor\Views\Account\ResetPassword.cshtml.g.cs

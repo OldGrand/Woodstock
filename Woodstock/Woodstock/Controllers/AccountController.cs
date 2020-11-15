@@ -63,7 +63,16 @@ namespace Woodstock.PL.Controllers
                 return View(nameof(LoginRegister), loginRegisterBM);
             }
 
-            return await SendEmailAsync(userDTO, loginRegisterBM.Register.Email, loginRegisterBM.ReturnUrl);
+            try
+            {
+                var confirmToken = await _accountService.GenerateEmailConfirmationAsync(userDTO.Email);
+                return await SendConfirmEmailAsync(confirmToken, userDTO.Email, loginRegisterBM.ReturnUrl);
+            }
+            catch (Exception e)
+            {
+                ModelState.AddModelError(string.Empty, e.Message);
+                return View(loginRegisterBM);
+            }
         }
 
         [HttpGet]
@@ -118,15 +127,74 @@ namespace Woodstock.PL.Controllers
                 return View(extRegisterBM);
             }
 
-            return await SendEmailAsync(userDTO, extRegisterBM.Email, extRegisterBM.ReturnUrl);
+            try
+            {
+                var confirmToken = await _accountService.GenerateEmailConfirmationAsync(userDTO.Email);
+                return await SendConfirmEmailAsync(confirmToken, userDTO.Email, extRegisterBM.ReturnUrl);
+            }
+            catch(Exception e)
+            {
+                ModelState.AddModelError(string.Empty, e.Message);
+                return View(extRegisterBM);
+            }
         }
 
-        private async Task<IActionResult> SendEmailAsync(UserDTO userDTO, string email, string returnUrl)
+        [HttpGet]
+        public IActionResult ForgotPassword()
         {
-            var confirmToken = await _accountService.RequestEmailConfirmationAsync(userDTO);
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ForgotPassword(ForgotPasswordBindingModel forgotPasswordBM)
+        {
+            if (!ModelState.IsValid)
+                return View(forgotPasswordBM);
+
+            try
+            {
+                var resetToken = await _accountService.GeneratePasswordResetTokenAsync(forgotPasswordBM.Email);
+                var callbackUrl = Url.Action(nameof(ResetPassword), "Account", 
+                                             new { resetToken, forgotPasswordBM.Email }, HttpContext.Request.Scheme);
+
+                await _emailService.SendEmailAsync(forgotPasswordBM.Email, "Reset Password",
+                    $"Для сброса пароля пройдите по ссылке: <a href='{callbackUrl}'>link</a>");
+            }
+            catch {}
+
+            return PartialView("_NotificationPartial", "Check your email");
+        }
+        
+        [HttpGet]
+        public IActionResult ResetPassword(string resetToken = null, string email = null)
+        {
+            return View(new ResetPasswordBindingModel { Email = email, ResetToken = resetToken });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ResetPassword(ResetPasswordBindingModel resetPasswordBM)
+        {
+            if (!ModelState.IsValid)
+                return View(resetPasswordBM);
+
+            var resetPasswordDTO = _mapper.Map<ResetPasswordDTO>(resetPasswordBM);
+            var identityResult = await _accountService.ResetPasswordAsync(resetPasswordDTO);
+            if (!identityResult.Succeeded)
+            {
+                foreach (var error in identityResult.Errors)
+                    ModelState.AddModelError(string.Empty, error.Description);
+                return View(resetPasswordBM);
+            }
+
+            return PartialView("_NotificationPartial", "Пароль успешно изменен");
+        }
+        
+        private async Task<IActionResult> SendConfirmEmailAsync(string confirmToken, string email, string returnUrl)
+        {
             var callbackUrl = Url.Action("ConfirmEmail", "Account",
-                                         new { email, confirmToken, returnUrl },
-                                         HttpContext.Request.Scheme);
+                                         new { email, confirmToken, returnUrl }, HttpContext.Request.Scheme);
 
             await _emailService.SendEmailAsync(email, "Confirm your account",
                 $"Чтобы закончить регистрацию - перейдите по <a href='{callbackUrl}'>ссылке</a>");
