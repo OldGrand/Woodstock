@@ -18,12 +18,12 @@ namespace Woodstock.DAL
         public DbSet<ShoppingCart> ShoppingCarts { get; set; }
         public DbSet<Strap> Straps { get; set; }
         public DbSet<StrapMaterial> StrapMaterials { get; set; }
-        public DbSet<Watch> Watches { get; set; }   
+        public DbSet<Watch> Watches { get; set; }  
+        public DbSet<Gender> Genders { get; set; }
+        public DbSet<OrderHistory> OrdersHistory { get; set; }
 
         public WoodstockDbContext(DbContextOptions options) : base(options)
         {
-            //Database.EnsureDeleted();
-            Database.EnsureCreated();
         }
 
         protected override void OnModelCreating(ModelBuilder builder)

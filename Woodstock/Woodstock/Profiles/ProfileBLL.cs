@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Identity;
 using Woodstock.BLL.DTOs;
 using Woodstock.DAL.Entities;
-using Woodstock.PL.Models.BindingModels;
 
 namespace Woodstock.PL.Profiles
 {

@@ -20,6 +20,8 @@ namespace Woodstock.DAL.Entities
         public virtual BodyMaterial BodyMaterial { get; set; }
         public int StrapId { get; set; }
         public virtual Strap Strap { get; set; }
+        public int GenderId { get; set; }
+        public virtual Gender Gender { get; set; }
         public virtual IEnumerable<OrderWatchLink> OrderWatchLinks { get; set; }
         public virtual IEnumerable<CartWatchLink> CartWatchLinks { get; set; }
     }

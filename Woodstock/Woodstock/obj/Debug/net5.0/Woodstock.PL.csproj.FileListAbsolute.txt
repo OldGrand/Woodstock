@@ -86,3 +86,5 @@ C:\Users\Sergey\Desktop\Woodstock\Woodstock\Woodstock\obj\Debug\net5.0\Razor\Vie
 C:\Users\Sergey\Desktop\Woodstock\Woodstock\Woodstock\obj\Debug\net5.0\Razor\Views\Account\ExternalRegistration.cshtml.g.cs
 C:\Users\Sergey\Desktop\Woodstock\Woodstock\Woodstock\obj\Debug\net5.0\Razor\Views\Account\ForgotPassword.cshtml.g.cs
 C:\Users\Sergey\Desktop\Woodstock\Woodstock\Woodstock\obj\Debug\net5.0\Razor\Views\Account\ResetPassword.cshtml.g.cs
+C:\Users\Sergey\Desktop\Woodstock\Woodstock\Woodstock\bin\Debug\net5.0\Humanizer.dll
+C:\Users\Sergey\Desktop\Woodstock\Woodstock\Woodstock\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Design.dll

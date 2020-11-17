@@ -9,4 +9,7 @@ C:\Users\Sergey\Desktop\Woodstock\Woodstock\Woodstock.DAL\obj\Debug\net5.0\Woods
 C:\Users\Sergey\Desktop\Woodstock\Woodstock\Woodstock.DAL\obj\Debug\net5.0\Woodstock.DAL.dll
 C:\Users\Sergey\Desktop\Woodstock\Woodstock\Woodstock.DAL\obj\Debug\net5.0\ref\Woodstock.DAL.dll
 C:\Users\Sergey\Desktop\Woodstock\Woodstock\Woodstock.DAL\obj\Debug\net5.0\Woodstock.DAL.pdb
+C:\Users\Sergey\Desktop\Woodstock\Woodstock\Woodstock.DAL\bin\Debug\net5.0\Woodstock.DAL.runtimeconfig.json
+C:\Users\Sergey\Desktop\Woodstock\Woodstock\Woodstock.DAL\bin\Debug\net5.0\Woodstock.DAL.runtimeconfig.dev.json
+C:\Users\Sergey\Desktop\Woodstock\Woodstock\Woodstock.DAL\obj\Debug\net5.0\Woodstock.DAL.genruntimeconfig.cache
 C:\Users\Sergey\Desktop\Woodstock\Woodstock\Woodstock.DAL\obj\Debug\net5.0\Woodstock.DAL.csprojAssemblyReference.cache

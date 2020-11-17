@@ -4,6 +4,6 @@ namespace Woodstock.DAL.Entities
 {
     public class User : IdentityUser<int>
     {
-        public virtual Order Order { get; set; }
+        public virtual ShoppingCart ShoppingCart { get; set; }
     }
 }
