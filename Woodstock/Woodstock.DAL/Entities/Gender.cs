@@ -2,7 +2,7 @@
 
 namespace Woodstock.DAL.Entities
 {
-    public class Gender : BaseIdTitle
+    public class Gender : IdTitleBased
     {
     }
 }

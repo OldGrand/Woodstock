@@ -40,8 +40,15 @@ using Microsoft.AspNetCore.Authentication.Google;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 5 "C:\Users\Sergey\Desktop\Woodstock\Woodstock\Woodstock\Views\_ViewImports.cshtml"
+using Woodstock.PL.Models.ViewModels;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"c48a3a1c56eb463e2b58424deb53d2c6110ab670", @"/Views/Shared/_NotificationPartial.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"73d781db4523ef8ccd5e43fc850e15c81aca08c4", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"cca01995d9922a9148d4c23a014d57cd96554276", @"/Views/_ViewImports.cshtml")]
     public class Views_Shared__NotificationPartial : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<string>
     {
         #pragma warning disable 1998

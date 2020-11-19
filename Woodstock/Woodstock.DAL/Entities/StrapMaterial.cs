@@ -2,7 +2,7 @@
 
 namespace Woodstock.DAL.Entities
 {
-    public class StrapMaterial : BaseIdTitle
+    public class StrapMaterial : IdTitleBased
     {
     }
 }

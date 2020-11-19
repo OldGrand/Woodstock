@@ -2,7 +2,7 @@
 
 namespace Woodstock.DAL.Entities
 {
-    public class MechanismType : BaseIdTitle
+    public class MechanismType : IdTitleBased
     {
     }
 }

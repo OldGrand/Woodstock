@@ -2,7 +2,7 @@
 
 namespace Woodstock.DAL.Entities
 {
-    public class Color : BaseIdTitle
+    public class Color : IdTitleBased
     {
         public string Hex { get; set; }
     }

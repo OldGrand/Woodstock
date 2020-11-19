@@ -2,7 +2,7 @@
 
 namespace Woodstock.DAL.Entities
 {
-    public class BodyMaterial : BaseIdTitle
+    public class BodyMaterial : IdTitleBased
     {
     }
 }

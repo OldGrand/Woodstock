@@ -2,7 +2,7 @@
 
 namespace Woodstock.DAL.Entities
 {
-    public class Mechanism : BaseIdTitle
+    public class Mechanism : IdTitleBased
     {
         public string Description { get; set; }
         public int PowerReserveDays { get; set; }

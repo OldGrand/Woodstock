@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Woodstock.BLL.DTOs;
 using Woodstock.PL.Models.BindingModels;
+using Woodstock.PL.Models.ViewModels;
 
 namespace Woodstock.PL.Profiles
 {
@@ -24,6 +25,8 @@ namespace Woodstock.PL.Profiles
                 .ReverseMap();
 
             CreateMap<ResetPasswordDTO, ResetPasswordBindingModel>().ReverseMap();
+            CreateMap<WatchDTO, WatchViewModel>().ReverseMap();
+            CreateMap<PagedResultDTO<WatchDTO>, PagedResultViewModel<WatchViewModel>>().ReverseMap();
         }
     }
 }

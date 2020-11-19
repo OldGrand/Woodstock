@@ -3,10 +3,10 @@ using Woodstock.DAL.AbstractEntities;
 
 namespace Woodstock.DAL.Entities
 {
-    public class Watch : BaseIdTitle
+    public class Watch : IdTitleBased
     {
         public double Diameter { get; set; }
-        public string Decription { get; set; }
+        public string Description { get; set; }
         public decimal Price { get; set; }
         public string Photo { get; set; }
 

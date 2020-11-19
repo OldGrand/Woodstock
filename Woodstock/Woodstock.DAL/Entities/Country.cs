@@ -2,7 +2,7 @@
 
 namespace Woodstock.DAL.Entities
 {
-    public class Country : BaseIdTitle
+    public class Country : IdTitleBased
     {
     }
 }

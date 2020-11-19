@@ -2,7 +2,7 @@
 
 namespace Woodstock.DAL.Entities
 {
-    public class Manufacturer : BaseIdTitle
+    public class Manufacturer : IdTitleBased
     {
         public int CountryId { get; set; }
         public virtual Country Country { get; set; }

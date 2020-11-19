@@ -2,7 +2,7 @@
 
 namespace Woodstock.DAL.Entities
 {
-    public class GlassMaterial : BaseIdTitle
+    public class GlassMaterial : IdTitleBased
     {
     }
 }
