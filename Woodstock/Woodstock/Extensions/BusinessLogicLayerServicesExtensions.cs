@@ -4,7 +4,7 @@ using Woodstock.BLL.Services;
 
 namespace Woodstock.PL.Extensions
 {
-    public static class BusinessLogicLayerServicesExtension
+    public static class BusinessLogicLayerServicesExtensions
     {
         public static void AddBusinessLogicLayerServices(this IServiceCollection services)
         {

@@ -9,4 +9,3 @@ C:\Users\Sergey\Desktop\Woodstock\Woodstock\Infrastructure\obj\Debug\net5.0\Infr
 C:\Users\Sergey\Desktop\Woodstock\Woodstock\Infrastructure\obj\Debug\net5.0\Infrastructure.dll
 C:\Users\Sergey\Desktop\Woodstock\Woodstock\Infrastructure\obj\Debug\net5.0\ref\Infrastructure.dll
 C:\Users\Sergey\Desktop\Woodstock\Woodstock\Infrastructure\obj\Debug\net5.0\Infrastructure.pdb
-C:\Users\Sergey\Desktop\Woodstock\Woodstock\Infrastructure\obj\Debug\net5.0\Infrastructure.csprojAssemblyReference.cache

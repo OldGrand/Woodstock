@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Models\TagHelpers\" />
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
 

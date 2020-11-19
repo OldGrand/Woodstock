@@ -5,6 +5,6 @@ namespace Woodstock.BLL.Interfaces
 {
     public interface IShopService
     {
-        Task<PagedResultDTO<UserDTO>> GetItemsOnPage(int pageNum, int itemsOnPage);
+        Task<PagedResultDTO<WatchDTO>> GetItemsOnPage(int pageNum, int itemsOnPage);
     }
 }

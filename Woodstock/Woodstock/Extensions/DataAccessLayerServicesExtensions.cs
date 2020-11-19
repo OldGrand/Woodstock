@@ -4,7 +4,7 @@ using Woodstock.DAL.UnitOfWork;
 
 namespace Woodstock.PL.Extensions
 {
-    public static class DataAccessLayerServicesExtension
+    public static class DataAccessLayerServicesExtensions
     {
         public static void AddUnitOfWork(this IServiceCollection services)
         {

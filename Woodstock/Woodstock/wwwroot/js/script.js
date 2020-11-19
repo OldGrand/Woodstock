@@ -3,7 +3,7 @@ let prevActiveLink = document.querySelector('.nav__link__active');
 
 navLinks.forEach(elem => {
     elem.addEventListener('click', e => {
-        e.preventDefault();
+        //e.preventDefault();
         prevActiveLink.classList.remove('nav__link__active');
         e.target.classList.add('nav__link__active');
         prevActiveLink = e.target;

@@ -18,10 +18,10 @@ namespace Woodstock.BLL.Services
             _mapper = mapper;
         }
 
-        public async Task<PagedResultDTO<UserDTO>> GetItemsOnPage(int pageNum, int itemsOnPage)
+        public async Task<PagedResultDTO<WatchDTO>> GetItemsOnPage(int pageNum, int itemsOnPage)
         {
             var pagedResult = await _unitOfWork.WatchRepository.GetPaged(pageNum, itemsOnPage);
-            return _mapper.Map<PagedResultDTO<UserDTO>>(pagedResult);
+            return _mapper.Map<PagedResultDTO<WatchDTO>>(pagedResult);
         }
     }
 }
