@@ -7,12 +7,12 @@ using Woodstock.BLL.DTOs;
 
 namespace Woodstock.BLL.Services
 {
-    public class ShopService : IShopService
+    public class CatalogService : ICatalogService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public ShopService(IUnitOfWork unitOfWork, IMapper mapper)
+        public CatalogService(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;

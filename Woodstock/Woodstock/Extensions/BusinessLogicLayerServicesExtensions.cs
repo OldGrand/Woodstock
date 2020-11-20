@@ -10,7 +10,7 @@ namespace Woodstock.PL.Extensions
         {
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IEmailService, EmailService>();
-            services.AddScoped<IShopService, ShopService>();
+            services.AddScoped<ICatalogService, CatalogService>();
         }
     }
 }

@@ -1,0 +1,361 @@
+﻿.filter {
+    font-family: "Playfair Display";
+}
+
+.categories {
+    height: 150px;
+    width: max-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.categories__title {
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 15px;
+}
+
+.categories__list {
+    font-weight: 300;
+    width: 210px;
+    text-transform: capitalize;
+    font-size: 15px;
+}
+
+.categories__item {
+    background-color: #333333;
+}
+
+    .categories__item + .categories__item {
+        border-top: .8px solid #282828;
+    }
+
+    .categories__item:first-child {
+        border-radius: 7px 7px 0px 0px;
+    }
+
+    .categories__item:last-child {
+        border-radius: 0px 0px 7px 7px;
+    }
+
+.categories__link {
+    display: block;
+    color: #aaaaaa;
+    padding: 12px 30px;
+    transition: color ease .2s;
+}
+
+    .categories__link:hover {
+        color: #ececec;
+    }
+
+.filter__container {
+    background-color: #242424;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 0px;
+}
+
+.diameter__title {
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 18px;
+    margin-bottom: 12px;
+}
+
+.diameter__list {
+    width: 210px;
+}
+
+.diameter__item {
+    border-bottom: .8px solid #2c2c2c;
+}
+
+.diameter__link {
+    font-family: Lato;
+    font-size: 16px;
+    font-weight: 400;
+    color: #a6a6a6;
+    width: 100%;
+    display: block;
+    padding: 5px;
+}
+
+    .diameter__link:hover {
+        color: #ececec;
+    }
+
+.filter__diameter {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    outline: 0;
+    box-shadow: none;
+    border: 0 !important;
+    background: #444;
+    background-image: none;
+}
+    /* Remove IE arrow */
+    select::-ms-expand {
+        display: none;
+    }
+
+    select.decorated option:hover {
+        box-shadow: 0 0 10px 100px #c71e1e inset;
+    }
+
+.select {
+    position: relative;
+    display: flex;
+    width: max-content;
+    min-width: 65px;
+    height: 35px;
+    line-height: 3;
+    background: #444;
+    overflow: hidden;
+    border-radius: .25em;
+    font-size: 13px;
+}
+
+select {
+    padding: 0 .5em;
+    color: #fff;
+    cursor: pointer;
+}
+
+.select::after {
+    content: '\25BC';
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0 1em;
+    background: #444;
+    cursor: pointer;
+    pointer-events: none;
+    -webkit-transition: .25s all ease;
+    -o-transition: .25s all ease;
+    transition: .25s all ease;
+}
+
+.select:hover::after {
+    color: #f39c12;
+}
+
+.catalog {
+    flex-grow: 1;
+}
+
+.main {
+    display: flex;
+    justify-content: center;
+}
+
+.main__container {
+    display: flex;
+    width: 93%;
+}
+
+.catalog__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 95.6%;
+    margin: auto;
+}
+
+.select__group {
+    display: flex;
+    justify-content: space-between;
+    width: 235px;
+}
+
+.search-result {
+    font-family: 'Lato';
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: 13px;
+    color: #fff;
+}
+
+.items {
+    border: 1px solid #fff;
+}
+
+.item__img {
+    background-color: #202020;
+    object-fit: cover;
+    width: 280px;
+    height: 260px;
+}
+
+.item__category {
+    color: #cb9400;
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: 12px;
+}
+
+.item__title {
+    font-family: "Playfair Display";
+    color: #fff;
+    font-weight: 500;
+    font-size: 25px;
+    position: relative;
+}
+
+    .item__title::after {
+        content: "";
+        display: block;
+        height: 1px;
+        width: 180px;
+        top: 100%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #535353;
+        position: absolute;
+    }
+
+.item__price {
+    font-family: 'Lato';
+    text-transform: uppercase;
+    font-weight: 300;
+    color: #cfcfcf;
+    font-size: 18px;
+}
+
+.item__descr {
+    font-family: 'Lato';
+    font-weight: 300;
+    color: #cfcfcf;
+    font-size: 16px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.item__wishlist {
+    font-family: 'Lato';
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #cfcfcf;
+    font-size: 11px;
+    text-align: center;
+    display: block;
+    width: 100%;
+}
+
+.item__container:hover {
+    max-height: 400px;
+}
+
+    .item__container:hover .item__extended-info {
+        display: block;
+    }
+
+.catalog__item {
+    width: min-content;
+}
+
+.catalog__items {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+/* ========pizda========== */
+.card {
+    width: 250px;
+    height: 400px;
+    position: relative;
+    perspective: 1000px;
+    margin: 25px 0px;
+}
+
+.wrap {
+    margin-bottom: 25px;
+}
+
+.front__description,
+.back__description {
+    padding: 26px;
+}
+
+.back__description {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.front__description {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.front,
+.back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    transition: 1s;
+    backface-visibility: hidden;
+}
+
+.front {
+    background-color: #242424;
+}
+
+.back {
+    background-color: #333333;
+    transform: rotateY(180deg);
+}
+
+.card:hover .front {
+    transform: rotateY(180deg);
+    cursor: pointer;
+}
+
+.card:hover .back {
+    transform: rotateY(360deg);
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+}
+
+.pagination__btn {
+    font-family: 'Lato';
+    padding: 8px 16px;
+    font-size: 20px;
+    background-color: #454545;
+    border-style: none;
+    border-radius: 3px;
+    color: #fff;
+    transition: all ease .3s;
+}
+
+    .pagination__btn:hover {
+        background-color: #cb9400;
+    }
+
+.pagination__btn-active {
+    background-color: #cb9400;
+}

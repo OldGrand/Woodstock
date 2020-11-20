@@ -1,0 +1,144 @@
+﻿@model PagedResultViewModel<WatchViewModel>
+
+@{
+    ViewData["Title"] = "Catalog";
+}
+
+<div class="main__container">
+    <div class="filter">
+        <div class="filter__container">
+            <div class="filter__range">
+                <h3>filter by price</h3>
+                <div class="slider" data-value-0="#first" data-value-1="#second" data-range="#third"></div>
+                <form class="box__container" method="POST">
+                    <div class="values">
+                        <div>$<span id="first"></span></div> - <div>$<span id="second"></span></div>
+                    </div>
+                    <input type="submit" value="Filter" class="submit__btn" />
+                </form>
+            </div>
+
+            <div class="filter__diameter">
+                <h3 class="diameter__title">
+                    Filter by Diameter
+                </h3>
+
+                <form action="" method="POST">
+                    <ul class="diameter__list">
+                        <li class="diameter__item">
+                            <a href="" class="diameter__link">
+                                32
+                            </a>
+                        </li>
+                        <li class="diameter__item">
+                            <a href="" class="diameter__link">
+                                39
+                            </a>
+                        </li>
+                        <li class="diameter__item">
+                            <a href="" class="diameter__link">
+                                40
+                            </a>
+                        </li>
+                        <li class="diameter__item">
+                            <a href="" class="diameter__link">
+                                41
+                            </a>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="catalog">
+        <div class="catalog__container">
+            <div class="catalog__header">
+                <div class="catalog__info">
+                    <p class="search-result">
+                        Showing @Model.Range.Start.Value - @Model.Range.End.Value of @Model.RowCount results
+                    </p>
+                </div>
+
+                <div class="select__group">
+                    <div class="select">
+                        <select class="slct" id="slct">
+                            <option class="select__item">
+                                12
+                            </option>
+                            <option class="select__item">
+                                24
+                            </option>
+                            <option class="select__item">
+                                36
+                            </option>
+                        </select>
+                    </div>
+                    <div class="select">
+                        <select class="slct" id="slct">
+                            <option class="select__item">
+                                Default sorting
+                            </option>
+                            <option class="select__item">
+                                Sort by popularity
+                            </option>
+                            <option class="select__item">
+                                Sort by latest
+                            </option>
+                            <option class="select__item">
+                                Sort by price: low to high
+                            </option>
+                            <option class="select__item">
+                                Sort by price: high to low
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="catalog__items">
+                @foreach (var watch in Model.Results)
+                {
+                    <div class="card">
+                        <div class="front">
+                            <div class="front__description">
+                                <img src="/images/Shop/@watch.Photo" alt="" class="item__img">
+                                <p class="item__category">!!!!!!</p>
+                                <div class="item__title">@watch.Title</div>
+                                <div class="item__price">$@watch.Price</div>
+                            </div>
+                        </div>
+                        <div class="back">
+                            <div class="back__description">
+                                <div class="item__descr">@watch.Description</div>
+                                <a class="item__wishlist">Add to wishlist</a>
+                                <input type="submit" value="Add to cart" class="submit__btn" />
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                <div class="pagination">
+                @for (int i = Model.Range.Start.Value; i <= Model.Range.End.Value; i++)
+                {
+                    if (i == Model.CurrentPage)
+                    {
+                        <a asp-controller="Catalog" asp-action="Index" asp-route-pageNum="@i" class="pagination__btn pagination__btn-active">@i</a>
+                    }
+                    else
+                    {
+                        <a asp-controller="Catalog" asp-action="Index" asp-route-pageNum="@i" class="pagination__btn">@i</a>
+                    }
+                }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js'></script>
+    <script src='https://code.jquery.com/jquery-3.4.1.min.js'></script>
+    <script src='https://code.jquery.com/ui/1.12.0/jquery-ui.min.js'></script>
+    <script src="~/js/range.js"></script>
+}

@@ -1,4 +1,4 @@
-$('.slider').each(function(e) {
+$('.slider').each(function (e) {
 
     var slider = $(this),
         width = slider.width(),
@@ -46,18 +46,18 @@ $('.slider').each(function(e) {
                 minRange = slider.slider('option', 'minRange'),
                 max = slider.slider('option', 'max');
 
-            if(ui.handleIndex == 0) {
-                if((ui.values[0] + minRange) >= ui.values[1]) {
+            if (ui.handleIndex == 0) {
+                if ((ui.values[0] + minRange) >= ui.values[1]) {
                     slider.slider('values', 1, ui.values[0] + minRange);
                 }
-                if(ui.values[0] > max - minRange) {
+                if (ui.values[0] > max - minRange) {
                     return false;
                 }
-            } else if(ui.handleIndex == 1) {
-                if((ui.values[1] - minRange) <= ui.values[0]) {
+            } else if (ui.handleIndex == 1) {
+                if ((ui.values[1] - minRange) <= ui.values[0]) {
                     slider.slider('values', 0, ui.values[1] - minRange);
                 }
-                if(ui.values[1] < min + minRange) {
+                if (ui.values[1] < min + minRange) {
                     return false;
                 }
             }
@@ -99,7 +99,7 @@ $('.slider').each(function(e) {
     }, {
         set(target, key, value) {
             target[key] = value;
-            if(target.x !== null && target.y !== null && target.b !== null && target.a !== null) {
+            if (target.x !== null && target.y !== null && target.b !== null && target.a !== null) {
                 slider.find('svg').html(getPath([target.x, target.y], target.b, target.a, width));
             }
             return true;
@@ -115,7 +115,7 @@ $('.slider').each(function(e) {
     svgPath.a = width;
 
     $(document).on('mousemove touchmove', e => {
-        if(handle) {
+        if (handle) {
 
             let laziness = 4,
                 max = 24,
@@ -133,8 +133,8 @@ $('.slider').each(function(e) {
             modify = handle.data('index') == 0 ? ((currentLeft + handleHalf <= edge ? (currentLeft + handleHalf) / edge : 1) * (otherLeft - currentLeft - handleWidth <= edge ? (otherLeft - currentLeft - handleWidth) / edge : 1)) : ((currentLeft - (otherLeft + handleHalf * 2) <= edge ? (currentLeft - (otherLeft + handleWidth)) / edge : 1) * (slider.outerWidth() - (currentLeft + handleHalf) <= edge ? (slider.outerWidth() - (currentLeft + handleHalf)) / edge : 1));
             modify = modify > 1 ? 1 : modify < 0 ? 0 : modify;
 
-            if(handle.data('index') == 0) {
-                svgPath.b = currentLeft / 2  * modify;
+            if (handle.data('index') == 0) {
+                svgPath.b = currentLeft / 2 * modify;
                 svgPath.a = otherLeft;
             } else {
                 svgPath.b = otherLeft + handleHalf;
@@ -153,16 +153,16 @@ $('.slider').each(function(e) {
 
 function getPoint(point, i, a, smoothing) {
     let cp = (current, previous, next, reverse) => {
-            let p = previous || current,
-                n = next || current,
-                o = {
-                    length: Math.sqrt(Math.pow(n[0] - p[0], 2) + Math.pow(n[1] - p[1], 2)),
-                    angle: Math.atan2(n[1] - p[1], n[0] - p[0])
-                },
-                angle = o.angle + (reverse ? Math.PI : 0),
-                length = o.length * smoothing;
-            return [current[0] + Math.cos(angle) * length, current[1] + Math.sin(angle) * length];
-        },
+        let p = previous || current,
+            n = next || current,
+            o = {
+                length: Math.sqrt(Math.pow(n[0] - p[0], 2) + Math.pow(n[1] - p[1], 2)),
+                angle: Math.atan2(n[1] - p[1], n[0] - p[0])
+            },
+            angle = o.angle + (reverse ? Math.PI : 0),
+            length = o.length * smoothing;
+        return [current[0] + Math.cos(angle) * length, current[1] + Math.sin(angle) * length];
+    },
         cps = cp(a[i - 1], a[i - 2], point, false),
         cpe = cp(point, a[i - 1], a[i + 1], true);
     return `C ${cps[0]},${cps[1]} ${cpe[0]},${cpe[1]} ${point[0]},${point[1]}`;

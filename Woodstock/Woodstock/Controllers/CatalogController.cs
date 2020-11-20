@@ -6,20 +6,20 @@ using Woodstock.PL.Models.ViewModels;
 
 namespace Woodstock.PL.Controllers
 {
-    public class ShopController : Controller
+    public class CatalogController : Controller
     {
-        private readonly IShopService _shopService;
+        private readonly ICatalogService _catalogService;
         private readonly IMapper _mapper;
 
-        public ShopController(IShopService shopService, IMapper mapper)
+        public CatalogController(ICatalogService shopService, IMapper mapper)
         {
-            _shopService = shopService;
+            _catalogService = shopService;
             _mapper = mapper;
         }
 
         public async Task<IActionResult> Index(int pageNum = 1, int itemsOnPage = 16)
         {
-            var pagedResultDTO = await _shopService.GetItemsOnPage(pageNum, itemsOnPage);
+            var pagedResultDTO = await _catalogService.GetItemsOnPage(pageNum, itemsOnPage);
             var padegResultVM = _mapper.Map<PagedResultViewModel<WatchViewModel>>(pagedResultDTO);
             return View(padegResultVM);
         }

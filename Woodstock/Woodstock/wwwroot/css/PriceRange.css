@@ -1,0 +1,173 @@
+﻿.ui-slider-active {
+    cursor: -webkit-grabbing;
+    cursor: grabbing;
+}
+
+.filter__range {
+    --primary: #fff;
+    width: 100%;
+    max-width: 250px;
+    background: #242424;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+    .filter__range::after {
+        content: "";
+        display: block;
+        position: absolute;
+        height: 1px;
+        width: 100%;
+        top: 115%;
+        background-color: #555555;
+    }
+
+    .filter__range h3 {
+        text-transform: uppercase;
+        font-weight: 600;
+        font-size: 18px;
+        margin-bottom: 20px;
+        color: var(--primary);
+        text-align: center;
+    }
+
+    .filter__range .values div,
+    .filter__range small div {
+        display: inline-block;
+        vertical-align: top;
+    }
+
+    .filter__range .values {
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        font-weight: 300;
+        font-size: 20px;
+        color: var(--primary);
+    }
+
+        .filter__range .values > div:first-child {
+            margin-right: 2px;
+        }
+
+        .filter__range .values > div:last-child {
+            margin-left: 2px;
+        }
+
+.slider {
+    --primary: #cb9400;
+    --handle: #242424;
+    --handle-active: #cb9400;
+    --handle-hover: #cb9400;
+    --handle-border: 2px solid var(--primary);
+    --line: #686868;
+    --line-active: var(--primary);
+    --handle-width: 23px;
+    --handle-height: 23px;
+    height: 23px;
+    width: 100%;
+    position: relative;
+    pointer-events: none;
+    margin-bottom: 20px;
+}
+
+.slider .ui-slider-handle {
+    --y: 0;
+    --background: var(--handle);
+    cursor: -webkit-grab;
+    cursor: grab;
+    -webkit-tap-highlight-color: transparent;
+    top: 0;
+    width: var(--handle-width);
+    height: var(--handle-height);
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    position: absolute;
+    outline: none;
+    display: block;
+    pointer-events: auto;
+}
+
+    .slider .ui-slider-handle div {
+        width: var(--handle-width);
+        height: var(--handle-height);
+        border-radius: 50%;
+        -webkit-transition: background .4s ease;
+        transition: background .4s ease;
+        -webkit-transform: translateY(calc(var(--y) * 1px));
+        transform: translateY(calc(var(--y) * 1px));
+        border: var(--handle-border);
+        background: var(--background);
+    }
+
+    .slider .ui-slider-handle:hover {
+        --background: var(--handle-hover);
+    }
+
+    .slider .ui-slider-handle:active {
+        --background: var(--handle-active);
+        cursor: -webkit-grabbing;
+        cursor: grabbing;
+    }
+
+.slider svg {
+    --stroke: var(--line);
+    display: block;
+    height: 83px;
+}
+
+    .slider svg path {
+        fill: none;
+        stroke: var(--stroke);
+        stroke-width: 2;
+    }
+
+.slider .active, .slider > svg {
+    position: absolute;
+    top: -30px;
+    height: 83px;
+}
+
+.slider > svg {
+    left: 0;
+    width: 100%;
+}
+
+.slider .active {
+    position: absolute;
+    overflow: hidden;
+    left: calc(var(--l) * 1px);
+    right: calc(var(--r) * 1px);
+}
+
+.slider .active svg {
+    --stroke: var(--line-active);
+    position: relative;
+    left: calc(var(--l) * -1px);
+    right: calc(var(--r) * -1px);
+}
+
+.slider .active svg path {
+    stroke-width: 2;
+}
+
+.submit__btn {
+    background-color: #cb9400;
+    border-style: none;
+    border-radius: 3px;
+    padding: 5px 10px;
+    text-transform: uppercase;
+    color: #fff;
+    transition: background-color ease .2s;
+    font-size: 17px;
+    font-weight: 300;
+    font-family: "Playfair Display"
+}
+
+    .submit__btn:hover {
+        background-color: #e9ab00;
+    }
+
+.box__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

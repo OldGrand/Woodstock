@@ -31,6 +31,12 @@ namespace Woodstock
                 options.UseSqlServer(_configuration.GetConnectionString("DefaultConnection"));
             });
 
+            services.AddRouting(option =>
+            {
+                //option.LowercaseQueryStrings = true;
+                //option.LowercaseUrls = true;
+            });
+
             services.AddAutoMapper(typeof(ProfileBLL), typeof(ProfilePL));
             services.AddUnitOfWork();
             services.AddBusinessLogicLayerServices();
