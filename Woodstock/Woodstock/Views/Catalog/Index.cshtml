@@ -1,4 +1,4 @@
-﻿@model PagedResultViewModel<WatchViewModel>
+﻿@model PagedResult<WatchViewModel>
 
 @{
     ViewData["Title"] = "Catalog";
@@ -75,23 +75,10 @@
                         </select>
                     </div>
                     <div class="select">
-                        <select class="slct" id="slct">
-                            <option class="select__item">
-                                Default sorting
-                            </option>
-                            <option class="select__item">
-                                Sort by popularity
-                            </option>
-                            <option class="select__item">
-                                Sort by latest
-                            </option>
-                            <option class="select__item">
-                                Sort by price: low to high
-                            </option>
-                            <option class="select__item">
-                                Sort by price: high to low
-                            </option>
-                        </select>
+                        @*<form asp-controller="Catalog" asp-action="Index" method="post">
+                            <select asp-for="@Model.Filter" asp-items="@Html.GetEnumSelectList<Filter>()"
+                                                                          class="slct" id="slct"></select>
+                        </form>*@
                     </div>
                 </div>
             </div>
@@ -117,19 +104,20 @@
                         </div>
                     </div>
                 }
-
-                <div class="pagination">
-                @for (int i = Model.Range.Start.Value; i <= Model.Range.End.Value; i++)
-                {
-                    if (i == Model.CurrentPage)
+            </div>
+            <div class="pagination">
+                <div class="pagination__container">
+                    @for (int i = Model.Range.Start.Value; i <= Model.Range.End.Value; i++)
                     {
-                        <a asp-controller="Catalog" asp-action="Index" asp-route-pageNum="@i" class="pagination__btn pagination__btn-active">@i</a>
+                        if (i == Model.CurrentPage)
+                        {
+                            <a asp-controller="Catalog" asp-action="Index" asp-route-pageNum="@i" class="pagination__btn pagination__btn-active">@i</a>
+                        }
+                        else
+                        {
+                            <a asp-controller="Catalog" asp-action="Index" asp-route-pageNum="@i" class="pagination__btn">@i</a>
+                        }
                     }
-                    else
-                    {
-                        <a asp-controller="Catalog" asp-action="Index" asp-route-pageNum="@i" class="pagination__btn">@i</a>
-                    }
-                }
                 </div>
             </div>
         </div>

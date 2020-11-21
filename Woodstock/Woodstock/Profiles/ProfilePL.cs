@@ -26,7 +26,6 @@ namespace Woodstock.PL.Profiles
 
             CreateMap<ResetPasswordDTO, ResetPasswordBindingModel>().ReverseMap();
             CreateMap<WatchDTO, WatchViewModel>().ReverseMap();
-            CreateMap<PagedResultDTO<WatchDTO>, PagedResultViewModel<WatchViewModel>>().ReverseMap();
         }
     }
 }

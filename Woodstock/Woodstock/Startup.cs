@@ -38,7 +38,6 @@ namespace Woodstock
             });
 
             services.AddAutoMapper(typeof(ProfileBLL), typeof(ProfilePL));
-            services.AddUnitOfWork();
             services.AddBusinessLogicLayerServices();
 
             services.AddIdentity<User, IdentityRole<int>>(config =>

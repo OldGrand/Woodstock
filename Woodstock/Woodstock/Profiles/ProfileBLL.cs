@@ -17,7 +17,6 @@ namespace Woodstock.PL.Profiles
                 .ReverseMap();
 
             CreateMap<Watch, WatchDTO>().ReverseMap();
-            CreateMap<PagedResult<Watch>, PagedResultDTO<WatchDTO>>().ReverseMap();
         }
     }
 }

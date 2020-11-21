@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Woodstock.BLL.Interfaces;
 using Woodstock.PL.Models.ViewModels;
+using System.Linq;
+using Woodstock.BLL.Pagination;
 
 namespace Woodstock.PL.Controllers
 {
@@ -17,11 +19,18 @@ namespace Woodstock.PL.Controllers
             _mapper = mapper;
         }
 
-        public async Task<IActionResult> Index(int pageNum = 1, int itemsOnPage = 16)
+        public IActionResult Index(int pageNum = 1, int itemsOnPage = 16)
         {
-            var pagedResultDTO = await _catalogService.GetItemsOnPage(pageNum, itemsOnPage);
-            var padegResultVM = _mapper.Map<PagedResultViewModel<WatchViewModel>>(pagedResultDTO);
-            return View(padegResultVM);
+            var pagedResult =  (from watchDTO in _catalogService.ReadAll()
+                                select new WatchViewModel
+                                {
+                                    Title = watchDTO.Title,
+                                    Description = watchDTO.Description,
+                                    Diameter = watchDTO.Diameter,
+                                    Photo = watchDTO.Photo,
+                                    Price = watchDTO.Price
+                                }).GetPaged(pageNum, itemsOnPage);
+            return View(pagedResult);
         }
     }
 }

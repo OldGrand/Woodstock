@@ -54,8 +54,15 @@ using Woodstock.PL.Extensions;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 7 "C:\Users\Sergey\Desktop\Woodstock\Woodstock\Woodstock\Views\_ViewImports.cshtml"
+using Woodstock.BLL.Pagination;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"56dbe90da7614f1f5bc2e5808b7c578d5ab49102", @"/Views/Shared/_Layout.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"b7c8ca7634816f6f0d3c71cbba68bd744654a67e", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"b25134225f6122e9df79efc622931ace20992021", @"/Views/_ViewImports.cshtml")]
     public class Views_Shared__Layout : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("asp-href-include", "~/css/*.css", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -108,7 +115,7 @@ using Woodstock.PL.Extensions;
         public async override global::System.Threading.Tasks.Task ExecuteAsync()
         {
             WriteLiteral("<!DOCTYPE html>\r\n<html lang=\"en\">\r\n");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "56dbe90da7614f1f5bc2e5808b7c578d5ab4910211133", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "56dbe90da7614f1f5bc2e5808b7c578d5ab4910211326", async() => {
                 WriteLiteral("\r\n    <meta charset=\"UTF-8\">\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n    <title>");
 #nullable restore
 #line 6 "C:\Users\Sergey\Desktop\Woodstock\Woodstock\Woodstock\Views\Shared\_Layout.cshtml"
@@ -118,7 +125,7 @@ using Woodstock.PL.Extensions;
 #line hidden
 #nullable disable
                 WriteLiteral("</title>\r\n    <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css\">\r\n    <link rel=\'stylesheet\' href=\'https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.3/animate.min.css\'>\r\n    ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "56dbe90da7614f1f5bc2e5808b7c578d5ab4910211989", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "56dbe90da7614f1f5bc2e5808b7c578d5ab4910212182", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_TagHelpers_LinkTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.LinkTagHelper>();
@@ -146,7 +153,7 @@ using Woodstock.PL.Extensions;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "56dbe90da7614f1f5bc2e5808b7c578d5ab4910213953", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "56dbe90da7614f1f5bc2e5808b7c578d5ab4910214146", async() => {
                 WriteLiteral(@"
     <header class=""header"">
         <div class=""header__container"">
@@ -193,7 +200,7 @@ using Woodstock.PL.Extensions;
 #line hidden
 #nullable disable
                 WriteLiteral("\r\n                                    </a>\r\n                                    ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "56dbe90da7614f1f5bc2e5808b7c578d5ab4910216703", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "56dbe90da7614f1f5bc2e5808b7c578d5ab4910216896", async() => {
                     WriteLiteral("\r\n                                        <input type=\"submit\" value=\"Выйти\" class=\"list__link\" />\r\n                                    ");
                 }
                 );
@@ -225,7 +232,7 @@ using Woodstock.PL.Extensions;
 #line hidden
 #nullable disable
                 WriteLiteral("                                    ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "56dbe90da7614f1f5bc2e5808b7c578d5ab4910219111", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "56dbe90da7614f1f5bc2e5808b7c578d5ab4910219304", async() => {
                     WriteLiteral(@"
                                         <svg class=""login-svg svg"" viewBox=""0 0 512 512"">
                                             <use xlink:href=""/images/icons/login.svg#login""></use>
@@ -305,7 +312,7 @@ using Woodstock.PL.Extensions;
                 <div class=""header__main__container"">
                     <div class=""search"">
                         ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "56dbe90da7614f1f5bc2e5808b7c578d5ab4910223865", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "56dbe90da7614f1f5bc2e5808b7c578d5ab4910224058", async() => {
                     WriteLiteral(@"
                             <input type=""text"" class=""search__input"" placeholder=""Search for products"">
                             <button type=""submit"" class=""search__submit"">
@@ -330,7 +337,7 @@ using Woodstock.PL.Extensions;
                 Write(__tagHelperExecutionContext.Output);
                 __tagHelperExecutionContext = __tagHelperScopeManager.End();
                 WriteLiteral("\r\n                    </div>\r\n\r\n                    <div class=\"logo\">\r\n                        ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "56dbe90da7614f1f5bc2e5808b7c578d5ab4910225913", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "56dbe90da7614f1f5bc2e5808b7c578d5ab4910226106", async() => {
                     WriteLiteral("\r\n                            <img src=\"/images/woodstock-logo.png\" alt=\"Logo\" class=\"logo__img\">\r\n                        ");
                 }
                 );
@@ -388,7 +395,7 @@ using Woodstock.PL.Extensions;
                     <ul class=""nav__list"">
                         <li class=""nav__item"">
                             ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "56dbe90da7614f1f5bc2e5808b7c578d5ab4910229540", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "56dbe90da7614f1f5bc2e5808b7c578d5ab4910229733", async() => {
                     WriteLiteral("Home");
                 }
                 );
@@ -407,7 +414,7 @@ using Woodstock.PL.Extensions;
                 Write(__tagHelperExecutionContext.Output);
                 __tagHelperExecutionContext = __tagHelperScopeManager.End();
                 WriteLiteral("\r\n                        </li>\r\n                        <li class=\"nav__item\">\r\n                            ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "56dbe90da7614f1f5bc2e5808b7c578d5ab4910231175", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "56dbe90da7614f1f5bc2e5808b7c578d5ab4910231368", async() => {
                     WriteLiteral("shop");
                 }
                 );
@@ -592,7 +599,7 @@ using Woodstock.PL.Extensions;
 
             <div class=""copyright__addition"">
                 ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "56dbe90da7614f1f5bc2e5808b7c578d5ab4910242017", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "56dbe90da7614f1f5bc2e5808b7c578d5ab4910242210", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -607,7 +614,7 @@ using Woodstock.PL.Extensions;
                 Write(__tagHelperExecutionContext.Output);
                 __tagHelperExecutionContext = __tagHelperScopeManager.End();
                 WriteLiteral("\r\n            </div>\r\n        </div>\r\n    </footer>\r\n\r\n    <script src=\'https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.js\'></script>\r\n    ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "56dbe90da7614f1f5bc2e5808b7c578d5ab4910243378", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "56dbe90da7614f1f5bc2e5808b7c578d5ab4910243571", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();

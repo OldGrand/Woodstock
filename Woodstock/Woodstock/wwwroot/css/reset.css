@@ -27,12 +27,12 @@ dd {
 }
 
 body {
-  min-height: 100vh;
-  scroll-behavior: smooth;
-  text-rendering: optimizeSpeed;
-  line-height: 1.5;
-  font: bold 1.2rem "Lato";
-  background-color: #23272a;
+    min-height: 100vh;
+    scroll-behavior: smooth;
+    text-rendering: optimizeSpeed;
+    line-height: 1.5;
+    font: bold 1.2rem "Lato";
+    background-color: #222222;
 }
 
 ul[class],
