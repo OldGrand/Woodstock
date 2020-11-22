@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Authentication;
+﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Linq;
@@ -15,14 +14,11 @@ namespace Woodstock.BLL.Services
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
-        private readonly IMapper _mapper;
 
-        public AccountService(UserManager<User> userManager, SignInManager<User> signInManager, 
-                              IMapper mapper)
+        public AccountService(UserManager<User> userManager, SignInManager<User> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _mapper = mapper;
         }
 
         public async Task<SignInResult> LoginAsync(UserDTO userDTO, bool isPersistent, bool lockoutOnFailure)
@@ -30,7 +26,11 @@ namespace Woodstock.BLL.Services
             var user = await _userManager.FindByEmailAsync(userDTO.Email);
 
             if (user is null)
-                user = _mapper.Map<User>(userDTO);
+                user = new User
+                {
+                    Email = userDTO.Email,
+                    UserName = userDTO.UserName
+                };
             
             var signInResult = await _signInManager.PasswordSignInAsync(user, userDTO.Password, 
                                                                         isPersistent, lockoutOnFailure);
@@ -40,7 +40,11 @@ namespace Woodstock.BLL.Services
 
         public async Task<IdentityResult> RegisterAsync(UserDTO userDTO, string claimRole)
         {
-            var user = _mapper.Map<User>(userDTO);
+            var user = new User
+            {
+                Email = userDTO.Email,
+                UserName = userDTO.UserName
+            };
             await _userManager.CreateAsync(user, userDTO.Password);
             var identityResult = await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, claimRole));
             return identityResult;
@@ -83,7 +87,11 @@ namespace Woodstock.BLL.Services
 
             if (user is null)
             {
-                user = _mapper.Map<User>(userDTO);
+                user = new User
+                {
+                    Email = userDTO.Email,
+                    UserName = userDTO.UserName
+                };
                 await _userManager.CreateAsync(user);
             }
 

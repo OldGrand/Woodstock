@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Woodstock.DAL;
 
 namespace Woodstock.BLL.Abstract
@@ -8,13 +7,11 @@ namespace Woodstock.BLL.Abstract
     {
         protected readonly WoodstockDbContext Context;
         protected readonly DbSet<TSource> Set;
-        protected readonly IMapper Mapper;
 
-        protected ApplicationContextService(WoodstockDbContext context, IMapper mapper)
+        protected ApplicationContextService(WoodstockDbContext context)
         {
             Context = context;
             Set = context.Set<TSource>();
-            Mapper = mapper;
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using Woodstock.BLL.Interfaces;
-using AutoMapper;
 using Woodstock.BLL.DTOs;
 using Woodstock.BLL.Abstract;
 using Woodstock.DAL.Entities;
@@ -11,20 +10,12 @@ namespace Woodstock.BLL.Services
 {
     public class CatalogService : ApplicationContextService<Watch>, ICatalogService
     {
-        public CatalogService(WoodstockDbContext context, IMapper mapper) : base(context, mapper) { }
+        public CatalogService(WoodstockDbContext context) : base(context) { }
 
         public IQueryable<WatchDTO> ReadAll()
         {
             return from watch in Set.AsNoTracking()
-                   select new WatchDTO
-                   {
-                       Title = watch.Title,
-                       Description = watch.Description,
-                       Diameter = watch.Diameter,
-                       Photo = watch.Photo,
-                       Price = watch.Price,
-                       GenderId = watch.GenderId
-                   };
+                   select new WatchDTO(watch.Diameter, watch.Description, watch.Price, watch.Photo, watch.Title, watch.Gender);
         }
 
         public IQueryable<WatchDTO> ReadMen()
@@ -38,6 +29,20 @@ namespace Woodstock.BLL.Services
         {
             return from watch in ReadAll()
                    where watch.Gender.Title == "Женские"
+                   select watch;
+        }
+
+        public IQueryable<WatchDTO> ReadOrderedByPriceDesc()
+        {
+            return from watch in ReadAll()
+                   orderby watch.Price descending
+                   select watch;
+        }
+
+        public IQueryable<WatchDTO> ReadOrderedByAsc()
+        {
+            return from watch in ReadAll()
+                   orderby watch.Price ascending
                    select watch;
         }
     }

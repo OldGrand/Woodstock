@@ -33,11 +33,11 @@ namespace Woodstock
 
             services.AddRouting(option =>
             {
-                //option.LowercaseQueryStrings = true;
-                //option.LowercaseUrls = true;
+                option.LowercaseQueryStrings = true;
+                option.LowercaseUrls = true;
             });
 
-            services.AddAutoMapper(typeof(ProfileBLL), typeof(ProfilePL));
+            services.AddAutoMapper(typeof(ProfilePL));
             services.AddBusinessLogicLayerServices();
 
             services.AddIdentity<User, IdentityRole<int>>(config =>

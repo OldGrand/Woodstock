@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using System.Threading.Tasks;
 using Woodstock.BLL.DTOs;
 
 namespace Woodstock.BLL.Interfaces
@@ -7,5 +6,9 @@ namespace Woodstock.BLL.Interfaces
     public interface ICatalogService
     {
         IQueryable<WatchDTO> ReadAll();
+        IQueryable<WatchDTO> ReadMen();
+        IQueryable<WatchDTO> ReadWomen();
+        IQueryable<WatchDTO> ReadOrderedByPriceDesc();
+        IQueryable<WatchDTO> ReadOrderedByAsc();
     }
 }

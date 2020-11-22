@@ -1,9 +1,16 @@
 ﻿namespace Woodstock.BLL.DTOs
 {
-    public class UserDTO
+    public sealed record UserDTO
     {
-        public string Email { get; set; }
-        public string UserName { get; set; }
-        public string Password { get; set; }
+        public string Email { get; }
+        public string UserName { get; }
+        public string Password { get; }
+
+        public UserDTO(string email, string userName, string password)
+        {
+            Email = email;
+            UserName = userName;
+            Password = password;
+        }
     }
 }

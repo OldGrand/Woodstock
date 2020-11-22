@@ -1,4 +1,4 @@
-﻿@model PagedResult<WatchViewModel>
+﻿@model FilteredWatchViewModel
 
 @{
     ViewData["Title"] = "Catalog";
@@ -56,7 +56,7 @@
             <div class="catalog__header">
                 <div class="catalog__info">
                     <p class="search-result">
-                        Showing @Model.Range.Start.Value - @Model.Range.End.Value of @Model.RowCount results
+                        Showing @Model.PageResult.SkippedItems - @Model.PageResult.CurrentItemNum of @Model.PageResult.ItemsTotal results
                     </p>
                 </div>
 
@@ -75,16 +75,16 @@
                         </select>
                     </div>
                     <div class="select">
-                        @*<form asp-controller="Catalog" asp-action="Index" method="post">
+                        <form asp-controller="Catalog" asp-action="Index" method="post">
                             <select asp-for="@Model.Filter" asp-items="@Html.GetEnumSelectList<Filter>()"
                                                                           class="slct" id="slct"></select>
-                        </form>*@
+                        </form>
                     </div>
                 </div>
             </div>
 
             <div class="catalog__items">
-                @foreach (var watch in Model.Results)
+                @foreach (var watch in Model.PageResult.Results)
                 {
                     <div class="card">
                         <div class="front">
@@ -107,9 +107,9 @@
             </div>
             <div class="pagination">
                 <div class="pagination__container">
-                    @for (int i = Model.Range.Start.Value; i <= Model.Range.End.Value; i++)
+                    @for (int i = Model.PageResult.Range.Start.Value; i <= Model.PageResult.Range.End.Value; i++)
                     {
-                        if (i == Model.CurrentPage)
+                        if (i == Model.PageResult.CurrentPage)
                         {
                             <a asp-controller="Catalog" asp-action="Index" asp-route-pageNum="@i" class="pagination__btn pagination__btn-active">@i</a>
                         }

@@ -2,14 +2,28 @@
 
 namespace Woodstock.BLL.DTOs
 {
-    public class WatchDTO
+    public sealed record WatchDTO
     {
-        public double Diameter { get; set; }
-        public string Description { get; set; }
-        public decimal Price { get; set; }
-        public string Photo { get; set; }
-        public string Title { get; set; }
-        public int GenderId { get; set; }
-        public Gender Gender { get; set; }
+        public double Diameter { get; }
+        public string Description { get; }
+        public decimal Price { get; }
+        public string Photo { get; }
+        public string Title { get; }
+        public int GenderId { get; }
+        public Gender Gender { get; }
+
+        public WatchDTO(double diameter, string description, decimal price, 
+                        string photo, string title, Gender gender)
+        {
+            Diameter = diameter;
+            Description = description;
+            Price = price;
+            Photo = photo;
+            Title = title;
+            Gender = gender;
+            GenderId = Gender.Id;
+        }
     }
 }
+
+

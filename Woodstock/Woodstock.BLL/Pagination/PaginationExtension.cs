@@ -9,11 +9,11 @@ namespace Woodstock.BLL.Pagination
         {
             var result = new PagedResult<T>();
             result.CurrentPage = pageNum;
-            result.PageSize = itemsOnPage;
-            result.RowCount = items.Count();
-           
-            result.PageCount = (int)Math.Ceiling((double)result.RowCount / itemsOnPage);
-            result.Results = items.Skip((pageNum - 1) * itemsOnPage).Take(itemsOnPage).ToList();
+            result.ItemsOnPage = itemsOnPage;
+            result.ItemsTotal = items.Count();
+            result.SkippedItems = (pageNum - 1) * itemsOnPage;
+            result.PagesTotal = (int)Math.Ceiling((double)result.ItemsTotal / itemsOnPage);
+            result.Results = items.Skip(result.SkippedItems).Take(itemsOnPage).ToList();
 
             return result;
         }

@@ -7,10 +7,12 @@ namespace Woodstock.BLL.Abstract
         private const int PAGES_RANGE = 3;
 
         public int CurrentPage { get; set; }//текущая страница currentPage
-        public int PageCount { get; set; }//общее кол-во страниц 
-        public int PageSize { get; set; }//кол-во элементов на странице
-        public int RowCount { get; set; }//общее кол-во элементов total
-        public Range Range => GetPaginationRange(CurrentPage, PageCount, PAGES_RANGE);
+        public int PagesTotal { get; set; }//общее кол-во страниц 
+        public int ItemsOnPage { get; set; }//кол-во элементов на странице
+        public int ItemsTotal { get; set; }//общее кол-во элементов total
+        public int SkippedItems { get; set; }//кол-во просмотренных элементов
+        public int CurrentItemNum => SkippedItems + ItemsOnPage;
+        public Range Range => GetPaginationRange(CurrentPage, PagesTotal, PAGES_RANGE);
 
         private static Range GetPaginationRange(int currentPage, int total, int range)
         {

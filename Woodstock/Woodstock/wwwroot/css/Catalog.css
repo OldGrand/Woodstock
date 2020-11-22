@@ -125,6 +125,7 @@ select {
     height: 35px;
     line-height: 3;
     background: #444;
+    color: #686868;
     overflow: hidden;
     border-radius: .25em;
     font-size: 13px;
@@ -273,7 +274,6 @@ select {
     justify-content: space-evenly;
 }
 
-/* ========pizda========== */
 .card {
     width: 250px;
     height: 400px;
