@@ -56,13 +56,13 @@
             <div class="catalog__header">
                 <div class="catalog__info">
                     <p class="search-result">
-                        Showing @Model.PageResult.SkippedItems - @Model.PageResult.CurrentItemNum of @Model.PageResult.ItemsTotal results
+                        Showing @Model.PageResult.SkippedItems - @Model.PageResult.CurrentItemsCount of @Model.PageResult.ItemsTotal results
                     </p>
                 </div>
 
                 <div class="select__group">
-                    <div class="select">
-                        <select class="slct" id="slct">
+                    <form asp-controller="Catalog" asp-action="Index" class="form-select" method="post">
+                        <select class="select" asp-for="@Model.ItemsOnPage" onchange="this.form.submit()">
                             <option class="select__item">
                                 12
                             </option>
@@ -73,13 +73,11 @@
                                 36
                             </option>
                         </select>
-                    </div>
-                    <div class="select">
-                        <form asp-controller="Catalog" asp-action="Index" method="post">
-                            <select asp-for="@Model.Filter" asp-items="@Html.GetEnumSelectList<Filter>()"
-                                                                          class="slct" id="slct"></select>
-                        </form>
-                    </div>
+                    </form>
+                    <form asp-controller="Catalog" asp-action="Index" method="post" class="form-select">
+                        <select asp-for="@Model.Filter" asp-items="@Html.GetEnumSelectList<Filter>()"
+                                class="select" onchange="this.form.submit()"></select>
+                    </form>
                 </div>
             </div>
 
@@ -90,7 +88,7 @@
                         <div class="front">
                             <div class="front__description">
                                 <img src="/images/Shop/@watch.Photo" alt="" class="item__img">
-                                <p class="item__category">!!!!!!</p>
+                                <p class="item__category">@watch.Gender.Title</p>
                                 <div class="item__title">@watch.Title</div>
                                 <div class="item__price">$@watch.Price</div>
                             </div>

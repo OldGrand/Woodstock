@@ -97,7 +97,8 @@
     align-items: center;
 }
 
-select {
+/* =============SELECT AREA=============== */
+.select {
     -webkit-appearance: none;
     -moz-appearance: none;
     -ms-appearance: none;
@@ -105,55 +106,44 @@ select {
     outline: 0;
     box-shadow: none;
     border: 0 !important;
+    border-radius: 6px;
     background: #444;
-    background-image: none;
-}
-    /* Remove IE arrow */
-    select::-ms-expand {
-        display: none;
-    }
-
-    select.decorated option:hover {
-        box-shadow: 0 0 10px 100px #c71e1e inset;
-    }
-
-.select {
-    position: relative;
-    display: flex;
-    width: max-content;
-    min-width: 65px;
-    height: 35px;
-    line-height: 3;
-    background: #444;
-    color: #686868;
-    overflow: hidden;
-    border-radius: .25em;
-    font-size: 13px;
-}
-
-select {
-    padding: 0 .5em;
+    font-family: 'Lato';
+    text-transform: uppercase;
+    font-size: .8rem;
     color: #fff;
     cursor: pointer;
+    padding: 12px 30px 12px 10px;
 }
 
-.select::after {
-    content: '\25BC';
+.form-select {
+    position: relative;
+    width: max-content;
+}
+
+.select__item {
+    font-family: fantasy;
+    font-weight: 400;
+}
+
+.form-select::after {
+    content: '';
     position: absolute;
-    top: 0;
-    right: 0;
-    padding: 0 1em;
-    background: #444;
+    top: calc(50% - 4px);
+    right: 10px;
+    transform: translateY(-50%);
     cursor: pointer;
-    pointer-events: none;
-    -webkit-transition: .25s all ease;
-    -o-transition: .25s all ease;
     transition: .25s all ease;
+    border: solid #686868;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+    padding: 3px;
 }
 
-.select:hover::after {
-    color: #f39c12;
+.form-select:hover::after {
+    border-color: #cb9400;
 }
+/* ==================End of Select Area================== */
 
 .catalog {
     flex-grow: 1;
@@ -179,7 +169,8 @@ select {
 .select__group {
     display: flex;
     justify-content: space-between;
-    width: 235px;
+    width: 290px;
+    flex-wrap: wrap;
 }
 
 .search-result {

@@ -9,6 +9,10 @@ namespace Woodstock.BLL.Interfaces
         IQueryable<WatchDTO> ReadMen();
         IQueryable<WatchDTO> ReadWomen();
         IQueryable<WatchDTO> ReadOrderedByPriceDesc();
-        IQueryable<WatchDTO> ReadOrderedByAsc();
+        IQueryable<WatchDTO> ReadOrderedByPriceAsc();
+        IQueryable<WatchDTO> ReadMenOrderedByPriceDesc();
+        IQueryable<WatchDTO> ReadMenOrderedByPriceAsc();
+        IQueryable<WatchDTO> ReadWomenOrderedByPriceDesc();
+        IQueryable<WatchDTO> ReadWomenOrderedByPriceAsc();
     }
 }
