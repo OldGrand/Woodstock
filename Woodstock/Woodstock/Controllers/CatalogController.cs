@@ -4,6 +4,7 @@ using Woodstock.BLL.Interfaces;
 using Woodstock.PL.Models.ViewModels;
 using System.Linq;
 using Woodstock.BLL.Pagination;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Woodstock.PL.Controllers
 {
@@ -18,46 +19,20 @@ namespace Woodstock.PL.Controllers
             _mapper = mapper;
         }
 
-        public IActionResult Index(int pageNum = 1, int itemsOnPage = 12)
-        {
-            var pagedResult = _catalogService.ReadAll()
-                .Select(_ => _mapper.Map<WatchViewModel>(_))
-                .GetPaged(pageNum, itemsOnPage);
-            var filteredVM = new FilteredWatchViewModel
-            {
-                PageResult = pagedResult,
-                Filter = Filter.Deafult
-            };
-            return View(filteredVM);
-        }
-
-        [HttpPost]
-        public IActionResult Index(FilteredWatchViewModel filteredVM, int pageNum = 1, int itemsOnPage = 12)
+        public IActionResult Index(FilteredWatchViewModel filteredVM, int pageNum = 1)
         {
             var pagedResult = (filteredVM.Filter switch
             {
                 Filter.OrderByPriceAsc => _catalogService.ReadOrderedByPriceAsc(),
                 Filter.OrderByPriceDesc => _catalogService.ReadOrderedByPriceDesc(),
                 _ => _catalogService.ReadAll()
-            }).Select(_ => _mapper.Map<WatchViewModel>(_)).GetPaged(pageNum, itemsOnPage);
+            }).Select(_ => _mapper.Map<WatchViewModel>(_)).GetPaged(pageNum, filteredVM.ItemsOnPage);
             filteredVM.PageResult = pagedResult;
+            filteredVM.ItemsOnPageVM = new SelectList(new[] { 12,24,36 });
+
             return View(filteredVM);
         }
 
-        public IActionResult MensWatches(int pageNum = 1, int itemsOnPage = 12)
-        {
-            var pagedResult = _catalogService.ReadMen()
-                .Select(_ => _mapper.Map<WatchViewModel>(_))
-                .GetPaged(pageNum, itemsOnPage);
-            var filteredVM = new FilteredWatchViewModel
-            {
-                PageResult = pagedResult,
-                Filter = Filter.Deafult
-            };
-            return View(filteredVM);
-        }
-
-        [HttpPost]
         public IActionResult MensWatches(FilteredWatchViewModel filteredVM, int pageNum = 1)
         {
             var pagedResult = (filteredVM.Filter switch
@@ -67,33 +42,23 @@ namespace Woodstock.PL.Controllers
                 _ => _catalogService.ReadMen()
             }).Select(_ => _mapper.Map<WatchViewModel>(_)).GetPaged(pageNum, filteredVM.ItemsOnPage);
             filteredVM.PageResult = pagedResult;
-            return View(filteredVM);
+            filteredVM.ItemsOnPageVM = new SelectList(new[] { 12, 24, 36 });
+
+            return View(nameof(Index), filteredVM);
         }
 
-        public IActionResult WomensWatches(int pageNum = 1, int itemsOnPage = 12)
-        {
-            var pagedResult = _catalogService.ReadWomen()
-                .Select(_ => _mapper.Map<WatchViewModel>(_))
-                .GetPaged(pageNum, itemsOnPage);
-            var filteredVM = new FilteredWatchViewModel
-            {
-                PageResult = pagedResult,
-                Filter = Filter.Deafult
-            };
-            return View(filteredVM);
-        }
-
-        [HttpPost]
         public IActionResult WomensWatches(FilteredWatchViewModel filteredVM, int pageNum = 1)
         {
             var pagedResult = (filteredVM.Filter switch
             {
-                Filter.OrderByPriceAsc => _catalogService.ReadMenOrderedByPriceAsc(),
-                Filter.OrderByPriceDesc => _catalogService.ReadMenOrderedByPriceDesc(),
-                _ => _catalogService.ReadMen()
+                Filter.OrderByPriceAsc => _catalogService.ReadWomenOrderedByPriceAsc(),
+                Filter.OrderByPriceDesc => _catalogService.ReadWomenOrderedByPriceDesc(),
+                _ => _catalogService.ReadWomen()
             }).Select(_ => _mapper.Map<WatchViewModel>(_)).GetPaged(pageNum, filteredVM.ItemsOnPage);
             filteredVM.PageResult = pagedResult;
-            return View(filteredVM);
+            filteredVM.ItemsOnPageVM = new SelectList(new[] { 12, 24, 36 });
+
+            return View(nameof(Index), filteredVM);
         }
     }
 }

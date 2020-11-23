@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Infrastructure.Enums;
+using System.Collections.Generic;
 using Woodstock.DAL.AbstractEntities;
 
 namespace Woodstock.DAL.Entities
@@ -9,6 +10,8 @@ namespace Woodstock.DAL.Entities
         public string Description { get; set; }
         public decimal Price { get; set; }
         public string Photo { get; set; }
+        public Gender Gender { get; set; }
+
 
         public int ManufacturerId { get; set; }
         public virtual Manufacturer Manufacturer { get; set; }
@@ -20,8 +23,6 @@ namespace Woodstock.DAL.Entities
         public virtual BodyMaterial BodyMaterial { get; set; }
         public int StrapId { get; set; }
         public virtual Strap Strap { get; set; }
-        public int GenderId { get; set; }
-        public virtual Gender Gender { get; set; }
         public virtual IEnumerable<OrderWatchLink> OrderWatchLinks { get; set; }
         public virtual IEnumerable<CartWatchLink> CartWatchLinks { get; set; }
     }

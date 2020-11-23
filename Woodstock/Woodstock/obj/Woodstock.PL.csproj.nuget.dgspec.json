@@ -90,6 +90,9 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
+              "C:\\Users\\Sergey\\Desktop\\Woodstock\\Woodstock\\Infrastructure\\Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\Sergey\\Desktop\\Woodstock\\Woodstock\\Infrastructure\\Infrastructure.csproj"
+              },
               "C:\\Users\\Sergey\\Desktop\\Woodstock\\Woodstock\\Woodstock.DAL\\Woodstock.DAL.csproj": {
                 "projectPath": "C:\\Users\\Sergey\\Desktop\\Woodstock\\Woodstock\\Woodstock.DAL\\Woodstock.DAL.csproj"
               }
@@ -169,7 +172,11 @@
         "frameworks": {
           "net5.0": {
             "targetAlias": "net5.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\Sergey\\Desktop\\Woodstock\\Woodstock\\Infrastructure\\Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\Sergey\\Desktop\\Woodstock\\Woodstock\\Infrastructure\\Infrastructure.csproj"
+              }
+            }
           }
         },
         "warningProperties": {

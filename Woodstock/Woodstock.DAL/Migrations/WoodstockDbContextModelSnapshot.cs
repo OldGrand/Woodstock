@@ -197,36 +197,6 @@ namespace Woodstock.DAL.Migrations
                     b.ToTable("Colors");
                 });
 
-            modelBuilder.Entity("Woodstock.DAL.Entities.Country", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Countries");
-                });
-
-            modelBuilder.Entity("Woodstock.DAL.Entities.Gender", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Genders");
-                });
-
             modelBuilder.Entity("Woodstock.DAL.Entities.GlassMaterial", b =>
                 {
                     b.Property<int>("Id")
@@ -249,15 +219,14 @@ namespace Woodstock.DAL.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<int>("CountryId")
-                        .HasColumnType("int");
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CountryId");
 
                     b.ToTable("Manufacturers");
                 });
@@ -272,8 +241,9 @@ namespace Woodstock.DAL.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("MechanismTypeId")
-                        .HasColumnType("int");
+                    b.Property<string>("MechanismType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("PowerReserveDays")
                         .HasColumnType("int");
@@ -283,24 +253,7 @@ namespace Woodstock.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MechanismTypeId");
-
                     b.ToTable("Mechanisms");
-                });
-
-            modelBuilder.Entity("Woodstock.DAL.Entities.MechanismType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("MechanismTypes");
                 });
 
             modelBuilder.Entity("Woodstock.DAL.Entities.Order", b =>
@@ -516,8 +469,9 @@ namespace Woodstock.DAL.Migrations
                     b.Property<double>("Diameter")
                         .HasColumnType("float");
 
-                    b.Property<int>("GenderId")
-                        .HasColumnType("int");
+                    b.Property<string>("Gender")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("GlassMaterialId")
                         .HasColumnType("int");
@@ -543,8 +497,6 @@ namespace Woodstock.DAL.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("BodyMaterialId");
-
-                    b.HasIndex("GenderId");
 
                     b.HasIndex("GlassMaterialId");
 
@@ -645,28 +597,6 @@ namespace Woodstock.DAL.Migrations
                     b.Navigation("Watch");
                 });
 
-            modelBuilder.Entity("Woodstock.DAL.Entities.Manufacturer", b =>
-                {
-                    b.HasOne("Woodstock.DAL.Entities.Country", "Country")
-                        .WithMany()
-                        .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Country");
-                });
-
-            modelBuilder.Entity("Woodstock.DAL.Entities.Mechanism", b =>
-                {
-                    b.HasOne("Woodstock.DAL.Entities.MechanismType", "MechanismType")
-                        .WithMany()
-                        .HasForeignKey("MechanismTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("MechanismType");
-                });
-
             modelBuilder.Entity("Woodstock.DAL.Entities.Order", b =>
                 {
                     b.HasOne("Woodstock.DAL.Entities.User", "User")
@@ -754,12 +684,6 @@ namespace Woodstock.DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Woodstock.DAL.Entities.Gender", "Gender")
-                        .WithMany()
-                        .HasForeignKey("GenderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Woodstock.DAL.Entities.GlassMaterial", "GlassMaterial")
                         .WithMany()
                         .HasForeignKey("GlassMaterialId")
@@ -785,8 +709,6 @@ namespace Woodstock.DAL.Migrations
                         .IsRequired();
 
                     b.Navigation("BodyMaterial");
-
-                    b.Navigation("Gender");
 
                     b.Navigation("GlassMaterial");
 

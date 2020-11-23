@@ -12,7 +12,7 @@
                 <div class="slider" data-value-0="#first" data-value-1="#second" data-range="#third"></div>
                 <form class="box__container" method="POST">
                     <div class="values">
-                        <div>$<span id="first"></span></div> - <div>$<span id="second"></span></div>
+                        <div>$<span name="StartPrice" id="first"></span></div> - <div>$<span name="EndPrice" id="second"></span></div>
                     </div>
                     <input type="submit" value="Filter" class="submit__btn" />
                 </form>
@@ -61,20 +61,11 @@
                 </div>
 
                 <div class="select__group">
-                    <form asp-controller="Catalog" asp-action="Index" class="form-select" method="post">
-                        <select class="select" asp-for="@Model.ItemsOnPage" onchange="this.form.submit()">
-                            <option class="select__item">
-                                12
-                            </option>
-                            <option class="select__item">
-                                24
-                            </option>
-                            <option class="select__item">
-                                36
-                            </option>
-                        </select>
+                    <form class="form-select" method="post">
+                        <select asp-for="@Model.ItemsOnPage" asp-items="@Model.ItemsOnPageVM"
+                                class="select" onchange="this.form.submit()"></select>
                     </form>
-                    <form asp-controller="Catalog" asp-action="Index" method="post" class="form-select">
+                    <form class="form-select" method="post">
                         <select asp-for="@Model.Filter" asp-items="@Html.GetEnumSelectList<Filter>()"
                                 class="select" onchange="this.form.submit()"></select>
                     </form>
@@ -88,7 +79,7 @@
                         <div class="front">
                             <div class="front__description">
                                 <img src="/images/Shop/@watch.Photo" alt="" class="item__img">
-                                <p class="item__category">@watch.Gender.Title</p>
+                                <p class="item__category">@watch.Gender</p>
                                 <div class="item__title">@watch.Title</div>
                                 <div class="item__price">$@watch.Price</div>
                             </div>
@@ -109,11 +100,11 @@
                     {
                         if (i == Model.PageResult.CurrentPage)
                         {
-                            <a asp-controller="Catalog" asp-action="Index" asp-route-pageNum="@i" class="pagination__btn pagination__btn-active">@i</a>
+                            <a asp-route-pageNum="@i" class="pagination__btn pagination__btn-active">@i</a>
                         }
                         else
                         {
-                            <a asp-controller="Catalog" asp-action="Index" asp-route-pageNum="@i" class="pagination__btn">@i</a>
+                            <a asp-route-pageNum="@i" class="pagination__btn">@i</a>
                         }
                     }
                 </div>

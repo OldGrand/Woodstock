@@ -13,11 +13,11 @@ $('.slider').each(function (e) {
 
     slider.slider({
         range: true,
-        values: [1800, 7800],
-        min: 500,
+        values: [3800, 1200000],
+        min: 3800,
         step: 5,
         minRange: 1000,
-        max: 12000,
+        max: 1200000,
         create(event, ui) {
 
             slider.find('.ui-slider-handle').append($('<div />'));

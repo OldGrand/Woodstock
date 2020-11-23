@@ -1886,10 +1886,21 @@
           "lib/netstandard1.3/System.Xml.XmlSerializer.dll": {}
         }
       },
+      "Infrastructure/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "compile": {
+          "bin/placeholder/Infrastructure.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Infrastructure.dll": {}
+        }
+      },
       "Woodstock.DAL/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
         "dependencies": {
+          "Infrastructure": "1.0.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "5.0.0",
           "Microsoft.EntityFrameworkCore.SqlServer": "5.0.0",
           "Microsoft.Extensions.Identity.Core": "5.0.0"
@@ -6683,6 +6694,11 @@
         "system.xml.xmlserializer.nuspec"
       ]
     },
+    "Infrastructure/1.0.0": {
+      "type": "project",
+      "path": "../Infrastructure/Infrastructure.csproj",
+      "msbuildProject": "../Infrastructure/Infrastructure.csproj"
+    },
     "Woodstock.DAL/1.0.0": {
       "type": "project",
       "path": "../Woodstock.DAL/Woodstock.DAL.csproj",
@@ -6691,6 +6707,7 @@
   },
   "projectFileDependencyGroups": {
     "net5.0": [
+      "Infrastructure >= 1.0.0",
       "MailKit >= 2.9.0",
       "Microsoft.AspNetCore.Identity >= 2.2.0",
       "Microsoft.Extensions.Identity.Core >= 5.0.0",
@@ -6730,6 +6747,9 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
+            "C:\\Users\\Sergey\\Desktop\\Woodstock\\Woodstock\\Infrastructure\\Infrastructure.csproj": {
+              "projectPath": "C:\\Users\\Sergey\\Desktop\\Woodstock\\Woodstock\\Infrastructure\\Infrastructure.csproj"
+            },
             "C:\\Users\\Sergey\\Desktop\\Woodstock\\Woodstock\\Woodstock.DAL\\Woodstock.DAL.csproj": {
               "projectPath": "C:\\Users\\Sergey\\Desktop\\Woodstock\\Woodstock\\Woodstock.DAL\\Woodstock.DAL.csproj"
             }

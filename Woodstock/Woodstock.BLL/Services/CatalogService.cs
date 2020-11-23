@@ -6,12 +6,17 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using Woodstock.DAL;
 using Woodstock.BLL.Extensions;
+using System;
+using Infrastructure.Enums;
 
 namespace Woodstock.BLL.Services
 {
     public class CatalogService : ApplicationContextService<Watch>, ICatalogService
     {
         public CatalogService(WoodstockDbContext context) : base(context) { }
+
+        public (decimal start, decimal end) GetWatchesPriceRange() =>
+            (start: Set.Min(_ => _.Price), end: Set.Max(_ => _.Price));
 
         public IQueryable<WatchDTO> ReadAll()
         {
@@ -24,15 +29,15 @@ namespace Woodstock.BLL.Services
                         Diameter = watch.Diameter,
                         Gender = watch.Gender,
                         Photo = watch.Photo,
-                        Price = watch.Price
+                        Price = watch.Price,
                     }).AsNoTracking();
         }
 
         public IQueryable<WatchDTO> ReadMen() =>
-            ReadAll().ReadByGender("Мужские");
+            ReadAll().ReadByGender(Gender.Man);
 
         public IQueryable<WatchDTO> ReadWomen() => 
-            ReadAll().ReadByGender("Женские");
+            ReadAll().ReadByGender(Gender.Woman);
 
         public IQueryable<WatchDTO> ReadOrderedByPriceDesc() =>
             ReadAll().OrderByDescending(_ => _.Price);

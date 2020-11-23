@@ -1,4 +1,4 @@
-﻿using Woodstock.DAL.Entities;
+﻿using Infrastructure.Enums;
 
 namespace Woodstock.BLL.DTOs
 {
@@ -10,7 +10,6 @@ namespace Woodstock.BLL.DTOs
         public decimal Price { get; set; }
         public string Photo { get; set; }
         public string Title { get; set; }
-        public int GenderId { get; set; }
         public Gender Gender { get; set; }
     }
 }
