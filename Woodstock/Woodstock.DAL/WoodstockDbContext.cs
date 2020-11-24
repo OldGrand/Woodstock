@@ -17,7 +17,7 @@ namespace Woodstock.DAL
         public DbSet<Watch> Watches { get; set; }  
         public DbSet<OrderHistory> OrdersHistory { get; set; }
         public DbSet<Color> Colors { get; set; }
-        public ShoppingCart ShoppingCarts { get; set; }
+        public DbSet<ShoppingCart> ShoppingCarts { get; set; }
 
         public WoodstockDbContext(DbContextOptions options) : base(options)
         {

@@ -1,7 +1,5 @@
 ﻿using Woodstock.BLL.Interfaces;
 using Woodstock.BLL.DTOs;
-using Woodstock.BLL.Abstract;
-using Woodstock.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using Woodstock.DAL;
@@ -10,15 +8,20 @@ using Infrastructure.Enums;
 
 namespace Woodstock.BLL.Services
 {
-    public class CatalogService : ApplicationContextService<Watch>, ICatalogService
+    public class CatalogService : ICatalogService
     {
-        public CatalogService(WoodstockDbContext context) : base(context) { }
+        private readonly WoodstockDbContext _context;
+
+        public CatalogService(WoodstockDbContext context)
+        {
+            _context = context;
+        }
 
         public (decimal start, decimal end) GetWatchesPriceRange() =>
-            (start: Set.Min(_ => _.Price), end: Set.Max(_ => _.Price));
+            (start: _context.Watches.Min(_ => _.Price), end: _context.Watches.Max(_ => _.Price));
 
         public IQueryable<WatchDTO> ReadAll() =>
-            (from watch in Set select watch.ToDTO()).AsNoTracking();
+            (from watch in _context.Watches select watch.ToDTO()).AsNoTracking();
 
         public IQueryable<WatchDTO> ReadMen() =>
             ReadAll().ReadByGender(Gender.Man);

@@ -327,7 +327,7 @@ namespace Woodstock.DAL.Migrations
 
                     b.HasIndex("WatchId");
 
-                    b.ToTable("ShoppingCart");
+                    b.ToTable("ShoppingCarts");
                 });
 
             modelBuilder.Entity("Woodstock.DAL.Entities.Strap", b =>

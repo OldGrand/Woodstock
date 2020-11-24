@@ -10,7 +10,9 @@ namespace Woodstock.PL.Profiles
         public ProfilePL()
         {
             CreateMap<ResetPasswordDTO, ResetPasswordBindingModel>().ReverseMap();
-            CreateMap<WatchDTO, WatchViewModel>();
+            CreateMap<WatchDTO, WatchViewModel>().ReverseMap();
+            CreateMap<UserDTO, UserViewModel>().ReverseMap();
+            CreateMap<ShoppingCartDTO, ShoppingCartViewModel>().ReverseMap();
         }
     }
 }

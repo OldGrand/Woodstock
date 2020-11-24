@@ -1,18 +1,29 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Linq;
-using Woodstock.BLL.Abstract;
 using Woodstock.BLL.DTOs;
 using Woodstock.BLL.Extensions;
+using Woodstock.BLL.Interfaces;
 using Woodstock.DAL;
-using Woodstock.DAL.Entities;
 
 namespace Woodstock.BLL.Services
 {
-    public class ShoppigCartService : ApplicationContextService<ShoppingCart>
+    public class ShoppigCartService : ISoppingCartService
     {
-        public ShoppigCartService(WoodstockDbContext context) : base(context) { }
+        private readonly WoodstockDbContext _context;
+
+        public ShoppigCartService(WoodstockDbContext context) 
+        {
+            _context = context;
+        }
 
         public IQueryable<ShoppingCartDTO> ReadAll() =>
-            (from shoppingCart in Set select shoppingCart.ToDTO()).AsNoTracking();
+            (from shoppingCart in _context.ShoppingCarts select shoppingCart.ToDTO()).AsNoTracking();
+
+        public IQueryable<ShoppingCartDTO> ReadUserCart(int id)
+        {
+            return from cart in ReadAll()
+                   where cart.Id == id
+                   select cart;
+        }
     }
 }

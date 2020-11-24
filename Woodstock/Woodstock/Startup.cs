@@ -85,6 +85,11 @@ namespace Woodstock
                     builder.RequireRole(ClaimRoles.Admin);
                 });
 
+                config.AddPolicy("Manager", builder =>
+                {
+                    builder.RequireRole(ClaimRoles.Manager);
+                });
+
                 config.AddPolicy("User", builder =>
                 {
                     builder.RequireRole(ClaimRoles.User);

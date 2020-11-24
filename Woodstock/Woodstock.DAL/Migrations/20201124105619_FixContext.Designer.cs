@@ -10,8 +10,8 @@ using Woodstock.DAL;
 namespace Woodstock.DAL.Migrations
 {
     [DbContext(typeof(WoodstockDbContext))]
-    [Migration("20201124075123_FixedShoppingCart")]
-    partial class FixedShoppingCart
+    [Migration("20201124105619_FixContext")]
+    partial class FixContext
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -329,7 +329,7 @@ namespace Woodstock.DAL.Migrations
 
                     b.HasIndex("WatchId");
 
-                    b.ToTable("ShoppingCart");
+                    b.ToTable("ShoppingCarts");
                 });
 
             modelBuilder.Entity("Woodstock.DAL.Entities.Strap", b =>
