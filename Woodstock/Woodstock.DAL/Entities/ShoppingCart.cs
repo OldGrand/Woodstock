@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Woodstock.DAL.Entities
+﻿namespace Woodstock.DAL.Entities
 {
     public class ShoppingCart
     {
@@ -8,6 +6,7 @@ namespace Woodstock.DAL.Entities
 
         public int UserId { get; set; }
         public virtual User User { get; set; }
-        public virtual IEnumerable<CartWatchLink> CartWatchLinks { get; set; }
+        public int WatchId { get; set; }
+        public virtual Watch Watch { get; set; }
     }
 }

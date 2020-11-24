@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using Woodstock.DAL;
 using Woodstock.BLL.Extensions;
-using System;
 using Infrastructure.Enums;
 
 namespace Woodstock.BLL.Services

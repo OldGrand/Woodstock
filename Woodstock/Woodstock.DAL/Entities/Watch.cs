@@ -24,6 +24,6 @@ namespace Woodstock.DAL.Entities
         public int StrapId { get; set; }
         public virtual Strap Strap { get; set; }
         public virtual IEnumerable<OrderWatchLink> OrderWatchLinks { get; set; }
-        public virtual IEnumerable<CartWatchLink> CartWatchLinks { get; set; }
+        public virtual IEnumerable<ShoppingCart> CartWatchLinks { get; set; }
     }
 }
