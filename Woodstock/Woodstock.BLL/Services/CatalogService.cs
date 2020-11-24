@@ -17,20 +17,8 @@ namespace Woodstock.BLL.Services
         public (decimal start, decimal end) GetWatchesPriceRange() =>
             (start: Set.Min(_ => _.Price), end: Set.Max(_ => _.Price));
 
-        public IQueryable<WatchDTO> ReadAll()
-        {
-            return (from watch in Set
-                    select new WatchDTO
-                    {
-                        Id = watch.Id,
-                        Title = watch.Title,
-                        Description = watch.Description,
-                        Diameter = watch.Diameter,
-                        Gender = watch.Gender,
-                        Photo = watch.Photo,
-                        Price = watch.Price,
-                    }).AsNoTracking();
-        }
+        public IQueryable<WatchDTO> ReadAll() =>
+            (from watch in Set select watch.ToDTO()).AsNoTracking();
 
         public IQueryable<WatchDTO> ReadMen() =>
             ReadAll().ReadByGender(Gender.Man);
