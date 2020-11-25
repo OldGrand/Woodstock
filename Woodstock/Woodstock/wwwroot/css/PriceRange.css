@@ -162,9 +162,9 @@
     font-family: "Playfair Display"
 }
 
-    .submit__btn:hover {
-        background-color: #e9ab00;
-    }
+.submit__btn:hover {
+    background-color: #e9ab00;
+}
 
 .box__container {
     display: flex;

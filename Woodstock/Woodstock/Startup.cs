@@ -33,8 +33,8 @@ namespace Woodstock
 
             services.AddRouting(option =>
             {
-                option.LowercaseQueryStrings = true;
-                option.LowercaseUrls = true;
+                //option.LowercaseQueryStrings = true;
+                //option.LowercaseUrls = true;
             });
 
             services.AddAutoMapper(typeof(ProfilePL));
@@ -94,7 +94,6 @@ namespace Woodstock
                 {
                     builder.RequireRole(ClaimRoles.User);
                 });
-
             });
 
             services.AddControllersWithViews();
