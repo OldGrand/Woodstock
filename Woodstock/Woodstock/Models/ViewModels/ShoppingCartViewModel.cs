@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Woodstock.PL.Models.ViewModels
+﻿namespace Woodstock.PL.Models.ViewModels
 {
     public class ShoppingCartViewModel
     {
+        public int Id { get; set; }
+
+        public int UserId { get; set; }
+        public UserViewModel User { get; set; }
+        public int WatchId { get; set; }
+        public WatchViewModel Watch { get; set; }
     }
 }

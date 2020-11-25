@@ -348,10 +348,15 @@
     transition: all ease .3s;
 }
 
-    .pagination__btn:hover {
-        background-color: #cb9400;
-    }
+.pagination__btn:hover {
+    background-color: #cb9400;
+}
 
 .pagination__btn-active {
     background-color: #cb9400;
+}
+
+.catalog-cart-form {
+    display: flex;
+    justify-content: center;
 }

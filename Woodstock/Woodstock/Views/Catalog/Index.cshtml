@@ -88,7 +88,9 @@
                             <div class="back__description">
                                 <div class="item__descr">@watch.Description</div>
                                 <a class="item__wishlist">Add to wishlist</a>
-                                <input type="submit" value="Add to cart" class="submit__btn" />
+                                <form class="catalog-cart-form" asp-controller="ShoppingCart" asp-action="AddToCart" asp-route-watchId="@watch.Id" method="post">
+                                    <input type="submit" value="Add to cart" class="submit__btn" />
+                                </form>
                             </div>
                         </div>
                     </div>
