@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -22,21 +23,41 @@ namespace Woodstock.PL.Controllers
             _mapper = mapper;
         }
 
-        public IActionResult ShoppingCart()
+        public IActionResult Items()
         {
-            var userId = Int32.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
-            var cartVM = _cartService.ReadUserCart(userId)
-                                          .Select(_ => _mapper.Map<ShoppingCartViewModel>(_))
-                                          .ToList();
-            return View(cartVM);
+            var cartVMs = ReadUserCart().ToList();
+            return View(cartVMs);
         }
 
         public async Task<IActionResult> AddToCart(int watchId)
-        {
+        {//TODO дублируются товары
             var userId = Int32.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
             await _cartService.AddToCartAsync(userId, watchId);
 
-            return RedirectToAction(nameof(ShoppingCart), "ShoppingCart");
+            return RedirectToAction(nameof(Items), "ShoppingCart");
+        }
+
+        public IActionResult ChangeCount(int id, Operation operation)
+        {
+            var cartVMs = ReadUserCart().ToList();
+
+            var changedItem = cartVMs.FirstOrDefault(_ => _.Id == id);
+            var pagedResult = operation switch
+            {
+                Operation.Minus => changedItem.Count--,
+                Operation.Plus => changedItem.Count++,
+                _ => changedItem.Count,
+            };
+
+            return View(nameof(Items), cartVMs);
+        }
+
+        private IQueryable<ShoppingCartViewModel> ReadUserCart()
+        {
+            var userId = Int32.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var cartVMs = _cartService.ReadUserCart(userId)
+                                          .Select(_ => _mapper.Map<ShoppingCartViewModel>(_));
+            return cartVMs;
         }
     }
 }

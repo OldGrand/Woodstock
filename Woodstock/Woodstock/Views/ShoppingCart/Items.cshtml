@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Shopping Cart";
+    var data = Model;
 }
 
 <div class="main-cart__container">
@@ -21,7 +22,8 @@
             <div class="cart__items">
                 @foreach (var item in Model)
                 {
-                    <div class="cart__item">
+                <div class="cart__item">
+                    <div class="cart-item__content">
                         <div class="squaredThree">
                             <input type="checkbox" class="cart-checkbox" id="single1" name="check" />
                             <label for="single1"></label>
@@ -32,21 +34,22 @@
                             <span class="cart__item-descr">@item.Watch.Description</span>
                             <span class="cart__item-price">$@item.Watch.Price</span>
                         </div>
-                        <div class="cart__item-control">
-                            <form action="">
-                                <input type="button" value="урна">
-                            </form>
-                            <form action="">
-                                <input type="button" value="сердечко">
-                            </form>
-                            <div action="">
-                                <a href="">-</a>
-                                <label for="">3</label>
-                                <a href="">+</a>
-                            </div>
+                    </div>
+                    <div class="cart__item-control">
+                        <form action="">
+                            <input type="button" value="урна">
+                        </form>
+                        <form action="">
+                            <input type="button" value="сердечко">
+                        </form>
+                        <div class="" >
+                            <a class="cart-minus-btn" asp-controller="ShoppingCart" asp-action="ChangeCount" asp-route-id="@item.Id" asp-route-operation="@Operation.Minus">-</a>
+                            <label class="cart-item-count">3</label>
+                            <a class="cart-plus-btn" asp-controller="ShoppingCart" asp-action="ChangeCount" asp-route-id="@item.Id" asp-route-operation="@Operation.Plus">+</a>
                         </div>
                     </div>
-                }
+                </div>
+                 }
             </div>
         </div>
         <form class="order__info">

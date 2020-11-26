@@ -26,12 +26,20 @@ namespace Woodstock.BLL.Services
 
         public async Task AddToCartAsync(int userId, int watchId)
         {
-            var a = new ShoppingCart
+            var record = _context.ShoppingCarts.FirstOrDefault(_ => _.UserId == userId && _.WatchId == watchId);
+
+            if (record is null)
             {
-                UserId = userId,
-                WatchId = watchId
-            };
-            _context.ShoppingCarts.Add(a);
+                var newCartRecord = new ShoppingCart
+                {
+                    Count = 1,
+                    UserId = userId,
+                    WatchId = watchId
+                };
+                _context.ShoppingCarts.Add(newCartRecord);
+            }
+            
+            record.Count++;
             await _context.SaveChangesAsync();
         }
     }

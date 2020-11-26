@@ -89,4 +89,4 @@ C:\Users\Sergey\Desktop\Woodstock\Woodstock\Woodstock\obj\Debug\net5.0\Razor\Vie
 C:\Users\Sergey\Desktop\Woodstock\Woodstock\Woodstock\bin\Debug\net5.0\Humanizer.dll
 C:\Users\Sergey\Desktop\Woodstock\Woodstock\Woodstock\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Design.dll
 C:\Users\Sergey\Desktop\Woodstock\Woodstock\Woodstock\obj\Debug\net5.0\Razor\Views\Catalog\Index.cshtml.g.cs
-C:\Users\Sergey\Desktop\Woodstock\Woodstock\Woodstock\obj\Debug\net5.0\Razor\Views\ShoppingCart\ShoppingCart.cshtml.g.cs
+C:\Users\Sergey\Desktop\Woodstock\Woodstock\Woodstock\obj\Debug\net5.0\Razor\Views\ShoppingCart\Items.cshtml.g.cs
