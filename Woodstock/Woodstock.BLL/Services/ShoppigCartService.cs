@@ -5,6 +5,7 @@ using Woodstock.BLL.Extensions;
 using Woodstock.BLL.Interfaces;
 using Woodstock.DAL;
 using Woodstock.DAL.Entities;
+using Woodstock.Infrastructure;
 
 namespace Woodstock.BLL.Services
 {
@@ -12,16 +13,30 @@ namespace Woodstock.BLL.Services
     {
         private readonly WoodstockDbContext _context;
 
-        public ShoppigCartService(WoodstockDbContext context) 
-        {
+        public ShoppigCartService(WoodstockDbContext context) =>
             _context = context;
-        }
 
         public IQueryable<ShoppingCartDTO> ReadUserCart(int userId)
         {
             return from cart in _context.ShoppingCarts
                    where cart.UserId == userId
                    select cart.ToDTO();
+        }
+
+        public IQueryable<ShoppingCartDTO> ChangeCount(int userId, Operations operation)
+        {
+            var cartDTOs = ReadUserCart(userId);
+
+            var changedItem = cartDTOs.FirstOrDefault(_ => _.Id == userId);
+            changedItem.Count = operation switch
+            {
+                Operations.Minus => changedItem.Count - 1,
+                Operations.Plus => changedItem.Count + 1,
+                _ => changedItem.Count
+            };
+
+            _context.SaveChanges();
+            return cartDTOs;
         }
 
         public async Task AddToCartAsync(int userId, int watchId)

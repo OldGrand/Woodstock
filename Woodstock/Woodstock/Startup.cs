@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Woodstock.DAL;
 using Woodstock.DAL.Entities;
+using Woodstock.Infrastructure;
 using Woodstock.PL.Extensions;
 using Woodstock.PL.Profiles;
 

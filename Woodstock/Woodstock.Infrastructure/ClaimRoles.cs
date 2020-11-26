@@ -1,4 +1,4 @@
-﻿namespace Infrastructure
+﻿namespace Woodstock.Infrastructure
 {
     public class ClaimRoles
     {

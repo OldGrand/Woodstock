@@ -8,12 +8,12 @@
     ".NETCoreApp,Version=v5.0": {
       "Woodstock.BLL/1.0.0": {
         "dependencies": {
-          "Infrastructure": "1.0.0",
           "MailKit": "2.9.0",
           "Microsoft.AspNetCore.Identity": "2.2.0",
           "Microsoft.Extensions.Identity.Core": "5.0.0",
           "MimeKit": "2.9.2",
-          "Woodstock.DAL": "1.0.0"
+          "Woodstock.DAL": "1.0.0",
+          "Woodstock.Infrastructure": "1.0.0"
         },
         "runtime": {
           "Woodstock.BLL.dll": {}
@@ -1397,20 +1397,19 @@
           "System.Xml.XmlDocument": "4.3.0"
         }
       },
-      "Infrastructure/1.0.0": {
-        "runtime": {
-          "Infrastructure.dll": {}
-        }
-      },
       "Woodstock.DAL/1.0.0": {
         "dependencies": {
-          "Infrastructure": "1.0.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "5.0.0",
           "Microsoft.EntityFrameworkCore.SqlServer": "5.0.0",
           "Microsoft.Extensions.Identity.Core": "5.0.0"
         },
         "runtime": {
           "Woodstock.DAL.dll": {}
+        }
+      },
+      "Woodstock.Infrastructure/1.0.0": {
+        "runtime": {
+          "Woodstock.Infrastructure.dll": {}
         }
       }
     }
@@ -2296,12 +2295,12 @@
       "path": "system.xml.xmlserializer/4.3.0",
       "hashPath": "system.xml.xmlserializer.4.3.0.nupkg.sha512"
     },
-    "Infrastructure/1.0.0": {
+    "Woodstock.DAL/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
-    "Woodstock.DAL/1.0.0": {
+    "Woodstock.Infrastructure/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

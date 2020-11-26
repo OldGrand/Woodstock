@@ -1,9 +1,0 @@
-C:\Users\Sergey\Desktop\Woodstock\Woodstock\Infrastructure\bin\Debug\netcoreapp3.1\Infrastructure.deps.json
-C:\Users\Sergey\Desktop\Woodstock\Woodstock\Infrastructure\bin\Debug\netcoreapp3.1\Infrastructure.dll
-C:\Users\Sergey\Desktop\Woodstock\Woodstock\Infrastructure\bin\Debug\netcoreapp3.1\Infrastructure.pdb
-C:\Users\Sergey\Desktop\Woodstock\Woodstock\Infrastructure\obj\Debug\netcoreapp3.1\Infrastructure.csprojAssemblyReference.cache
-C:\Users\Sergey\Desktop\Woodstock\Woodstock\Infrastructure\obj\Debug\netcoreapp3.1\Infrastructure.AssemblyInfoInputs.cache
-C:\Users\Sergey\Desktop\Woodstock\Woodstock\Infrastructure\obj\Debug\netcoreapp3.1\Infrastructure.AssemblyInfo.cs
-C:\Users\Sergey\Desktop\Woodstock\Woodstock\Infrastructure\obj\Debug\netcoreapp3.1\Infrastructure.csproj.CoreCompileInputs.cache
-C:\Users\Sergey\Desktop\Woodstock\Woodstock\Infrastructure\obj\Debug\netcoreapp3.1\Infrastructure.dll
-C:\Users\Sergey\Desktop\Woodstock\Woodstock\Infrastructure\obj\Debug\netcoreapp3.1\Infrastructure.pdb

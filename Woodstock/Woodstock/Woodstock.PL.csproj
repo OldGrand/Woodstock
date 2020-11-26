@@ -24,9 +24,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
     <ProjectReference Include="..\Woodstock.BLL\Woodstock.BLL.csproj" />
     <ProjectReference Include="..\Woodstock.DAL\Woodstock.DAL.csproj" />
+    <ProjectReference Include="..\Woodstock.Infrastructure\Woodstock.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
