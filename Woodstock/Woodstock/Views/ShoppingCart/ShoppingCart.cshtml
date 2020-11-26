@@ -4,39 +4,70 @@
     ViewBag.Title = "Shopping Cart";
 }
 
-<table class="table_price">
-    <caption>Sale</caption>
-    <tr>
-        <th>
-            Фото
-        </th>
-        <th>
-            Название
-        </th>
-        <th>
-            Описание
-        </th>
-        <th>
-            Цена
-        </th>
-        <th></th>
-    </tr>
+<div class="main-cart__container">
+    <div class="cart">
+        <div class="cart__container">
+            <div class="cart__header">
+                <h1 class="cart__header-title">shopping cart</h1>
+                <div class="checkbox__container">
+                    <div class="squaredThree">
+                        <input type="checkbox" id="mainCheck" name="check" />
+                        <label for="mainCheck"></label>
+                    </div>
+                    <label for="squaredThree" class="bukvi">Choose all</label>
+                </div>
+            </div>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @item.Watch.Photo
-            </td>
-            <td>
-                @item.Watch.Title
-            </td>
-            <td>
-                @item.Watch.Description
-            </td>
-            <td>
-                @item.Watch.Price
-            </td>
-        </tr>
-    }
-</table>
+            <div class="cart__items">
+                @foreach (var item in Model)
+                {
+                    <div class="cart__item">
+                        <div class="squaredThree">
+                            <input type="checkbox" class="cart-checkbox" id="single1" name="check" />
+                            <label for="single1"></label>
+                        </div>
+                        <img src="/images/Shop/@item.Watch.Photo" alt="" class="cart__item-img">
+                        <div class="cart__item-block">
+                            <span class="cart__item-title">@item.Watch.Title</span>
+                            <span class="cart__item-descr">@item.Watch.Description</span>
+                            <span class="cart__item-price">$@item.Watch.Price</span>
+                        </div>
+                        <div class="cart__item-control">
+                            <form action="">
+                                <input type="button" value="урна">
+                            </form>
+                            <form action="">
+                                <input type="button" value="сердечко">
+                            </form>
+                            <div action="">
+                                <a href="">-</a>
+                                <label for="">3</label>
+                                <a href="">+</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <form class="order__info">
+            <h1 class="cart__header-title">Order Summary</h1>
+            <p class="order__subtotal order__content">
+                <span>Subtotal</span>
+                <span>$12345</span>
+            </p>
+            <p class="order__shipping order__content">
+                <span>Shipping</span>
+                <span>$12345</span>
+            </p>
+            <p class="order__total order__content">
+                <span>Total</span>
+                <span>$12345</span>
+            </p>
+            <input type="button" class="buy__btn" value="BUY">
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/CartCheckbox.js"></script>
+}
