@@ -2,7 +2,6 @@
 
 @{
     ViewBag.Title = "Shopping Cart";
-    var data = Model;
 }
 
 <div class="main-cart__container">
@@ -42,10 +41,10 @@
                         <form action="">
                             <input type="button" value="сердечко">
                         </form>
-                        <div class="" >
-                            <a class="cart-minus-btn" asp-controller="ShoppingCart" asp-action="ChangeCount" asp-route-id="@item.Id" asp-route-operation="@Operations.Minus">-</a>
-                            <label class="cart-item-count">3</label>
-                            <a class="cart-plus-btn" asp-controller="ShoppingCart" asp-action="ChangeCount" asp-route-id="@item.Id" asp-route-operation="@Operations.Plus">+</a>
+                        <div class="">
+                            <a class="cart-minus-btn" asp-controller="ShoppingCart" asp-action="ChangeCount" asp-route-id="@item.User.Id" asp-route-operation="@Operations.Minus">-</a>
+                            <label class="cart-item-count">@item.Count</label>
+                            <a class="cart-plus-btn" asp-controller="ShoppingCart" asp-action="ChangeCount" asp-route-id="@item.User.Id" asp-route-operation="@Operations.Plus">+</a>
                         </div>
                     </div>
                 </div>

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Woodstock.BLL.DTOs;
 using Woodstock.BLL.Extensions;
@@ -23,11 +24,13 @@ namespace Woodstock.BLL.Services
                    select cart.ToDTO();
         }
 
-        public IQueryable<ShoppingCartDTO> ChangeCount(int userId, Operations operation)
+        public IEnumerable<ShoppingCartDTO> ChangeCount(int userId, Operations operation)
         {
-            var cartDTOs = ReadUserCart(userId);
+            var cartDTOs = (from cart in _context.ShoppingCarts
+                           where cart.UserId == userId
+                           select cart).ToList();
 
-            var changedItem = cartDTOs.FirstOrDefault(_ => _.Id == userId);
+            var changedItem = cartDTOs.FirstOrDefault(_ => _.UserId == userId);
             changedItem.Count = operation switch
             {
                 Operations.Minus => changedItem.Count - 1,
@@ -36,7 +39,7 @@ namespace Woodstock.BLL.Services
             };
 
             _context.SaveChanges();
-            return cartDTOs;
+            return cartDTOs.Select(_ => _.ToDTO());
         }
 
         public async Task AddToCartAsync(int userId, int watchId)

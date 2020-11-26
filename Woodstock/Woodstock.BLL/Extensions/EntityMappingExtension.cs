@@ -34,7 +34,10 @@ namespace Woodstock.BLL.Extensions
             return new ShoppingCartDTO
             {
                 Id = shoppingCart.Id,
+                Count = shoppingCart.Count,
+                UserId = shoppingCart.UserId,
                 User = shoppingCart.User.ToDTO(),
+                WatchId = shoppingCart.WatchId,
                 Watch = shoppingCart.Watch.ToDTO(),
             };
         }
