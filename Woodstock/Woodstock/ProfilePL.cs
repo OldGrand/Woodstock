@@ -23,6 +23,8 @@ namespace Woodstock.PL.Profiles
             CreateMap<UserDTO, UserViewModel>().ReverseMap();
             CreateMap<ShoppingCartDTO, ShoppingCartViewModel>().ReverseMap();
             CreateMap<OrderSummaryDTO, OrderSummaryViewModel>().ReverseMap();
+            CreateMap<OrderDTO, OrderViewModel>().ReverseMap();
+            CreateMap<OrderWatchLinkDTO, OrderWatchLinkViewModel>().ReverseMap();
         }
     }
 }

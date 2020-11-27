@@ -13,6 +13,5 @@ namespace Woodstock.BLL.Interfaces
         void DeleteFromCart(int cartId);
         OrderSummaryDTO UpdateSummary(int userId, int watchId, bool isChecked);
         OrderSummaryDTO GetSummary(int userId);
-        void MoveCartToOrder(int userId);
     }
 }

@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq;
+using Woodstock.BLL.DTOs;
 using Woodstock.BLL.Extensions;
 using Woodstock.BLL.Interfaces;
 using Woodstock.DAL;
@@ -55,6 +57,13 @@ namespace Woodstock.BLL.Services
                     transaction.Rollback();
                 }
             }
+        }
+
+        public IQueryable<OrderDTO> GetOrders(int userId)
+        {
+            return (from order in _context.Orders.Include(_ => _.OrderWatchLinks)
+                    where order.UserId == userId && !order.IsOrderCompleted
+                    select order.ToDTO()).AsNoTracking();
         }
     }
 }

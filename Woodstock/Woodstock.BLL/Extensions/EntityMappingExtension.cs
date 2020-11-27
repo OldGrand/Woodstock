@@ -1,4 +1,5 @@
-﻿using Woodstock.BLL.DTOs;
+﻿using System.Linq;
+using Woodstock.BLL.DTOs;
 using Woodstock.DAL.Entities;
 
 namespace Woodstock.BLL.Extensions
@@ -51,6 +52,35 @@ namespace Woodstock.BLL.Extensions
                 OrderId = order.Id,
                 Watch = shoppingCart.Watch,
                 WatchId = shoppingCart.WatchId,
+            };
+        }
+
+        public static OrderDTO ToDTO(this Order order)
+        {
+            return new OrderDTO
+            {
+                Id = order.Id,
+                IsOrderCompleted = order.IsOrderCompleted,
+                OrderDate = order.OrderDate,
+                OrderWatchLinks = order.OrderWatchLinks.Select(_ => _.ToDTO()),
+                PaymentMethod = order.PaymentMethod,
+                TotalCount = order.TotalCount,
+                TotalPrice = order.TotalPrice,
+                User = order.User.ToDTO(),
+                UserId = order.UserId,
+            };
+        }
+
+        public static OrderWatchLinkDTO ToDTO(this OrderWatchLink orderWatchLink)
+        {
+            return new OrderWatchLinkDTO
+            {
+                Id = orderWatchLink.Id,
+                Count = orderWatchLink.Count,
+                Order = orderWatchLink.Order.ToDTO(),
+                OrderId = orderWatchLink.OrderId,
+                Watch = orderWatchLink.Watch.ToDTO(),
+                WatchId = orderWatchLink.WatchId,
             };
         }
     }

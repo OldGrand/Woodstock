@@ -44,11 +44,8 @@ namespace Woodstock.PL.Controllers
         }
 
         public IActionResult Buy()
-        {//TODO fix
-            var userId = User.GetId();
-            _cartService.MoveCartToOrder(userId);
-
-            return RedirectToAction(nameof(Items), "ShoppingCart");
+        {
+            return RedirectToAction("CreateOrder", "Orders");
         }
 
         public async Task<IActionResult> AddToCart(int watchId)

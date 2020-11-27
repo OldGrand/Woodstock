@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Woodstock.BLL.DTOs;
 using Woodstock.BLL.Extensions;
@@ -37,24 +36,6 @@ namespace Woodstock.BLL.Services
                 Total = shippingPrice + totalPrice,
                 Count = watches.Sum(_ => _.Count)
             };
-        }
-
-        public void MoveCartToOrder(int userId)
-        {
-            using (var transaction = _context.Database.BeginTransaction())
-            {
-                try
-                {
-                    var checkedWatches = ReadAll(userId).Where(_ => _.IsChecked);
-
-
-                    transaction.Commit();
-                }
-                catch (Exception)
-                {
-                    transaction.Rollback();
-                }
-            }
         }
 
         public OrderSummaryDTO UpdateSummary(int userId, int watchId, bool isChecked)
