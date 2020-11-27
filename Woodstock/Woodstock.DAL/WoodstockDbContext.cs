@@ -18,6 +18,7 @@ namespace Woodstock.DAL
         public DbSet<OrderHistory> OrdersHistory { get; set; }
         public DbSet<Color> Colors { get; set; }
         public DbSet<ShoppingCart> ShoppingCarts { get; set; }
+        public DbSet<OrderWatchLink> OrderWatchLinks { get; set; }
 
         public WoodstockDbContext(DbContextOptions options) : base(options)
         {
@@ -33,17 +34,6 @@ namespace Woodstock.DAL
 
             builder.Entity<Manufacturer>().Property(p => p.Country)
                 .HasConversion<string>();
-
-            builder.Entity<OrderWatchLink>().HasKey(_ => new { _.OrderId, _.WatchId });
-            builder.Entity<OrderWatchLink>()
-                .HasOne(_ => _.Watch)
-                .WithMany(_ => _.OrderWatchLinks)
-                .HasForeignKey(_ => _.WatchId);
-
-            builder.Entity<OrderWatchLink>()
-                .HasOne(_ => _.Order)
-                .WithMany(_ => _.OrderWatchLinks)
-                .HasForeignKey(_ => _.OrderId);
 
             base.OnModelCreating(builder);
         }

@@ -47,17 +47,6 @@ namespace Woodstock.BLL.Services
                 {
                     var checkedWatches = ReadAll(userId).Where(_ => _.IsChecked);
 
-                    var order = new Order
-                    {
-                        UserId = userId,
-                        PaymentMethod = "qwer",
-                        Count = checkedWatches.Sum(_ => _.Count),
-                        TotalPrice = checkedWatches.Sum(_ => _.Count * _.Watch.Price),
-                        OrderDate = DateTime.Now,
-                        User = _context.Users.Find(userId),
-                    };
-                    _context.Orders.Add(order);
-                    _context.SaveChanges();
 
                     transaction.Commit();
                 }

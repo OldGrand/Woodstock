@@ -42,5 +42,16 @@ namespace Woodstock.BLL.Extensions
                 Watch = shoppingCart.Watch.ToDTO(),
             };
         }
+
+        public static OrderWatchLink ToOrder(this ShoppingCart shoppingCart, Order order)
+        {
+            return new OrderWatchLink
+            {
+                Order = order,
+                OrderId = order.Id,
+                Watch = shoppingCart.Watch,
+                WatchId = shoppingCart.WatchId,
+            };
+        }
     }
 }

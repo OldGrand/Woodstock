@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Woodstock.BLL.Extensions;
 using Woodstock.BLL.Interfaces;
 using Woodstock.DAL;
 using Woodstock.DAL.Entities;
@@ -18,7 +16,7 @@ namespace Woodstock.BLL.Services
             _context = context;
         }
 
-        public Order CreateOrder(int userId)
+        private Order CreateOrder(int userId)
         {
             var order = new Order
             {
@@ -36,9 +34,27 @@ namespace Woodstock.BLL.Services
 
         public void AddItemsToOrder(int userId)
         {
-            var order = CreateOrder(userId);
+            using (var transaction = _context.Database.BeginTransaction())
+            {
+                try
+                {
+                    var order = CreateOrder(userId);
+                    var carts = _context.ShoppingCarts.Where(_ => _.UserId == userId && _.IsChecked).ToList();
+                    var oderLinks = carts.Select(_ => _.ToOrder(order));
+                    _context.OrderWatchLinks.AddRange(oderLinks);
+                    _context.ShoppingCarts.RemoveRange(carts);
 
+                    order.TotalPrice = carts.Sum(_ => _.Count * _.Watch.Price);
+                    order.TotalCount = carts.Sum(_ => _.Count);
 
+                    _context.SaveChanges();
+                    transaction.Commit();
+                }
+                catch (Exception)
+                {
+                    transaction.Rollback();
+                }
+            }
         }
     }
 }

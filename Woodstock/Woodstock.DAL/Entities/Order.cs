@@ -8,7 +8,7 @@ namespace Woodstock.DAL.Entities
         public int Id { get; set; }
         public string PaymentMethod { get; set; }
         public DateTime OrderDate { get; set; }
-        public int Count { get; set; }
+        public int TotalCount { get; set; }
         public decimal TotalPrice { get; set; }
         public bool IsOrderCompleted { get; set; }
 
