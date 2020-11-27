@@ -29,6 +29,14 @@ namespace Woodstock.PL.Controllers
             return View(cartVMs);
         }
 
+        public IActionResult ChangeSelection(int watchId, bool isChecked)
+        {
+            var userId = Int32.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            _cartService.UpdateSummary(userId, watchId, isChecked);
+
+            return View();
+        }
+
         public async Task<IActionResult> AddToCart(int watchId)
         {
             var userId = Int32.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));

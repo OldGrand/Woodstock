@@ -12,5 +12,7 @@ namespace Woodstock.BLL.Interfaces
         Task AddToCartAsync(int userId, int watchId);
         IEnumerable<ShoppingCartDTO> ChangeCount(int userId, int watchId, Operations operation);
         void DeleteFromCart(int cartId);
+        OrderSummaryDTO UpdateSummary(int userId, int watchId, bool isChecked);
+        OrderSummaryDTO GetSummary(int userId);
     }
 }
