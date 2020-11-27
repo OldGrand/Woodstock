@@ -35,6 +35,7 @@ namespace Woodstock.BLL.Extensions
             {
                 Id = shoppingCart.Id,
                 Count = shoppingCart.Count,
+                IsChecked = shoppingCart.IsChecked,
                 UserId = shoppingCart.UserId,
                 User = shoppingCart.User.ToDTO(),
                 WatchId = shoppingCart.WatchId,

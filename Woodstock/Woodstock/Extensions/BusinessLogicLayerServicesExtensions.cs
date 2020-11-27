@@ -11,7 +11,7 @@ namespace Woodstock.PL.Extensions
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IEmailService, EmailService>();
             services.AddScoped<ICatalogService, CatalogService>();
-            services.AddScoped<IShoppingCartService, ShoppigCartService>();
+            services.AddScoped<IShoppingCartService, ShoppingCartService>();
         }
     }
 }

@@ -19,14 +19,18 @@
             </div>
 
             <div class="cart__items">
+                @if (Model is null || Model.Count() == 0)
+                {
+                <h3>Your Shopping Cart is empty</h3>
+                }
                 @foreach (var item in Model)
                 {
                 <div class="cart__item">
                     <div class="cart-item__content">
-                        <div class="squaredThree">
-                            <input type="checkbox" class="cart-checkbox" id="single1" name="check" />
+                        <form class="squaredThree" onchange="this.form.submit()">
+                            <input type="checkbox" class="cart-checkbox" id="single1" name="check" asp-for="@item.IsChecked" />
                             <label for="single1"></label>
-                        </div>
+                        </form>
                         <img src="/images/Shop/@item.Watch.Photo" alt="" class="cart__item-img">
                         <div class="cart__item-block">
                             <span class="cart__item-title">@item.Watch.Title</span>
@@ -35,16 +39,16 @@
                         </div>
                     </div>
                     <div class="cart__item-control">
-                        <form action="">
-                            <input type="button" value="урна">
-                        </form>
+                        <a asp-controller="ShoppingCart" asp-action="Remove" asp-route-cartId="@item.Id">
+                            Удалить
+                        </a>
                         <form action="">
                             <input type="button" value="сердечко">
                         </form>
                         <div class="">
-                            <a class="cart-minus-btn" asp-controller="ShoppingCart" asp-action="ChangeCount" asp-route-id="@item.User.Id" asp-route-operation="@Operations.Minus">-</a>
+                            <a class="cart-minus-btn" asp-controller="ShoppingCart" asp-action="ChangeCount" asp-route-userId="@item.UserId" asp-route-watchId="@item.WatchId" asp-route-operation="@Operations.Minus">-</a>
                             <label class="cart-item-count">@item.Count</label>
-                            <a class="cart-plus-btn" asp-controller="ShoppingCart" asp-action="ChangeCount" asp-route-id="@item.User.Id" asp-route-operation="@Operations.Plus">+</a>
+                            <a class="cart-plus-btn" asp-controller="ShoppingCart" asp-action="ChangeCount" asp-route-userId="@item.UserId" asp-route-watchId="@item.WatchId" asp-route-operation="@Operations.Plus">+</a>
                         </div>
                     </div>
                 </div>

@@ -37,13 +37,19 @@ namespace Woodstock.PL.Controllers
             return RedirectToAction(nameof(Items), "ShoppingCart");
         }
 
-        public IActionResult ChangeCount(int id, Operations operation)
+        public IActionResult ChangeCount(int userId, int watchId, Operations operation)
         {
-            var cartVMs = _cartService.ChangeCount(id, operation)
+            var cartVMs = _cartService.ChangeCount(userId, watchId, operation)
                                       .Select(_ => _mapper.Map<ShoppingCartViewModel>(_))
                                       .ToList();
 
             return View(nameof(Items), cartVMs);
+        }
+
+        public IActionResult Remove(int cartId)
+        {
+            _cartService.DeleteFromCart(cartId);
+            return RedirectToAction(nameof(Items), "ShoppingCart");
         }
 
         private IQueryable<ShoppingCartViewModel> ReadUserCartVM()

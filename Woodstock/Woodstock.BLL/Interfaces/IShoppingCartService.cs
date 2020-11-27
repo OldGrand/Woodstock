@@ -10,6 +10,7 @@ namespace Woodstock.BLL.Interfaces
     {
         IQueryable<ShoppingCartDTO> ReadUserCart(int id);
         Task AddToCartAsync(int userId, int watchId);
-        IEnumerable<ShoppingCartDTO> ChangeCount(int id, Operations operation);
+        IEnumerable<ShoppingCartDTO> ChangeCount(int userId, int watchId, Operations operation);
+        void DeleteFromCart(int cartId);
     }
 }
