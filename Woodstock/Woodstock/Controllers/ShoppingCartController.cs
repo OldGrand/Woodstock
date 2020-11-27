@@ -1,10 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
+using Woodstock.BLL.Extensions;
 using Woodstock.BLL.Interfaces;
 using Woodstock.Infrastructure;
 using Woodstock.PL.Models.ViewModels;
@@ -25,33 +24,47 @@ namespace Woodstock.PL.Controllers
 
         public IActionResult Items()
         {
-            var cartVMs = ReadUserCartVM().ToList();
-            return View(cartVMs);
+            var userId = User.GetId();
+
+            var cartWrapper = new CartWrapperViewModel
+            {
+                OrderSummary = _mapper.Map<OrderSummaryViewModel>(_cartService.GetSummary(userId)),
+                ShoppingCarts = ReadUserCartVM(userId).ToList()
+            };
+
+            return View(cartWrapper);
         }
 
         public IActionResult ChangeSelection(int watchId, bool isChecked)
         {
-            var userId = Int32.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var userId = User.GetId();
             _cartService.UpdateSummary(userId, watchId, isChecked);
 
-            return View();
+            return RedirectToAction(nameof(Items), "ShoppingCart");
+        }
+
+        public IActionResult Buy()
+        {//TODO fix
+            var userId = User.GetId();
+            _cartService.MoveCartToOrder(userId);
+
+            return RedirectToAction(nameof(Items), "ShoppingCart");
         }
 
         public async Task<IActionResult> AddToCart(int watchId)
         {
-            var userId = Int32.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var userId = User.GetId();
             await _cartService.AddToCartAsync(userId, watchId);
 
             return RedirectToAction(nameof(Items), "ShoppingCart");
         }
 
-        public IActionResult ChangeCount(int userId, int watchId, Operations operation)
+        public IActionResult ChangeCount(int watchId, Operations operation)
         {
-            var cartVMs = _cartService.ChangeCount(userId, watchId, operation)
-                                      .Select(_ => _mapper.Map<ShoppingCartViewModel>(_))
-                                      .ToList();
+            var userId = User.GetId();
+            _cartService.ChangeCount(userId, watchId, operation);
 
-            return View(nameof(Items), cartVMs);
+            return RedirectToAction(nameof(Items), "ShoppingCart");
         }
 
         public IActionResult Remove(int cartId)
@@ -60,9 +73,8 @@ namespace Woodstock.PL.Controllers
             return RedirectToAction(nameof(Items), "ShoppingCart");
         }
 
-        private IQueryable<ShoppingCartViewModel> ReadUserCartVM()
+        private IQueryable<ShoppingCartViewModel> ReadUserCartVM(int userId)
         {
-            var userId = Int32.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
             var cartVMs = _cartService.ReadUserCart(userId)
                                           .Select(_ => _mapper.Map<ShoppingCartViewModel>(_));
             return cartVMs;

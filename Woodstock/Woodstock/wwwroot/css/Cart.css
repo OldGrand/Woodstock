@@ -10,13 +10,14 @@
     font-weight: 300;
     font-family: "Playfair Display";
     width: 100%;
+    text-align: center;
 }
 
 .buy__btn:hover {
     background-color: #e9ab00;
 }
 /* ===================================== */
-.squaredThree {
+/*.squaredThree {
     width: 20px;
     position: relative;
 }
@@ -59,7 +60,7 @@
 
 .squaredThree input[type=checkbox]:checked + label:after {
     opacity: 1;
-}
+}*/
 
 .bukvi {
     color: #fff;

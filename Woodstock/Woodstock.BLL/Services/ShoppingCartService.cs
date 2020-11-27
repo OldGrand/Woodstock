@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Woodstock.BLL.DTOs;
@@ -26,15 +26,46 @@ namespace Woodstock.BLL.Services
 
         public OrderSummaryDTO GetSummary(int userId)
         {
-            var watchesPrice = ReadAll(userId).Sum(_ => _.Watch.Price);
+            var watches = ReadAll(userId);
+            var totalPrice = watches.Sum(_ => _.Watch.Price * _.Count);
             var shippingPrice = 25;
 
             return new OrderSummaryDTO
             {
                 Shipping = shippingPrice,
-                SubTotal = watchesPrice,
-                Total = shippingPrice + watchesPrice,
+                SubTotal = totalPrice,
+                Total = shippingPrice + totalPrice,
+                Count = watches.Sum(_ => _.Count)
             };
+        }
+
+        public void MoveCartToOrder(int userId)
+        {
+            using (var transaction = _context.Database.BeginTransaction())
+            {
+                try
+                {
+                    var checkedWatches = ReadAll(userId).Where(_ => _.IsChecked);
+
+                    var order = new Order
+                    {
+                        UserId = userId,
+                        PaymentMethod = "qwer",
+                        Count = checkedWatches.Sum(_ => _.Count),
+                        TotalPrice = checkedWatches.Sum(_ => _.Count * _.Watch.Price),
+                        OrderDate = DateTime.Now,
+                        User = _context.Users.Find(userId),
+                    };
+                    _context.Orders.Add(order);
+                    _context.SaveChanges();
+
+                    transaction.Commit();
+                }
+                catch (Exception)
+                {
+                    transaction.Rollback();
+                }
+            }
         }
 
         public OrderSummaryDTO UpdateSummary(int userId, int watchId, bool isChecked)
@@ -67,11 +98,9 @@ namespace Woodstock.BLL.Services
             }
         }
 
-        public IEnumerable<ShoppingCartDTO> ChangeCount(int userId, int watchId, Operations operation)
-        {//TODO Убрать лишние действия
-            var shoppingCarts = ReadAll(userId).ToList();
-
-            var changedItem = shoppingCarts.FirstOrDefault(_ => _.WatchId == watchId);
+        public void ChangeCount(int userId, int watchId, Operations operation)
+        {
+            var changedItem = _context.ShoppingCarts.FirstOrDefault(_ => _.UserId == userId && _.WatchId == watchId);
             changedItem.Count = operation switch
             {
                 Operations.Minus => changedItem.Count - 1,
@@ -80,7 +109,6 @@ namespace Woodstock.BLL.Services
             };
 
             _context.SaveChanges();
-            return shoppingCarts.Select(_ => _.ToDTO());
         }
 
         public async Task AddToCartAsync(int userId, int watchId)

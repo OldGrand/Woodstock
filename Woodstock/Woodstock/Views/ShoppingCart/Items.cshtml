@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ShoppingCartViewModel>
+﻿@model CartWrapperViewModel
 
 @{
     ViewBag.Title = "Shopping Cart";
@@ -19,17 +19,17 @@
             </div>
 
             <div class="cart__items">
-                @if (Model is null || Model.Count() == 0)
+                @if (Model is null || Model.ShoppingCarts.Count() == 0)
                 {
                 <h3>Your Shopping Cart is empty</h3>
                 }
-                @foreach (var item in Model)
+                @foreach (var item in Model.ShoppingCarts)
                 {
                 <div class="cart__item">
                     <div class="cart-item__content">
-                        <form class="squaredThree" asp-controller="ShoppingCart" asp-action="ChangeSelection" asp-route-watchId="@item.WatchId">
-                            <input type="checkbox" class="cart-checkbox" id="single1" name="check" asp-for="@item.IsChecked" onchange="this.form.submit()"/>
-                            <label for="single1"></label>
+                        <form class="squaredThree" asp-controller="ShoppingCart" asp-action="ChangeSelection" asp-route-watchId="@item.WatchId" asp-route-isChecked="@item.IsChecked">
+                            <input asp-for="@item.IsChecked" class="cart-checkbox" onchange="this.form.submit()"/>
+                            <label asp-for="@item.IsChecked" class="control-label"></label>
                         </form>
                         <img src="/images/Shop/@item.Watch.Photo" alt="" class="cart__item-img">
                         <div class="cart__item-block">
@@ -46,31 +46,35 @@
                             <input type="button" value="сердечко">
                         </form>
                         <div class="">
-                            <a class="cart-minus-btn" asp-controller="ShoppingCart" asp-action="ChangeCount" asp-route-userId="@item.UserId" asp-route-watchId="@item.WatchId" asp-route-operation="@Operations.Minus">-</a>
+                            <a class="cart-minus-btn" asp-controller="ShoppingCart" asp-action="ChangeCount" asp-route-watchId="@item.WatchId" asp-route-operation="@Operations.Minus">-</a>
                             <label class="cart-item-count">@item.Count</label>
-                            <a class="cart-plus-btn" asp-controller="ShoppingCart" asp-action="ChangeCount" asp-route-userId="@item.UserId" asp-route-watchId="@item.WatchId" asp-route-operation="@Operations.Plus">+</a>
+                            <a class="cart-plus-btn" asp-controller="ShoppingCart" asp-action="ChangeCount" asp-route-watchId="@item.WatchId" asp-route-operation="@Operations.Plus">+</a>
                         </div>
                     </div>
                 </div>
                  }
             </div>
         </div>
-        <form class="order__info">
+        <div class="order__info">
             <h1 class="cart__header-title">Order Summary</h1>
             <p class="order__subtotal order__content">
                 <span>Subtotal</span>
-                <span>$12345</span>
+                <span>$@Math.Round(Model.OrderSummary.SubTotal, 2)</span>
             </p>
             <p class="order__shipping order__content">
                 <span>Shipping</span>
-                <span>$12345</span>
+                <span>$@Model.OrderSummary.Shipping</span>
+            </p>
+            <p class="order__shipping order__content">
+                <span>Count</span>
+                <span>@Model.OrderSummary.Count</span>
             </p>
             <p class="order__total order__content">
                 <span>Total</span>
-                <span>$12345</span>
+                <span>$@Math.Round(Model.OrderSummary.Total, 2)</span>
             </p>
-            <input type="button" class="buy__btn" value="BUY">
-        </form>
+            <a asp-controller="ShoppingCart" asp-action="Buy" class="buy__btn">BUY</a>
+        </div>
     </div>
 </div>
 
