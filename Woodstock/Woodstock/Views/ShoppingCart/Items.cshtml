@@ -27,9 +27,8 @@
                 {
                 <div class="cart__item">
                     <div class="cart-item__content">
-                        <form class="squaredThree" asp-controller="ShoppingCart" asp-action="ChangeSelection" asp-route-watchId="@item.WatchId" asp-route-isChecked="@item.IsChecked">
-                            <input asp-for="@item.IsChecked" class="cart-checkbox" onchange="this.form.submit()"/>
-                            <label asp-for="@item.IsChecked" class="control-label"></label>
+                        <form class="squaredThree" asp-controller="ShoppingCart" asp-action="ChangeSelection" asp-route-watchId="@item.WatchId">
+                            <input id="test" name="isChecked" value="@item.IsChecked" type="checkbox" onchange="this.form.submit()"/>
                         </form>
                         <img src="/images/Shop/@item.Watch.Photo" alt="" class="cart__item-img">
                         <div class="cart__item-block">

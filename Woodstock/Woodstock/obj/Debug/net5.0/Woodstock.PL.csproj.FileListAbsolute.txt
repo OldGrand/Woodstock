@@ -90,3 +90,4 @@ C:\Users\Sergey\Desktop\Woodstock\Woodstock\Woodstock\obj\Debug\net5.0\Razor\Vie
 C:\Users\Sergey\Desktop\Woodstock\Woodstock\Woodstock\obj\Debug\net5.0\Razor\Views\ShoppingCart\Items.cshtml.g.cs
 C:\Users\Sergey\Desktop\Woodstock\Woodstock\Woodstock\bin\Debug\net5.0\Woodstock.Infrastructure.dll
 C:\Users\Sergey\Desktop\Woodstock\Woodstock\Woodstock\bin\Debug\net5.0\Woodstock.Infrastructure.pdb
+C:\Users\Sergey\Desktop\Woodstock\Woodstock\Woodstock\obj\Debug\net5.0\Razor\Views\Orders\Items.cshtml.g.cs
