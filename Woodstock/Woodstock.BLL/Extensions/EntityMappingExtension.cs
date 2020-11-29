@@ -52,6 +52,7 @@ namespace Woodstock.BLL.Extensions
                 OrderId = order.Id,
                 Watch = shoppingCart.Watch,
                 WatchId = shoppingCart.WatchId,
+                Count = shoppingCart.Count
             };
         }
 
