@@ -23,7 +23,7 @@ namespace Woodstock.PL.Controllers
         {
             var userId = User.GetId();
             var orderDTOs = _orderService.GetOrders(userId).ToList();
-            var orderVMs = _mapper.Map<IEnumerable<OrderViewModel>>(orderDTOs);
+            var orderVMs = _mapper.Map<List<OrderViewModel>>(orderDTOs);
             return View(orderVMs);
         }
 

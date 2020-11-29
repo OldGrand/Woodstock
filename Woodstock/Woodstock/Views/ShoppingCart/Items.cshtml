@@ -28,17 +28,19 @@
                         <div class="cart__item-block">
                             <span class="cart__item-title">@item.Watch.Title</span>
                             <span class="cart__item-descr">@item.Watch.Description</span>
-                            <span class="cart__item-price">$@item.Watch.Price</span>
+                            <span class="cart__item-price">
+                                $ @(item.Watch.Price * item.Count)
+                                <span class="price__details">($ @item.Watch.Price x @item.Count)</span>
+                            </span>
                         </div>
                     </div>
                     <div class="cart__item-control">
                         <a asp-controller="ShoppingCart" asp-action="Remove" asp-route-cartId="@item.Id">
-                            Удалить
+                            <svg class="delete-svg" viewBox="0 0 512 512">
+                                <use xlink:href="/images/icons/delete.svg#delete"></use>
+                            </svg>
                         </a>
-                        <form action="">
-                            <input type="button" value="сердечко">
-                        </form>
-                        <div class="">
+                        <div class="watch-counter-setter">
                             <a class="cart-minus-btn" asp-controller="ShoppingCart" asp-action="ChangeCount" asp-route-watchId="@item.WatchId" asp-route-operation="@Operations.Minus">-</a>
                             <label class="cart-item-count">@item.Count</label>
                             <a class="cart-plus-btn" asp-controller="ShoppingCart" asp-action="ChangeCount" asp-route-watchId="@item.WatchId" asp-route-operation="@Operations.Plus">+</a>

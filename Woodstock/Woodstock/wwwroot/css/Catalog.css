@@ -17,6 +17,11 @@
     font-size: 15px;
 }
 
+.price__details {
+    color: #fff;
+    font-size:12px;
+}
+
 .categories__list {
     font-weight: 300;
     width: 210px;
@@ -359,4 +364,27 @@
 .catalog-cart-form {
     display: flex;
     justify-content: center;
+}
+
+.watch-counter-setter {
+    background-color: #444444;
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+.cart-minus-btn,
+.cart-plus-btn {
+    padding: 5px 10px;
+    transition: all ease .2s;
+    cursor: pointer;
+}
+
+    .cart-minus-btn:hover,
+    .cart-plus-btn:hover {
+        background-color: #cb9400;
+    }
+
+.cart-item-count {
+    color: #fff;
+    padding: 0px 10px;
 }

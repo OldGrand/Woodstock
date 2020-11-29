@@ -192,3 +192,9 @@
     display: block;
     max-width: 400px;
 }
+
+.delete-svg {
+    height: 25px;
+    fill: #fff;
+    margin-bottom: 35px;
+}
