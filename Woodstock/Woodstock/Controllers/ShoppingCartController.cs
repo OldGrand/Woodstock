@@ -36,11 +36,11 @@ namespace Woodstock.PL.Controllers
         }
 
         public IActionResult ChangeSelection(int watchId, bool isChecked)
-        {//TODO починить
+        {
             var userId = User.GetId();
-            _cartService.UpdateSummary(userId, watchId, isChecked);
+            _cartService.UpdateSelection(userId, watchId, isChecked);
 
-            return RedirectToAction(nameof(Items), "ShoppingCart");
+            return Json(Url.Action(nameof(Items), "ShoppingCart"));
         }
 
         public IActionResult Buy()

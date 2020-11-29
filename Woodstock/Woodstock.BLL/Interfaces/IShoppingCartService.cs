@@ -11,7 +11,7 @@ namespace Woodstock.BLL.Interfaces
         Task AddToCartAsync(int userId, int watchId);
         void ChangeCount(int userId, int watchId, Operations operation);
         void DeleteFromCart(int cartId);
-        OrderSummaryDTO UpdateSummary(int userId, int watchId, bool isChecked);
+        void UpdateSelection(int userId, int watchId, bool isChecked);
         OrderSummaryDTO GetSummary(int userId);
     }
 }

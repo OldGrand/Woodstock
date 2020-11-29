@@ -25,9 +25,9 @@ namespace Woodstock.BLL.Services
 
         public OrderSummaryDTO GetSummary(int userId)
         {
-            var watches = ReadAll(userId);
+            var watches = ReadAll(userId).Where(_ => _.IsChecked);
             var totalPrice = watches.Sum(_ => _.Watch.Price * _.Count);
-            var shippingPrice = 25;
+            var shippingPrice = totalPrice != 0 ? 25 : 0;
 
             return new OrderSummaryDTO
             {
@@ -38,7 +38,7 @@ namespace Woodstock.BLL.Services
             };
         }
 
-        public OrderSummaryDTO UpdateSummary(int userId, int watchId, bool isChecked)
+        public void UpdateSelection(int userId, int watchId, bool isChecked)
         {
             var shoppingCart = _context.ShoppingCarts.FirstOrDefault(_ => _.UserId == userId && _.WatchId == watchId);
 
@@ -47,8 +47,6 @@ namespace Woodstock.BLL.Services
                 shoppingCart.IsChecked = isChecked;
                 _context.SaveChanges();
             }
-
-            return GetSummary(userId);
         }
 
         public IQueryable<ShoppingCartDTO> ReadUserCart(int userId)

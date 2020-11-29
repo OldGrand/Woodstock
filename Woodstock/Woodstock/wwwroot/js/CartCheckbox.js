@@ -8,6 +8,10 @@ const OnChangeCheckbox = e => {
     $.ajax({
         type: "POST",
         url: "/ShoppingCart/ChangeSelection",
-        data: `watchId=${e.target.previousElementSibling.value}&isChecked=${e.target.checked}`
+        data: `watchId=${e.target.previousElementSibling.value}&isChecked=${e.target.checked}`,
+        success: function (response) {
+            window.location.href = response;
+            window.reload();
+        }
     });
 }

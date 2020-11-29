@@ -9,13 +9,6 @@
         <div class="cart__container">
             <div class="cart__header">
                 <h1 class="cart__header-title">shopping cart</h1>
-                <div class="checkbox__container">
-                    <div>
-                        <input type="checkbox" id="mainCheck" name="check" />
-                        <label for="mainCheck"></label>
-                    </div>
-                    <label for="squaredThree" class="bukvi">Choose all</label>
-                </div>
             </div>
 
             <div class="cart__items">
@@ -27,10 +20,10 @@
                 {
                 <div class="cart__item">
                     <div class="cart-item__content">
-                        <div class="squaredThree">
+                        <form class="squaredThree">
                             <input type="hidden" name="watchId" value="@item.WatchId" class="watchIdInput"/>
-                            <input name="isChecked" value="@item.IsChecked" type="checkbox" class="checkboxInput"/>
-                        </div>
+                            <input name="isChecked" asp-for="@item.IsChecked" class="checkboxInput"/>
+                        </form>
                         <img src="/images/Shop/@item.Watch.Photo" alt="" class="cart__item-img">
                         <div class="cart__item-block">
                             <span class="cart__item-title">@item.Watch.Title</span>
