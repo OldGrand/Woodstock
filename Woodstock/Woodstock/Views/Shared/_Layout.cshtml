@@ -35,12 +35,24 @@
                             <li class="list__item">
                                 @if (User.Identity.IsAuthenticated)
                                 {
-                                    <a class="list__link">
-                                        @User.Identity.Name
-                                    </a>
-                                    <form asp-controller="Account" asp-action="Logout" method="post">
-                                        <input type="submit" value="Выйти" class="list__link" />
-                                    </form>
+                                    <ul class="user__list">
+                                        <li class="user__item">
+                                            <a class="user__link arrow-down">@User.Identity.Name</a>
+                                            <ul class="sub-user__list">
+                                                <li class="sub-user__item">
+                                                    <a asp-controller="ShoppingCart" asp-action="Items" class="sub-user__link">Shoping cart</a>
+                                                </li>
+                                                <li class="sub-user__item">
+                                                    <a asp-controller="Orders" asp-action="Items" class="sub-user__link">Orders</a>
+                                                </li>
+                                                <li class="sub-user__item">
+                                                    <form asp-controller="Account" asp-action="Logout" method="post">
+                                                        <input type="submit" value="Exit" class="user-exit__link" />
+                                                    </form>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
                                 }
                                 else
                                 {

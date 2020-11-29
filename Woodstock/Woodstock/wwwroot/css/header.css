@@ -307,3 +307,72 @@
     position: absolute;
     background-color: rgba(26, 24, 24, 0.932);
 }
+
+.user__list {
+    font-size: 11px;
+    font-weight: 400;
+    font-family: "Lato";
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.user__link {
+    display: block;
+    padding: 16px 15px;
+    font-size: 11px;
+    font-weight: 400;
+    text-transform: uppercase;
+    transition: background-color ease .1s, color ease .5s;
+}
+
+    .user__link:hover {
+        background-color: rgba(255, 255, 255, 0.15);
+        color: rgb(170, 170, 170);
+    }
+
+.sub-user__link {
+    display: block;
+    position: relative;
+    padding: 17px 20px;
+    font-size: 11px;
+    font-weight: 400;
+    font-family: "Lato";
+    text-transform: capitalize;
+    transition: color ease .2s;
+}
+
+.sub-user__list {
+    display: none;
+    min-width: 200px;
+    position: absolute;
+    background-color: rgba(26, 24, 24, 0.932);
+}
+
+.user__link:hover {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.user__item:hover .sub-user__list {
+    display: block;
+    z-index: 10;
+}
+
+.user-exit__link {
+    border-style: none;
+    background-color: transparent;
+    color: #fff;
+    padding: 17px 20px;
+}
+
+.sub-user__link,
+.user-exit__link {
+    color: rgb(131, 131, 131);
+    cursor: pointer;
+}
+
+    .sub-user__link:hover,
+    .user-exit__link:hover {
+        color: #fff;
+    }

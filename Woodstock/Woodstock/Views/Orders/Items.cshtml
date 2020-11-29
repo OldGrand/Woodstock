@@ -9,6 +9,10 @@
         <h1 class="orders__header-title">Orders</h1>
     </div>
     <div class="orders__list">
+        @if (Model is null || Model.Count() == 0)
+        {
+            <h3>Your Orders is empty</h3>
+        }
         @foreach (var item in Model)
         {
             <div class="order__item">
