@@ -1,10 +1,10 @@
 ﻿using Woodstock.BLL.Interfaces;
 using Woodstock.BLL.DTOs;
-using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using Woodstock.DAL;
 using Woodstock.BLL.Extensions;
 using Infrastructure.Enums;
+using Woodstock.DAL.Entities;
 
 namespace Woodstock.BLL.Services
 {
@@ -20,14 +20,17 @@ namespace Woodstock.BLL.Services
         public (decimal start, decimal end) GetWatchesPriceRange() =>
             (start: _context.Watches.Min(_ => _.Price), end: _context.Watches.Max(_ => _.Price));
 
+        public IQueryable<Watch> ReadAllEntities() =>
+            from watch in _context.Watches select watch;
+
         public IQueryable<WatchDTO> ReadAll() =>
-            (from watch in _context.Watches select watch.ToDTO()).AsNoTracking();
+            from watch in _context.Watches select watch.ToDTO();
 
         public IQueryable<WatchDTO> ReadMen() =>
-            ReadAll().ReadByGender(Gender.Man);
+            ReadAllEntities().ReadByGender(Gender.Man);
 
-        public IQueryable<WatchDTO> ReadWomen() => 
-            ReadAll().ReadByGender(Gender.Woman);
+        public IQueryable<WatchDTO> ReadWomen() =>
+            ReadAllEntities().ReadByGender(Gender.Woman);
 
         public IQueryable<WatchDTO> ReadOrderedByPriceDesc() =>
             ReadAll().OrderByDescending(_ => _.Price);
