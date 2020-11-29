@@ -10,7 +10,7 @@
             <div class="cart__header">
                 <h1 class="cart__header-title">shopping cart</h1>
                 <div class="checkbox__container">
-                    <div class="squaredThree">
+                    <div>
                         <input type="checkbox" id="mainCheck" name="check" />
                         <label for="mainCheck"></label>
                     </div>
@@ -27,9 +27,10 @@
                 {
                 <div class="cart__item">
                     <div class="cart-item__content">
-                        <form class="squaredThree" asp-controller="ShoppingCart" asp-action="ChangeSelection" asp-route-watchId="@item.WatchId">
-                            <input id="test" name="isChecked" value="@item.IsChecked" type="checkbox" onchange="this.form.submit()"/>
-                        </form>
+                        <div class="squaredThree">
+                            <input type="hidden" name="watchId" value="@item.WatchId" class="watchIdInput"/>
+                            <input name="isChecked" value="@item.IsChecked" type="checkbox" class="checkboxInput"/>
+                        </div>
                         <img src="/images/Shop/@item.Watch.Photo" alt="" class="cart__item-img">
                         <div class="cart__item-block">
                             <span class="cart__item-title">@item.Watch.Title</span>
@@ -78,5 +79,6 @@
 </div>
 
 @section Scripts {
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
     <script src="~/js/CartCheckbox.js"></script>
 }

@@ -1,10 +1,13 @@
-﻿const mainCheck = document.querySelector('#mainCheck');
-
-const childCheckbox = document.querySelectorAll('.cart-checkbox');
-
-mainCheck.addEventListener('change', e => {
-    if (e.target.checked)
-        childCheckbox.forEach(e => e.checked = true);
-    else
-        childCheckbox.forEach(e => e.checked = false);
+﻿document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll('.checkboxInput')
+            .forEach(elem => elem.addEventListener("change", OnChangeCheckbox));
 });
+
+const OnChangeCheckbox = e => {
+    console.log(e.target.form.submit());
+    $.ajax({
+        type: "POST",
+        url: "/ShoppingCart/ChangeSelection",
+        data: `watchId=${e.target.previousElementSibling.value}&isChecked=${e.target.checked}`
+    });
+}

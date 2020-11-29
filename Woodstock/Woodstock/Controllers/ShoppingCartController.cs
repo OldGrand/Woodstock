@@ -35,8 +35,8 @@ namespace Woodstock.PL.Controllers
             return View(cartWrapper);
         }
 
-        public IActionResult ChangeSelection(int watchId, string test, bool isChecked)
-        {
+        public IActionResult ChangeSelection(int watchId, bool isChecked)
+        {//TODO починить
             var userId = User.GetId();
             _cartService.UpdateSummary(userId, watchId, isChecked);
 

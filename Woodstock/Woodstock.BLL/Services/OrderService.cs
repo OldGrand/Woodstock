@@ -61,9 +61,9 @@ namespace Woodstock.BLL.Services
 
         public IQueryable<OrderDTO> GetOrders(int userId)
         {
-            return (from order in _context.Orders.Include(_ => _.OrderWatchLinks)
+            return from order in _context.Orders.Include(_ => _.OrderWatchLinks).Include(_ => _.User).AsNoTracking()
                     where order.UserId == userId && !order.IsOrderCompleted
-                    select order.ToDTO()).AsNoTracking();
+                    select order.ToDTO();
         }
     }
 }
