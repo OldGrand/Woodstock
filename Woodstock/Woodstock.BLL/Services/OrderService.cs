@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq;
 using Woodstock.BLL.DTOs;
 using Woodstock.BLL.Extensions;
@@ -61,7 +62,7 @@ namespace Woodstock.BLL.Services
         public IQueryable<OrderDTO> GetOrders(int userId)
         {
             return from order in _context.Orders
-                   where order.UserId == userId && !order.IsOrderCompleted
+                   where order.UserId == userId && order.IsOrderCompleted != true
                    select order.ToDTO();
         }
     }

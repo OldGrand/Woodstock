@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,7 @@ using Woodstock.PL.Models.ViewModels;
 
 namespace Woodstock.PL.Controllers
 {
+    [Authorize]
     public class OrdersController : Controller
     {
         private readonly IOrderService _orderService;
@@ -23,7 +25,7 @@ namespace Woodstock.PL.Controllers
         {
             var userId = User.GetId();
             var orderDTOs = _orderService.GetOrders(userId).ToList();
-            var orderVMs = _mapper.Map<List<OrderViewModel>>(orderDTOs);
+            var orderVMs = _mapper.Map<IEnumerable<OrderViewModel>>(orderDTOs);
             return View(orderVMs);
         }
 
