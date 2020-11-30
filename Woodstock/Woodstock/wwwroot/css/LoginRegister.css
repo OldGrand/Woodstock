@@ -3,8 +3,8 @@
     justify-content: center;
     align-items: center;
     background-color: #222222;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
 }
 
 .login-register__container {
@@ -14,6 +14,7 @@
     border-radius: 5px;
     padding: 25px;
     position: relative;
+    background-color: #252525;
 }
 
 .login-register__header {
@@ -32,9 +33,9 @@
     transition: color ease .2s;
 }
 
-    .login-register__title:hover {
-        color: #fff;
-    }
+.login-register__title:hover {
+    color: #fff;
+}
 
 .title_active {
     font-weight: 700;

@@ -33,6 +33,7 @@ body {
     line-height: 1.5;
     font: bold 1.2rem "Lato";
     background-color: #222222;
+    overflow-x:hidden;
 }
 
 ul[class],

@@ -69,30 +69,26 @@
                 </div>
             </form>
         </div>
-        <form class="form-socials">
-             <a class="social-form__link">
+        <div class="form-socials">
+             <a class="social-form__link" asp-controller="Account" asp-action="ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" asp-route-provider="@VkontakteAuthenticationDefaults.AuthenticationScheme">
                 <svg class="svg svg__vk_color" viewBox="0 0 112.196 112.196">
                     <use xlink:href="/images/icons/vk-color.svg#vk-color"></use>
                 </svg>
             </a>
-            <a class="social-form__link">
+            <a class="social-form__link" asp-controller="Account" asp-action="ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" asp-route-provider="@GoogleDefaults.AuthenticationScheme">
                 <svg class="svg svg__google_color" viewBox="0 0 512 512">
                     <use xlink:href="/images/icons/google-color.svg#google-color"></use>
                 </svg>
             </a>
-            <a class="social-form__link">
+            <a class="social-form__link" asp-controller="Account" asp-action="ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" asp-route-provider="@FacebookDefaults.AuthenticationScheme">
                 <svg class="svg svg__fb_color" viewBox="0 0 112.196 112.196">
                     <use xlink:href="/images/icons/facebook-color.svg#facebook-color"></use>
                 </svg>
             </a> 
-        </form>
+        </div>
     </div>
 </div>
-<form asp-controller="Account" asp-action="ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl">
-    <button type="submit" name="provider" value="@FacebookDefaults.AuthenticationScheme">Facebook</button>
-    <button type="submit" name="provider" value="@VkontakteAuthenticationDefaults.AuthenticationScheme">Vkontakte</button>
-    <button type="submit" name="provider" value="@GoogleDefaults.AuthenticationScheme">Google</button>
-</form>
+
 @section Scripts {
     <script src="~/js/LoginRegister.js"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
