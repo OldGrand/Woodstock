@@ -3,12 +3,6 @@
 @{
     ViewBag.Title = "Registration/Authorization";
 }
-@*TODO Удалить*@
-<form asp-controller="Account" asp-action="ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl">
-    <button type="submit" name="provider" value="@FacebookDefaults.AuthenticationScheme">Facebook</button>
-    <button type="submit" name="provider" value="@VkontakteAuthenticationDefaults.AuthenticationScheme">Vkontakte</button>
-    <button type="submit" name="provider" value="@GoogleDefaults.AuthenticationScheme">Google</button>
-</form>
 
 <div class="login-register">
     <div class="login-register__container">
@@ -25,83 +19,80 @@
                 <div asp-validation-summary="ModelOnly"></div>
                 <div class="form-group">
                     <label asp-for="Login.Email" class="control-label"></label>
-                    <input asp-for="Login.Email" сlass="form-input">
-                    <span asp-validation-for="Login.Email" class="form-span"></span>
+                    <div class="fake__form-input">
+                        <input class="form-input" asp-for="Login.Email">
+                    </div>
+                    <div class="error__message-block">
+                        <span asp-validation-for="Login.Email" class="form-span"></span>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label asp-for="Login.Password" class="control-label"></label>
-                    <input asp-for="Login.Password" сlass="form-input" type="password">
-                    <span asp-validation-for="Login.Password" class="form-span"></span>
-                </div>
-                <div class="checkbox-group">
-                    <input asp-for="Login.RememberMe" />
-                    <label asp-for="Login.RememberMe" class="control-label"></label>
+                    <div class="fake__form-input">
+                        <input class="form-input" asp-for="Login.Password" type="password">
+                    </div>
+                    <div class="error__message-block">
+                        <span asp-validation-for="Login.Password" class="form-span"></span>
+                    </div>
                 </div>
                 <div class="extended-group">
                     <input class="form-submit" type="submit" value="log in" />
-                    <div class="form-socials">
-                        <a href="" class="social-form__link">
-                            <svg class="svg svg__vk_color" viewBox="0 0 112.196 112.196">
-                                <use xlink:href="/images/icons/vk-color.svg#vk-color"></use>
-                            </svg>
-                        </a>
-                        <a href="" class="social-form__link">
-                            <svg class="svg svg__google_color" viewBox="0 0 512 512">
-                                <use xlink:href="/images/icons/google-color.svg#google-color"></use>
-                            </svg>
-                        </a>
-                        <a href="" class="social-form__link">
-                            <svg class="svg svg__fb_color" viewBox="0 0 112.196 112.196">
-                                <use xlink:href="/images/icons/facebook-color.svg#facebook-color"></use>
-                            </svg>
-                        </a>
-                    </div>
                 </div>
+                <a asp-controller="Account" asp-action="ForgotPassword" class="forgotPassword">Forgot password?</a>
             </form>
-
 
             <form asp-controller="Account" asp-action="Registration" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form form_invisible">
                 <div asp-validation-summary="ModelOnly"></div>
                 <div class="form-group">
                     <label asp-for="Register.Email" class="control-label"></label>
-                    <input asp-for="Register.Email" сlass="form-input">
+                    <div class="fake__form-input">
+                        <input asp-for="Register.Email" class="form-input">
+                    </div>
                     <span asp-validation-for="Register.Email" class="form-span"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Register.Password" class="control-label"></label>
-                    <input asp-for="Register.Password" сlass="form-input" type="password">
+                    <div class="fake__form-input">
+                        <input asp-for="Register.Password" class="form-input" type="password">
+                    </div>
                     <span asp-validation-for="Register.Password" class="form-span"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Register.PasswordConfirmation" class="control-label"></label>
-                    <input asp-for="Register.PasswordConfirmation" сlass="form-input" type="password">
+                    <div class="fake__form-input">
+                        <input asp-for="Register.PasswordConfirmation" class="form-input" type="password">
+                    </div>
                     <span asp-validation-for="Register.PasswordConfirmation" class="form-span"></span>
                 </div>
                 <div class="extended-group">
                     <input class="form-submit" type="submit" value="register" />
-                    <div class="form-socials">
-                        <a href="" class="social-form__link">
-                            <svg class="svg svg__vk_color" viewBox="0 0 112.196 112.196">
-                                <use xlink:href="/images/icons/vk-color.svg#vk-color"></use>
-                            </svg>
-                        </a>
-                        <a href="" class="social-form__link">
-                            <svg class="svg svg__google_color" viewBox="0 0 512 512">
-                                <use xlink:href="/images/icons/google-color.svg#google-color"></use>
-                            </svg>
-                        </a>
-                        <a href="" class="social-form__link">
-                            <svg class="svg svg__fb_color" viewBox="0 0 112.196 112.196">
-                                <use xlink:href="/images/icons/facebook-color.svg#facebook-color"></use>
-                            </svg>
-                        </a>
-                    </div>
                 </div>
             </form>
         </div>
+        <form class="form-socials">
+             <a class="social-form__link">
+                <svg class="svg svg__vk_color" viewBox="0 0 112.196 112.196">
+                    <use xlink:href="/images/icons/vk-color.svg#vk-color"></use>
+                </svg>
+            </a>
+            <a class="social-form__link">
+                <svg class="svg svg__google_color" viewBox="0 0 512 512">
+                    <use xlink:href="/images/icons/google-color.svg#google-color"></use>
+                </svg>
+            </a>
+            <a class="social-form__link">
+                <svg class="svg svg__fb_color" viewBox="0 0 112.196 112.196">
+                    <use xlink:href="/images/icons/facebook-color.svg#facebook-color"></use>
+                </svg>
+            </a> 
+        </form>
     </div>
 </div>
-<a asp-controller="Account" asp-action="ForgotPassword">Забыли пароль?</a>
+<form asp-controller="Account" asp-action="ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl">
+    <button type="submit" name="provider" value="@FacebookDefaults.AuthenticationScheme">Facebook</button>
+    <button type="submit" name="provider" value="@VkontakteAuthenticationDefaults.AuthenticationScheme">Vkontakte</button>
+    <button type="submit" name="provider" value="@GoogleDefaults.AuthenticationScheme">Google</button>
+</form>
 @section Scripts {
     <script src="~/js/LoginRegister.js"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>

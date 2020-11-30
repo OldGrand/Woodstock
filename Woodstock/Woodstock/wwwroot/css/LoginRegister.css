@@ -2,100 +2,56 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #242424;
-    width: 100vw;
-    height: 100vh;
+    background-color: #222222;
+    width: 100%;
+    height: 100%;
 }
 
 .login-register__container {
     display: flex;
     flex-direction: column;
-    width: 700px;
-    height: 300px;
-    border: 3px dashed #2f2f2f;
-    border-radius: 7px;
-    padding: 20px;
+    border: 2px dashed #616161;
+    border-radius: 5px;
+    padding: 25px;
+    position: relative;
 }
 
 .login-register__header {
     display: flex;
-    width: 70%;
-    margin: auto;
     justify-content: space-evenly;
-    align-items: center;
-}
-
-.login-register__title {
     font-family: "Playfair Display";
     font-weight: 300;
     font-size: 30px;
     color: #616161;
     text-transform: capitalize;
+    margin-bottom: 30px;
+}
+
+.login-register__title {
     cursor: pointer;
     transition: color ease .2s;
 }
 
-.login-register__title:hover {
-    color: #fff;
-}
+    .login-register__title:hover {
+        color: #fff;
+    }
 
 .title_active {
     font-weight: 700;
     color: #fff;
 }
 
-.login-register__froms {
-    flex-grow: 1;
-    position: relative;
-}
-
-.validation-summary-errors > ul {
-    list-style: none;
-    color: red;
-    padding-left: 0;
-}
-
-.form {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    transition: all ease-out .2s;
-}
-
 .form_invisible {
     display: none;
 }
 
-.form-span {
-    color: red;
+.control-label {
+    color: #fff;
     font-weight: 300;
 }
 
-.form-group {
-    display: flex;
-    flex-direction: column;
-}
-
-.control-label {
-    font: 12px/24px "Helvetica Neue", Helvetica, Arial, sans-serif;
-    color: #fff;
-    text-transform: uppercase;
-}
-
-.form-input { 
-/*input[type="text"],
-input[type="password"] {*/
-    border-radius: 3px;
-    background-color: #2f2f2f;
-    border-style: none;
-    font-size: 0.875rem;
-    padding: 0rem 0.9375rem;
-    height: 2.8125rem;
-    font-family: 'Lato';
-    color: #fff;
+.form-span {
+    color: rgb(255, 0, 0);
     font-weight: 300;
 }
 
@@ -111,29 +67,52 @@ input[type="password"] {*/
     font-weight: 300;
     width: 140px;
     height: 45px;
-    font-family: 'Playfair Display';
-    margin-top: 15px;
+    cursor: pointer;
 }
 
-.form-submit:hover {
-    background-color: #e9ab00;
+    .form-submit:hover {
+        background-color: #e9ab00;
+    }
+
+.form-input {
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    margin: 5px 8px;
+    font-weight: 300;
+    overflow: visible;
+    min-width: 400px;
 }
 
-.extended-group {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.fake__form-input {
+    border: 1px solid #616161;
+    border-radius: 5px;
 }
 
-.checkbox-group {
-    display: flex;
-    align-items: center;
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group {
+    position: relative;
+}
+
+.error__message-block {
+    min-width: max-content;
+    font-size: 14px;
+    position: absolute;
+    left: calc(100% + 37px);
+    top: 100%;
+    left: 0;
 }
 
 .form-socials {
     display: flex;
-    align-items: center;
-    margin-top: 16px;
+    justify-content: space-between;
+    right: 25px;
+    bottom: 25px;
+    width: 35%;
+    position: absolute;
 }
 
 .svg__fb_color,
@@ -152,4 +131,9 @@ input[type="password"] {*/
 .svg__google_color:hover,
 .svg__vk_color:hover {
     fill-opacity: .5;
+}
+
+.forgotPassword {
+    font-weight: 300;
+    font-size: 14px;
 }
