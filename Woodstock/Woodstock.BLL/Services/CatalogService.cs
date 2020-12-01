@@ -33,10 +33,10 @@ namespace Woodstock.BLL.Services
             ReadAllEntities().ReadByGender(Gender.Woman);
 
         public IQueryable<WatchDTO> ReadOrderedByPriceDesc() =>
-            ReadAll().OrderByDescending(_ => _.Price);
+            ReadAllEntities().OrderByDescending(_ => _.Price).Select(_ => _.ToDTO());
 
         public IQueryable<WatchDTO> ReadOrderedByPriceAsc() =>
-            ReadAll().OrderBy(_ => _.Price);
+            ReadAllEntities().OrderBy(_ => _.Price).Select(_ => _.ToDTO());
 
         public IQueryable<WatchDTO> ReadMenOrderedByPriceDesc() =>
             ReadMen().OrderByDescending(_ => _.Price);
