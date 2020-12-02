@@ -72,6 +72,7 @@ namespace Woodstock.BLL.Services
         {
             return from order in _context.Orders
                    where order.UserId == userId && order.IsOrderCompleted != true
+                   orderby order.Id descending
                    select order.ToDTO();
         }
     }
