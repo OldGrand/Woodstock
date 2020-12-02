@@ -4,7 +4,6 @@ using System.Linq;
 using Woodstock.DAL;
 using Woodstock.BLL.Extensions;
 using Infrastructure.Enums;
-using Woodstock.DAL.Entities;
 
 namespace Woodstock.BLL.Services
 {
@@ -18,29 +17,34 @@ namespace Woodstock.BLL.Services
         }
 
         public (decimal start, decimal end) GetWatchesPriceRange() =>
-            (start: _context.Watches.Min(_ => _.Price), end: _context.Watches.Max(_ => _.Price));
-
-        public IQueryable<Watch> ReadAllEntities() =>
-            from watch in _context.Watches
-            where watch.CountInStock > 0
-            select watch;
+            (_context.Watches.Min(_ => _.Price), _context.Watches.Max(_ => _.Price));
 
         public IQueryable<WatchDTO> ReadAll() =>
             from watch in _context.Watches
             where watch.CountInStock > 0
-            select watch.ToDTO();
+            select new WatchDTO
+            {
+                Id = watch.Id,
+                Title = watch.Title,
+                Description = watch.Description,
+                Diameter = watch.Diameter,
+                Gender = watch.Gender,
+                Photo = watch.Photo,
+                Price = watch.Price,
+                CountInStock = watch.CountInStock
+            };
 
         public IQueryable<WatchDTO> ReadMen() =>
-            ReadAllEntities().ReadByGender(Gender.Man);
+            ReadAll().ReadByGender(Gender.Man);
 
         public IQueryable<WatchDTO> ReadWomen() =>
-            ReadAllEntities().ReadByGender(Gender.Woman);
+            ReadAll().ReadByGender(Gender.Woman);
 
         public IQueryable<WatchDTO> ReadOrderedByPriceDesc() =>
-            ReadAllEntities().OrderByDescending(_ => _.Price).Select(_ => _.ToDTO());
+            ReadAll().OrderByDescending(_ => _.Price);
 
         public IQueryable<WatchDTO> ReadOrderedByPriceAsc() =>
-            ReadAllEntities().OrderBy(_ => _.Price).Select(_ => _.ToDTO());
+            ReadAll().OrderBy(_ => _.Price);
 
         public IQueryable<WatchDTO> ReadMenOrderedByPriceDesc() =>
             ReadMen().OrderByDescending(_ => _.Price);

@@ -20,6 +20,7 @@ namespace Woodstock.BLL.Services
         {
             return from cart in _context.ShoppingCarts
                    where cart.UserId == userId
+                   orderby cart.Id descending
                    select cart;
         }
 
