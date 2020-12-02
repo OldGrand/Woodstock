@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -86,7 +85,7 @@ namespace Woodstock.PL.Controllers
             }
             catch (Exception e)
             {
-                return PartialView("_NotificationPartial", e.Message);
+                return View("Notification", e.Message);
             }
         }
 
@@ -165,7 +164,7 @@ namespace Woodstock.PL.Controllers
             }
             catch {}
 
-            return PartialView("_NotificationPartial", "Check your email");
+            return View("Notification", "Check your email");
         }
         
         [HttpGet]
@@ -190,7 +189,7 @@ namespace Woodstock.PL.Controllers
                 return View(resetPasswordBM);
             }
 
-            return PartialView("_NotificationPartial", "Пароль успешно изменен");
+            return View("Notification", "Password changed successfully");
         }
         
         private async Task<IActionResult> SendConfirmEmailAsync(string confirmToken, string email, string returnUrl)
@@ -201,7 +200,7 @@ namespace Woodstock.PL.Controllers
             await _emailService.SendEmailAsync(email, "Confirm your account",
                 $"Чтобы закончить регистрацию - перейдите по <a href='{callbackUrl}'>ссылке</a>");
 
-            return PartialView("_NotificationPartial", "Check your email");
+            return View("Notification", "Check your email");
         }
     }
 }

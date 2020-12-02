@@ -35,6 +35,10 @@
                         <span asp-validation-for="Login.Password" class="form-span"></span>
                     </div>
                 </div>
+                <div class="form-group">
+                    <input asp-for="@Model.Login.RememberMe" />
+                    <label asp-for="@Model.Login.RememberMe" class="control-label"></label>
+                </div>
                 <div class="extended-group">
                     <input class="form-submit" type="submit" value="log in" />
                 </div>

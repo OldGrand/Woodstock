@@ -1,3 +1,10 @@
 ﻿@model string
 
-<h3>@Model</h3>
+<div class="notification__container">
+    <a asp-controller="Home" asp-action="Index" class="notify__logo">
+        <img src="/images/woodstock-logo.png" alt="Logo" class="notify__img">
+    </a>
+    <div class="notification__block">
+        <h3 class="notification">@Model</h3>
+    </div>
+</div>

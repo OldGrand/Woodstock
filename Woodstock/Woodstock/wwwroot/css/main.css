@@ -127,3 +127,37 @@
     margin-bottom: 10px;
     font-size: 22px;
 }
+
+.notification__container {
+    width: 100vw;
+    height: calc(100vh - 350px);
+    background-color: #222222;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.notification {
+    color: #fff;
+    font-size: 25px;
+    font-weight: 300;
+    font-family: "Playfair Display";
+}
+
+.notify__logo {
+    cursor: pointer;
+}
+
+.notify__img {
+    object-fit: contain;
+    width: 320px;
+    height: 180px;
+}
+
+.notification__block {
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

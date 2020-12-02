@@ -14,40 +14,44 @@
             <div class="cart__items">
                 @if (Model is null || Model.ShoppingCarts.Count() == 0)
                 {
-                <h3>Your Shopping Cart is empty</h3>
+                    <div class="cart__item">
+                        <div class="cart-item__content">
+                            <h3 style="color:#fff; font-weight: 300">Your Shopping Cart is empty</h3>
+                        </div>
+                    </div>
                 }
                 @foreach (var item in Model.ShoppingCarts)
                 {
-                <div class="cart__item">
-                    <div class="cart-item__content">
-                        <form class="squaredThree">
-                            <input type="hidden" name="watchId" value="@item.WatchId" class="watchIdInput"/>
-                            <input name="isChecked" asp-for="@item.IsChecked" class="checkboxInput"/>
-                        </form>
-                        <img src="/images/Shop/@item.Watch.Photo" alt="" class="cart__item-img">
-                        <div class="cart__item-block">
-                            <span class="cart__item-title">@item.Watch.Title</span>
-                            <span class="cart__item-descr">@item.Watch.Description</span>
-                            <span class="cart__item-price">
-                                $ @(item.Watch.Price * item.Count)
-                                <span class="price__details">($ @item.Watch.Price x @item.Count)</span>
-                            </span>
+                    <div class="cart__item">
+                        <div class="cart-item__content">
+                            <form class="squaredThree">
+                                <input type="hidden" name="watchId" value="@item.WatchId" class="watchIdInput" />
+                                <input name="isChecked" asp-for="@item.IsChecked" class="checkboxInput" />
+                            </form>
+                            <img src="/images/Shop/@item.Watch.Photo" alt="" class="cart__item-img">
+                            <div class="cart__item-block">
+                                <span class="cart__item-title">@item.Watch.Title</span>
+                                <span class="cart__item-descr">@item.Watch.Description</span>
+                                <span class="cart__item-price">
+                                    $ @(item.Watch.Price * item.Count)
+                                    <span class="price__details">($ @item.Watch.Price x @item.Count)</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="cart__item-control">
+                            <a asp-controller="ShoppingCart" asp-action="Remove" asp-route-cartId="@item.Id">
+                                <svg class="delete-svg" viewBox="0 0 512 512">
+                                    <use xlink:href="/images/icons/delete.svg#delete"></use>
+                                </svg>
+                            </a>
+                            <div class="watch-counter-setter">
+                                <a class="cart-minus-btn" asp-controller="ShoppingCart" asp-action="ChangeCount" asp-route-watchId="@item.WatchId" asp-route-operation="@Operations.Minus">-</a>
+                                <label class="cart-item-count">@item.Count</label>
+                                <a class="cart-plus-btn" asp-controller="ShoppingCart" asp-action="ChangeCount" asp-route-watchId="@item.WatchId" asp-route-operation="@Operations.Plus">+</a>
+                            </div>
                         </div>
                     </div>
-                    <div class="cart__item-control">
-                        <a asp-controller="ShoppingCart" asp-action="Remove" asp-route-cartId="@item.Id">
-                            <svg class="delete-svg" viewBox="0 0 512 512">
-                                <use xlink:href="/images/icons/delete.svg#delete"></use>
-                            </svg>
-                        </a>
-                        <div class="watch-counter-setter">
-                            <a class="cart-minus-btn" asp-controller="ShoppingCart" asp-action="ChangeCount" asp-route-watchId="@item.WatchId" asp-route-operation="@Operations.Minus">-</a>
-                            <label class="cart-item-count">@item.Count</label>
-                            <a class="cart-plus-btn" asp-controller="ShoppingCart" asp-action="ChangeCount" asp-route-watchId="@item.WatchId" asp-route-operation="@Operations.Plus">+</a>
-                        </div>
-                    </div>
-                </div>
-                 }
+                }
             </div>
         </div>
         <div class="order__info">
