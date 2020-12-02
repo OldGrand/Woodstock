@@ -40,17 +40,20 @@ namespace Woodstock.BLL.Services
             {
                 try
                 {
-                    var order = CreateOrder(userId);
                     var carts = _context.ShoppingCarts.Where(_ => _.UserId == userId && _.IsChecked).ToList();
-                    var oderLinks = carts.Select(_ => _.ToOrder(order));
-                    _context.OrderWatchLinks.AddRange(oderLinks);
-                    _context.ShoppingCarts.RemoveRange(carts);
+                    if (carts.Count > 0)
+                    {
+                        var order = CreateOrder(userId);
+                        var oderLinks = carts.Select(_ => _.ToOrder(order));
+                        _context.OrderWatchLinks.AddRange(oderLinks);
+                        _context.ShoppingCarts.RemoveRange(carts);
 
-                    order.TotalPrice = carts.Sum(_ => _.Count * _.Watch.Price);
-                    order.TotalCount = carts.Sum(_ => _.Count);
+                        order.TotalPrice = carts.Sum(_ => _.Count * _.Watch.Price);
+                        order.TotalCount = carts.Sum(_ => _.Count);
 
-                    _context.SaveChanges();
-                    transaction.Commit();
+                        _context.SaveChanges();
+                        transaction.Commit();
+                    }
                 }
                 catch (Exception)
                 {

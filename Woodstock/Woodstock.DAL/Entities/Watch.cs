@@ -11,7 +11,7 @@ namespace Woodstock.DAL.Entities
         public decimal Price { get; set; }
         public string Photo { get; set; }
         public Gender Gender { get; set; }
-
+        public int CountInStock { get; set; }
 
         public int ManufacturerId { get; set; }
         public virtual Manufacturer Manufacturer { get; set; }

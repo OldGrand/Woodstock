@@ -75,8 +75,8 @@ namespace Woodstock.BLL.Services
                 Operations.Plus => changedItem.Count + 1,
                 _ => changedItem.Count
             };
-
-            _context.SaveChanges();
+            if (changedItem.Count >= 1)
+                _context.SaveChanges();
         }
 
         public async Task AddToCartAsync(int userId, int watchId)
