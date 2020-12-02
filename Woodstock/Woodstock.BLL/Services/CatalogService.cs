@@ -21,10 +21,14 @@ namespace Woodstock.BLL.Services
             (start: _context.Watches.Min(_ => _.Price), end: _context.Watches.Max(_ => _.Price));
 
         public IQueryable<Watch> ReadAllEntities() =>
-            from watch in _context.Watches select watch;
+            from watch in _context.Watches
+            where watch.CountInStock > 0
+            select watch;
 
         public IQueryable<WatchDTO> ReadAll() =>
-            from watch in _context.Watches select watch.ToDTO();
+            from watch in _context.Watches
+            where watch.CountInStock > 0
+            select watch.ToDTO();
 
         public IQueryable<WatchDTO> ReadMen() =>
             ReadAllEntities().ReadByGender(Gender.Man);

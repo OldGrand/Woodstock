@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Linq;
 using Woodstock.BLL.DTOs;
 using Woodstock.BLL.Extensions;
@@ -44,9 +43,16 @@ namespace Woodstock.BLL.Services
                     if (carts.Count > 0)
                     {
                         var order = CreateOrder(userId);
+
                         var oderLinks = carts.Select(_ => _.ToOrder(order));
                         _context.OrderWatchLinks.AddRange(oderLinks);
                         _context.ShoppingCarts.RemoveRange(carts);
+
+                        _context.Watches.UpdateRange(carts.Select(_ =>
+                        {
+                            _.Watch.CountInStock = _.Watch.CountInStock - _.Count;
+                            return _.Watch;
+                        }));
 
                         order.TotalPrice = carts.Sum(_ => _.Count * _.Watch.Price);
                         order.TotalCount = carts.Sum(_ => _.Count);

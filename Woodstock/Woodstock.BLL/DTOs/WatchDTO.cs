@@ -11,6 +11,7 @@ namespace Woodstock.BLL.DTOs
         public string Photo { get; set; }
         public string Title { get; set; }
         public Gender Gender { get; set; }
+        public int CountInStock { get; set; }
     }
 }
 

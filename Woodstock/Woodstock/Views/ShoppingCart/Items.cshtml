@@ -46,7 +46,7 @@
                             </a>
                             <div class="watch-counter-setter">
                                 <a class="cart-minus-btn" asp-controller="ShoppingCart" asp-action="ChangeCount" asp-route-watchId="@item.WatchId" asp-route-operation="@Operations.Minus">-</a>
-                                <label class="cart-item-count">@item.Count</label>
+                                <label class="cart-item-count">@item.Count / @item.Watch.CountInStock</label>
                                 <a class="cart-plus-btn" asp-controller="ShoppingCart" asp-action="ChangeCount" asp-route-watchId="@item.WatchId" asp-route-operation="@Operations.Plus">+</a>
                             </div>
                         </div>

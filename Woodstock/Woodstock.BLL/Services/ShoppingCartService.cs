@@ -75,7 +75,7 @@ namespace Woodstock.BLL.Services
                 Operations.Plus => changedItem.Count + 1,
                 _ => changedItem.Count
             };
-            if (changedItem.Count >= 1)
+            if (changedItem.Count >= 1 && changedItem.Count <= changedItem.Watch.CountInStock)
                 _context.SaveChanges();
         }
 
