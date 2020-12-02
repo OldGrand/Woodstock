@@ -16,7 +16,7 @@
     height: 8px;
     border: solid #fff;
     border-width: 1px 1px 0px 0px;
-    transform: rotate(135deg) translateY(70%);
+    transform: rotate(135deg) translateY(100%);
 }
 
 .svg {
@@ -222,9 +222,27 @@
     margin-left: 20px;
 }
 
+.product__price,
+.shopping-bag-svg,
+.shop__bag {
+    transition: all ease .2s;
+}
+
 .shop__bag {
     width: 100px;
     height: 60px;
+}
+
+.shop__bag:hover {
+    background-color: rgba(255, 255, 255, 0.01);
+}
+
+.shop__bag:hover .product__price {
+    color: rgb(170, 170, 170);
+}
+
+.shop__bag:hover .shopping-bag-svg {
+    fill: rgb(170, 170, 170);
 }
 
 .shopping-bag-svg {
@@ -320,17 +338,18 @@
 
 .user__link {
     display: block;
-    padding: 16px 15px;
+    padding: 16px 30px;
     font-size: 11px;
     font-weight: 400;
     text-transform: uppercase;
     transition: background-color ease .1s, color ease .5s;
+    position: relative;
 }
 
-    .user__link:hover {
-        background-color: rgba(255, 255, 255, 0.15);
-        color: rgb(170, 170, 170);
-    }
+.user__link:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: rgb(170, 170, 170);
+}
 
 .sub-user__link {
     display: block;
@@ -364,6 +383,8 @@
     background-color: transparent;
     color: #fff;
     padding: 17px 20px;
+    width: 100%;
+    text-align: start;
 }
 
 .sub-user__link,
