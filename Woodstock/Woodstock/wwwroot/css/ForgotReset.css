@@ -1,0 +1,23 @@
+﻿.recovery__container {
+    display: flex;
+    flex-direction: column;
+    border: 2px dashed #616161;
+    border-radius: 5px;
+    padding: 25px;
+    background-color: #252525;
+}
+
+.deda {
+    font-weight: 700;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.recovery__main {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
