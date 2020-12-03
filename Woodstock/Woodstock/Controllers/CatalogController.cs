@@ -25,10 +25,11 @@ namespace Woodstock.PL.Controllers
             {
                 Filter.OrderByPriceAsc => _catalogService.ReadOrderedByPriceAsc(),
                 Filter.OrderByPriceDesc => _catalogService.ReadOrderedByPriceDesc(),
+                Filter.SortByNoveltyAsc =>
                 _ => _catalogService.ReadAll()
             }).Select(_ => _mapper.Map<WatchViewModel>(_)).GetPaged(pageNum, filteredVM.ItemsOnPage);
             filteredVM.PageResult = pagedResult;
-            filteredVM.ItemsOnPageVM = new SelectList(new[] { 12,24,36 });
+            filteredVM.ItemsOnPageVM = new SelectList(new[] { 12, 24, 36 });
 
             return View(filteredVM);
         }

@@ -33,29 +33,37 @@ namespace Woodstock.BLL.Services
                 Price = watch.Price,
                 CountInStock = watch.CountInStock
             };
+        public IQueryable<WatchDTO> ReadOrderedByPriceDesc() =>
+            ReadAll().OrderByDescending(_ => _.Price);
+        public IQueryable<WatchDTO> ReadOrderedByPriceAsc() =>
+            ReadAll().OrderBy(_ => _.Price);
+        public IQueryable<WatchDTO> ReadOrderedByNoveltyDesc() =>
+            ReadAll().OrderByDescending(_ => _.Id);
+        public IQueryable<WatchDTO> ReadOrderedByNoveltyAsc() =>
+            ReadAll().OrderBy(_ => _.Id);
+
 
         public IQueryable<WatchDTO> ReadMen() =>
             ReadAll().ReadByGender(Gender.Man);
+        public IQueryable<WatchDTO> ReadMenOrderedByPriceDesc() =>
+            ReadMen().OrderByDescending(_ => _.Price);
+        public IQueryable<WatchDTO> ReadMenOrderedByPriceAsc() =>
+            ReadMen().OrderBy(_ => _.Price);
+        public IQueryable<WatchDTO> ReadMenOrderedByNoveltyDesc() =>
+            ReadMen().OrderByDescending(_ => _.Id);
+        public IQueryable<WatchDTO> ReadMenOrderedByNoveltyAsc() =>
+            ReadMen().OrderBy(_ => _.Id);
+
 
         public IQueryable<WatchDTO> ReadWomen() =>
             ReadAll().ReadByGender(Gender.Woman);
-
-        public IQueryable<WatchDTO> ReadOrderedByPriceDesc() =>
-            ReadAll().OrderByDescending(_ => _.Price);
-
-        public IQueryable<WatchDTO> ReadOrderedByPriceAsc() =>
-            ReadAll().OrderBy(_ => _.Price);
-
-        public IQueryable<WatchDTO> ReadMenOrderedByPriceDesc() =>
-            ReadMen().OrderByDescending(_ => _.Price);
-
-        public IQueryable<WatchDTO> ReadMenOrderedByPriceAsc() =>
-            ReadMen().OrderBy(_ => _.Price);
-
         public IQueryable<WatchDTO> ReadWomenOrderedByPriceDesc() =>
             ReadWomen().OrderByDescending(_ => _.Price);
-
         public IQueryable<WatchDTO> ReadWomenOrderedByPriceAsc() =>
             ReadWomen().OrderBy(_ => _.Price);
+        public IQueryable<WatchDTO> ReadWomenOrderedByNoveltyDesc() =>
+            ReadWomen().OrderByDescending(_ => _.Id);
+        public IQueryable<WatchDTO> ReadWomenOrderedByNoveltyAsc() =>
+            ReadWomen().OrderBy(_ => _.Id);
     }
 }

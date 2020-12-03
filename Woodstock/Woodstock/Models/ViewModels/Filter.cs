@@ -10,8 +10,11 @@ namespace Woodstock.PL.Models.ViewModels
         [Display(Name = "По популярности")]
         SortByPopularity,
 
-        [Display(Name = "По новизне")]
-        SortByNewest,
+        [Display(Name = "Новизна : самые старые")]
+        SortByNoveltyAsc,
+
+        [Display(Name = "Новизна : самые новые")]
+        SortByNoveltyDesc,
 
         [Display(Name = "Цена : по возрастанию")]
         OrderByPriceAsc,

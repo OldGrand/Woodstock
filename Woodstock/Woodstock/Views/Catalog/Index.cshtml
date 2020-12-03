@@ -6,7 +6,7 @@
 
 <div class="main__container">
     <div class="filter">
-        <div class="filter__container">
+        <div class="filter__container" style="width: 250px">
             <div class="filter__range">
                 <h3>filter by price</h3>
                 <div class="slider" data-value-0="#first" data-value-1="#second" data-range="#third"></div>
@@ -18,7 +18,7 @@
                 </form>
             </div>
 
-            <div class="filter__diameter">
+            @*<div class="filter__diameter">
                 <h3 class="diameter__title">
                     Filter by Diameter
                 </h3>
@@ -47,7 +47,7 @@
                         </li>
                     </ul>
                 </form>
-            </div>
+            </div>*@
         </div>
     </div>
 
@@ -61,11 +61,11 @@
                 </div>
 
                 <div class="select__group">
-                    <form class="form-select" method="post">
+                    <form class="form-select" method="post" asp-route-ItemsOnPage="@Model.ItemsOnPage" asp-route-Filter="@Model.Filter">
                         <select asp-for="@Model.ItemsOnPage" asp-items="@Model.ItemsOnPageVM"
                                 class="select" onchange="this.form.submit()"></select>
                     </form>
-                    <form class="form-select" method="post">
+                    <form class="form-select" method="post" asp-route-ItemsOnPage="@Model.ItemsOnPage" asp-route-Filter="@Model.Filter">
                         <select asp-for="@Model.Filter" asp-items="@Html.GetEnumSelectList<Filter>()"
                                 class="select" onchange="this.form.submit()"></select>
                     </form>
@@ -103,11 +103,11 @@
                     {
                         if (i == Model.PageResult.CurrentPage)
                         {
-                            <a asp-route-pageNum="@i" class="pagination__btn pagination__btn-active">@i</a>
+                            <a asp-route-ItemsOnPage="@Model.ItemsOnPage" asp-route-Filter="@Model.Filter" asp-route-pageNum="@i" class="pagination__btn pagination__btn-active">@i</a>
                         }
                         else
                         {
-                            <a asp-route-pageNum="@i" class="pagination__btn">@i</a>
+                            <a asp-route-ItemsOnPage="@Model.ItemsOnPage" asp-route-Filter="@Model.Filter" asp-route-pageNum="@i" class="pagination__btn">@i</a>
                         }
                     }
                 </div>
