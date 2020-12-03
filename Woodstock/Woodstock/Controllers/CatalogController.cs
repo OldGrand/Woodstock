@@ -25,7 +25,8 @@ namespace Woodstock.PL.Controllers
             {
                 Filter.OrderByPriceAsc => _catalogService.ReadOrderedByPriceAsc(),
                 Filter.OrderByPriceDesc => _catalogService.ReadOrderedByPriceDesc(),
-                Filter.SortByNoveltyAsc =>
+                Filter.SortByNoveltyAsc => _catalogService.ReadOrderedByNoveltyAsc(),
+                Filter.SortByNoveltyDesc => _catalogService.ReadOrderedByNoveltyDesc(),
                 _ => _catalogService.ReadAll()
             }).Select(_ => _mapper.Map<WatchViewModel>(_)).GetPaged(pageNum, filteredVM.ItemsOnPage);
             filteredVM.PageResult = pagedResult;
@@ -40,6 +41,8 @@ namespace Woodstock.PL.Controllers
             {
                 Filter.OrderByPriceAsc => _catalogService.ReadMenOrderedByPriceAsc(),
                 Filter.OrderByPriceDesc => _catalogService.ReadMenOrderedByPriceDesc(),
+                Filter.SortByNoveltyAsc => _catalogService.ReadMenOrderedByNoveltyAsc(),
+                Filter.SortByNoveltyDesc => _catalogService.ReadMenOrderedByNoveltyDesc(),
                 _ => _catalogService.ReadMen()
             }).Select(_ => _mapper.Map<WatchViewModel>(_)).GetPaged(pageNum, filteredVM.ItemsOnPage);
             filteredVM.PageResult = pagedResult;
@@ -54,6 +57,8 @@ namespace Woodstock.PL.Controllers
             {
                 Filter.OrderByPriceAsc => _catalogService.ReadWomenOrderedByPriceAsc(),
                 Filter.OrderByPriceDesc => _catalogService.ReadWomenOrderedByPriceDesc(),
+                Filter.SortByNoveltyAsc => _catalogService.ReadWomenOrderedByNoveltyAsc(),
+                Filter.SortByNoveltyDesc => _catalogService.ReadWomenOrderedByNoveltyDesc(),
                 _ => _catalogService.ReadWomen()
             }).Select(_ => _mapper.Map<WatchViewModel>(_)).GetPaged(pageNum, filteredVM.ItemsOnPage);
             filteredVM.PageResult = pagedResult;
