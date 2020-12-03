@@ -66,5 +66,11 @@ namespace Woodstock.PL.Controllers
 
             return View(nameof(Index), filteredVM);
         }
+
+        public IActionResult GetPriceRange()
+        {
+            var (start, end) = _catalogService.GetWatchesPriceRange();
+            return Json(new { start, end });
+        }
     }
 }

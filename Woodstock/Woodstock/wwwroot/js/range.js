@@ -1,4 +1,11 @@
-$('.slider').each(function (e) {
+$('.slider').each(async function (e) {
+    let promise = await $.get("/Catalog/GetPriceRange", (data) => {
+        return data;
+    });
+
+    let step = 10;
+    let start = promise.start;
+    let end = promise.end;
 
     var slider = $(this),
         width = slider.width(),
@@ -13,11 +20,11 @@ $('.slider').each(function (e) {
 
     slider.slider({
         range: true,
-        values: [3800, 1200000],
-        min: 3800,
-        step: 5,
-        minRange: 1000,
-        max: 1200000,
+        values: [start, end],
+        min: start,
+        step: step,
+        minRange: start,
+        max: end,
         create(event, ui) {
 
             slider.find('.ui-slider-handle').append($('<div />'));
