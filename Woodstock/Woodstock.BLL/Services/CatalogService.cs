@@ -31,7 +31,8 @@ namespace Woodstock.BLL.Services
                 Gender = watch.Gender,
                 Photo = watch.Photo,
                 Price = watch.Price,
-                CountInStock = watch.CountInStock
+                CountInStock = watch.CountInStock,
+                SaledCount = watch.SaledCount,
             };
         public IQueryable<WatchDTO> ReadOrderedByPriceDesc() =>
             ReadAll().OrderByDescending(_ => _.Price);
@@ -41,6 +42,10 @@ namespace Woodstock.BLL.Services
             ReadAll().OrderByDescending(_ => _.Id);
         public IQueryable<WatchDTO> ReadOrderedByNoveltyAsc() =>
             ReadAll().OrderBy(_ => _.Id);
+        public IQueryable<WatchDTO> ReadOrderedByPopularityDesc() =>
+            ReadAll().OrderByDescending(_ => _.SaledCount);
+        public IQueryable<WatchDTO> ReadOrderedByPopularityAsc() =>
+            ReadAll().OrderBy(_ => _.SaledCount);
 
 
         public IQueryable<WatchDTO> ReadMen() =>
@@ -53,6 +58,10 @@ namespace Woodstock.BLL.Services
             ReadMen().OrderByDescending(_ => _.Id);
         public IQueryable<WatchDTO> ReadMenOrderedByNoveltyAsc() =>
             ReadMen().OrderBy(_ => _.Id);
+        public IQueryable<WatchDTO> ReadMenOrderedByPopularityDesc() =>
+            ReadMen().OrderByDescending(_ => _.SaledCount);
+        public IQueryable<WatchDTO> ReadMenOrderedByPopularityAsc() =>
+            ReadMen().OrderBy(_ => _.SaledCount);
 
 
         public IQueryable<WatchDTO> ReadWomen() =>
@@ -65,5 +74,9 @@ namespace Woodstock.BLL.Services
             ReadWomen().OrderByDescending(_ => _.Id);
         public IQueryable<WatchDTO> ReadWomenOrderedByNoveltyAsc() =>
             ReadWomen().OrderBy(_ => _.Id);
+        public IQueryable<WatchDTO> ReadWomenOrderedByPopularityDesc() =>
+            ReadWomen().OrderByDescending(_ => _.SaledCount);
+        public IQueryable<WatchDTO> ReadWomenOrderedByPopularityAsc() =>
+            ReadWomen().OrderBy(_ => _.SaledCount);
     }
 }

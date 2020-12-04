@@ -27,8 +27,11 @@ namespace Woodstock.PL.Controllers
                 Filter.OrderByPriceDesc => _catalogService.ReadOrderedByPriceDesc(),
                 Filter.SortByNoveltyAsc => _catalogService.ReadOrderedByNoveltyAsc(),
                 Filter.SortByNoveltyDesc => _catalogService.ReadOrderedByNoveltyDesc(),
+                Filter.SortByPopularityAsc => _catalogService.ReadOrderedByPopularityAsc(),
+                Filter.SortByPopularityDesc => _catalogService.ReadOrderedByPopularityDesc(),
                 _ => _catalogService.ReadAll()
             }).Select(_ => _mapper.Map<WatchViewModel>(_)).GetPaged(pageNum, filteredVM.ItemsOnPage);
+
             filteredVM.PageResult = pagedResult;
             filteredVM.ItemsOnPageVM = new SelectList(new[] { 12, 24, 36 });
 
@@ -43,8 +46,11 @@ namespace Woodstock.PL.Controllers
                 Filter.OrderByPriceDesc => _catalogService.ReadMenOrderedByPriceDesc(),
                 Filter.SortByNoveltyAsc => _catalogService.ReadMenOrderedByNoveltyAsc(),
                 Filter.SortByNoveltyDesc => _catalogService.ReadMenOrderedByNoveltyDesc(),
+                Filter.SortByPopularityAsc => _catalogService.ReadMenOrderedByPopularityAsc(),
+                Filter.SortByPopularityDesc => _catalogService.ReadMenOrderedByPopularityDesc(),
                 _ => _catalogService.ReadMen()
             }).Select(_ => _mapper.Map<WatchViewModel>(_)).GetPaged(pageNum, filteredVM.ItemsOnPage);
+
             filteredVM.PageResult = pagedResult;
             filteredVM.ItemsOnPageVM = new SelectList(new[] { 12, 24, 36 });
 
@@ -59,8 +65,11 @@ namespace Woodstock.PL.Controllers
                 Filter.OrderByPriceDesc => _catalogService.ReadWomenOrderedByPriceDesc(),
                 Filter.SortByNoveltyAsc => _catalogService.ReadWomenOrderedByNoveltyAsc(),
                 Filter.SortByNoveltyDesc => _catalogService.ReadWomenOrderedByNoveltyDesc(),
+                Filter.SortByPopularityAsc => _catalogService.ReadWomenOrderedByPopularityAsc(),
+                Filter.SortByPopularityDesc => _catalogService.ReadWomenOrderedByPopularityDesc(),
                 _ => _catalogService.ReadWomen()
             }).Select(_ => _mapper.Map<WatchViewModel>(_)).GetPaged(pageNum, filteredVM.ItemsOnPage);
+
             filteredVM.PageResult = pagedResult;
             filteredVM.ItemsOnPageVM = new SelectList(new[] { 12, 24, 36 });
 

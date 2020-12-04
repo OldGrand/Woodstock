@@ -7,8 +7,11 @@ namespace Woodstock.PL.Models.ViewModels
         [Display(Name = "По умолчанию")]
         Deafult,
         
-        [Display(Name = "По популярности")]
-        SortByPopularity,
+        [Display(Name = "Самые продоваемые")]
+        SortByPopularityDesc,
+
+        [Display(Name = "Наименее продоваемые")]
+        SortByPopularityAsc,
 
         [Display(Name = "Новизна : самые старые")]
         SortByNoveltyAsc,

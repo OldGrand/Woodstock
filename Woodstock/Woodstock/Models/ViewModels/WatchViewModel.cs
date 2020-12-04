@@ -12,5 +12,6 @@ namespace Woodstock.PL.Models.ViewModels
         public string Title { get; set; }
         public Gender Gender { get; set; }
         public int CountInStock { get; set; }
+        public int SaledCount { get; set; }
     }
 }

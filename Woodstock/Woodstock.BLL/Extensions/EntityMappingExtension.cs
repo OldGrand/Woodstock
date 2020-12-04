@@ -28,6 +28,7 @@ namespace Woodstock.BLL.Extensions
                 Photo = watch.Photo,
                 Price = watch.Price,
                 CountInStock = watch.CountInStock,
+                SaledCount = watch.SaledCount,
             };
         }
 
