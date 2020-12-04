@@ -9,7 +9,6 @@ namespace Woodstock.PL.Models.ViewModels
         public int ItemsOnPage { get; set; } = 12;
         public Filter Filter { get; set; }
         public SelectList ItemsOnPageVM { get; set; }
-        public string StartPrice { get; set; } = "0";
-        public string EndPrice { get; set; } = "0";
+        public PriceRangeViewModel PriceRange { get; set; }
     }
 }

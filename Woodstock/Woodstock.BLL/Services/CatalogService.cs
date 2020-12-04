@@ -4,35 +4,28 @@ using System.Linq;
 using Woodstock.DAL;
 using Woodstock.BLL.Extensions;
 using Infrastructure.Enums;
-using System.Text.RegularExpressions;
 
 namespace Woodstock.BLL.Services
 {
     public class CatalogService : ICatalogService
     {
         private readonly WoodstockDbContext _context;
-        private decimal _start;
-        private decimal _end;
+        private static PriceRangeDTO _priceRange;
 
         public CatalogService(WoodstockDbContext context)
         {
             _context = context;
-            _start = _context.Watches.Min(_ => _.Price);
-            _end = _context.Watches.Max(_ => _.Price);
+            _priceRange ??= InitRange();
         }
 
-        public (decimal start, decimal end) GetWatchesPriceRange() =>
-            (_start, _end);
+        public PriceRangeDTO GetWatchesPriceRange() => _priceRange;
 
-        public void ChangePriceRange(string start, string end)
-        {
-            _start = decimal.Parse( Regex.Replace(start, @"\s*", string.Empty));
-            _end = decimal.Parse(Regex.Replace(end, @"\s*", string.Empty));
-        }
+        public void ChangePriceRange(decimal start, decimal end) =>
+            (_priceRange.StartPrice, _priceRange.EndPrice) = (start, end);
 
         public IQueryable<WatchDTO> ReadAll() =>
             from watch in _context.Watches
-            where watch.CountInStock > 0 && (watch.Price >= _start && watch.Price <= _end)
+            where watch.CountInStock > 0 && (watch.Price >= _priceRange.StartPrice && watch.Price <= _priceRange.EndPrice)
             select new WatchDTO
             {
                 Id = watch.Id,
@@ -89,5 +82,20 @@ namespace Woodstock.BLL.Services
             ReadWomen().OrderByDescending(_ => _.SaledCount);
         public IQueryable<WatchDTO> ReadWomenOrderedByPopularityAsc() =>
             ReadWomen().OrderBy(_ => _.SaledCount);
+
+
+        private PriceRangeDTO InitRange()
+        {
+            var start = _context.Watches.Min(_ => _.Price);
+            var end = _context.Watches.Max(_ => _.Price);
+
+            return new PriceRangeDTO
+            {
+                StartBorder = start,
+                EndBorder = end,
+                StartPrice = start,
+                EndPrice = end,
+            };
+        }
     }
 }
