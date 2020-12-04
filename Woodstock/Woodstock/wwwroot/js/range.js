@@ -1,15 +1,15 @@
 document.querySelector('.zalupa').addEventListener('click', e => {
-    let start = document.querySelector('#first').innerHTML;
-    let end = document.querySelector('#second').innerHTML;
-    document.querySelector('.zalupa__start').value = start;
-    document.querySelector('.zalupa__end').value = end;
+    let start = document.querySelector('#first').innerHTML.replace(/\s/g, '');
+    let end = document.querySelector('#second').innerHTML.replace(/\s/g, '');
+    debugger
+    document.querySelector('.zalupa__start').value = +start;
+    document.querySelector('.zalupa__end').value = +end;
 });
 
 $('.slider').each(async function (e) {
     let promise = await $.get("/Catalog/GetPriceRange", (data) => {
         return data;
     });
-    console.dir(promise);
 
     var slider = $(this),
         width = slider.width(),
