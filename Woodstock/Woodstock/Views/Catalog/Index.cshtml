@@ -10,11 +10,13 @@
             <div class="filter__range">
                 <h3>filter by price</h3>
                 <div class="slider" data-value-0="#first" data-value-1="#second" data-range="#third"></div>
-                <form class="box__container" method="POST">
+                <form class="box__container" asp-route-ItemsOnPage="@Model.ItemsOnPage" asp-route-Filter="@Model.Filter" method="POST">
                     <div class="values">
-                        <div>$<a name="StartPrice" id="first"></a></div> - <div>$<a name="EndPrice" id="second"></a></div>
+                        <div>$<spam name="StartPrice" id="first"></spam></div> - <div>$<span name="EndPrice" id="second"></span></div>
+                        <input type="hidden" name="StartPrice" class="zalupa__start"/>
+                        <input type="hidden" name="EndPrice" class="zalupa__end"/>
                     </div>
-                    <input type="submit" value="Filter" class="submit__btn" />
+                    <input type="submit" value="Filter" class="submit__btn zalupa" />
                 </form>
             </div>
 

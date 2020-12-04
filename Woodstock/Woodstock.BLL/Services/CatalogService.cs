@@ -4,24 +4,35 @@ using System.Linq;
 using Woodstock.DAL;
 using Woodstock.BLL.Extensions;
 using Infrastructure.Enums;
+using System.Text.RegularExpressions;
 
 namespace Woodstock.BLL.Services
 {
     public class CatalogService : ICatalogService
     {
         private readonly WoodstockDbContext _context;
+        private decimal _start;
+        private decimal _end;
 
         public CatalogService(WoodstockDbContext context)
         {
             _context = context;
+            _start = _context.Watches.Min(_ => _.Price);
+            _end = _context.Watches.Max(_ => _.Price);
         }
 
         public (decimal start, decimal end) GetWatchesPriceRange() =>
-            (_context.Watches.Min(_ => _.Price), _context.Watches.Max(_ => _.Price));
+            (_start, _end);
+
+        public void ChangePriceRange(string start, string end)
+        {
+            _start = decimal.Parse( Regex.Replace(start, @"\s*", string.Empty));
+            _end = decimal.Parse(Regex.Replace(end, @"\s*", string.Empty));
+        }
 
         public IQueryable<WatchDTO> ReadAll() =>
             from watch in _context.Watches
-            where watch.CountInStock > 0
+            where watch.CountInStock > 0 && (watch.Price >= _start && watch.Price <= _end)
             select new WatchDTO
             {
                 Id = watch.Id,

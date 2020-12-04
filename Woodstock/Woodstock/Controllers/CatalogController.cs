@@ -21,6 +21,8 @@ namespace Woodstock.PL.Controllers
 
         public IActionResult Index(FilteredWatchViewModel filteredVM, int pageNum = 1)
         {
+            _catalogService.ChangePriceRange(filteredVM.StartPrice, filteredVM.EndPrice);
+
             var pagedResult = (filteredVM.Filter switch
             {
                 Filter.OrderByPriceAsc => _catalogService.ReadOrderedByPriceAsc(),
@@ -40,6 +42,8 @@ namespace Woodstock.PL.Controllers
 
         public IActionResult MensWatches(FilteredWatchViewModel filteredVM, int pageNum = 1)
         {
+            _catalogService.ChangePriceRange(filteredVM.StartPrice, filteredVM.EndPrice);
+
             var pagedResult = (filteredVM.Filter switch
             {
                 Filter.OrderByPriceAsc => _catalogService.ReadMenOrderedByPriceAsc(),
@@ -59,6 +63,8 @@ namespace Woodstock.PL.Controllers
 
         public IActionResult WomensWatches(FilteredWatchViewModel filteredVM, int pageNum = 1)
         {
+            _catalogService.ChangePriceRange(filteredVM.StartPrice, filteredVM.EndPrice);
+
             var pagedResult = (filteredVM.Filter switch
             {
                 Filter.OrderByPriceAsc => _catalogService.ReadWomenOrderedByPriceAsc(),

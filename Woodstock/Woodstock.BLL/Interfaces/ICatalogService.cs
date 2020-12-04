@@ -6,6 +6,8 @@ namespace Woodstock.BLL.Interfaces
     public interface ICatalogService
     {
         (decimal start, decimal end) GetWatchesPriceRange();
+        void ChangePriceRange(string start, string end);
+
 
         IQueryable<WatchDTO> ReadAll();
         IQueryable<WatchDTO> ReadOrderedByPriceDesc();
