@@ -1,12 +1,10 @@
-﻿@model ExternalRegisterBindingModel
+﻿@model ExternalRegisterViewModel
 
-@{
-    ViewData["Title"] = "Восстановление пароля";
-}
+@{ ViewData["Title"] = "External registration"; }
 
 <div class="recovery__main">
     <div class="recovery__container">
-        <h2 class="deda">Passworgd recovery</h2>
+        <h2 class="deda">External registration</h2>
         <form asp-controller="Account" asp-action="ExternalRegistration" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form">
             <div asp-validation-summary="ModelOnly"></div>
             <div class="form-group">
@@ -22,3 +20,8 @@
         </form>
     </div>
 </div>
+
+@section Scripts {
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

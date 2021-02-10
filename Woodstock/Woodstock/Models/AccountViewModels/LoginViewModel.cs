@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace Woodstock.PL.Models.BindingModels
+namespace Woodstock.PL.Models.AccountViewModels
 {
-    public class LoginBindingModel
+    public class LoginViewModel
     {
         [Required]
         [EmailAddress]
@@ -18,5 +18,6 @@ namespace Woodstock.PL.Models.BindingModels
 
         [DisplayName("Запомнить меня")]
         public bool RememberMe { get; set; }
+        public string ReturnUrl { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Woodstock.BLL.DTOs
+﻿namespace Woodstock.BLL.DTOs.Account
 {
     public class ResetPasswordDTO
     {

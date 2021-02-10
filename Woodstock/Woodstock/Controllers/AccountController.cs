@@ -3,9 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
 using Woodstock.BLL.DTOs;
+using Woodstock.BLL.DTOs.Account;
 using Woodstock.BLL.Interfaces;
 using Woodstock.Infrastructure;
-using Woodstock.PL.Models.BindingModels;
+using Woodstock.PL.Models.AccountViewModels;
 
 namespace Woodstock.PL.Controllers
 {
@@ -22,56 +23,69 @@ namespace Woodstock.PL.Controllers
             _emailService = emailService;
         }
 
-        public IActionResult LoginRegister(string returnUrl = "/")
+        [HttpGet]
+        public IActionResult Registration(string returnUrl = "/")
         {
-            return View(new LoginRegisterBindingModel { ReturnUrl = returnUrl });
+            var registerViewModel = new RegisterViewModel { ReturnUrl = returnUrl };
+            return View(registerViewModel);
+        }
+
+        [HttpGet]
+        public IActionResult Login(string returnUrl = "/")
+        {
+            var loginViewModel = new LoginViewModel { ReturnUrl = returnUrl };
+            return View(loginViewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginRegisterBindingModel loginRegisterBM)
+        public async Task<IActionResult> Login(LoginViewModel loginViewModel)
         {
             if (!ModelState.IsValid)
-                return View(nameof(LoginRegister), loginRegisterBM);
+                return View(nameof(Login), loginViewModel);
 
-            var userDTO = _mapper.Map<UserDTO>(loginRegisterBM.Login);
-            var signInResultDTO = await _accountService.LoginAsync(userDTO, loginRegisterBM.Login.RememberMe, false);
-            
-            if (!signInResultDTO.Succeeded)
-            {
-                ModelState.AddModelError(string.Empty, "Неверный логин или пароль");
-                return View(nameof(LoginRegister), loginRegisterBM);
-            }
-
-            return Redirect(loginRegisterBM.ReturnUrl);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Registration(LoginRegisterBindingModel loginRegisterBM)
-        {
-            if (!ModelState.IsValid)
-                return View(nameof(LoginRegister), loginRegisterBM);
-
-            var userDTO = _mapper.Map<UserDTO>(loginRegisterBM.Register);
-            var identityResult = await _accountService.RegisterAsync(userDTO, ClaimRoles.User);
-            
-            if (!identityResult.Succeeded)
-            {
-                foreach (var error in identityResult.Errors)
-                    ModelState.AddModelError(string.Empty, error.Description);
-                return View(nameof(LoginRegister), loginRegisterBM);
-            }
+            var loginModel = _mapper.Map<LoginDTO>(loginViewModel);
 
             try
             {
-                var confirmToken = await _accountService.GenerateEmailConfirmationAsync(userDTO.Email);
-                return await SendConfirmEmailAsync(confirmToken, userDTO.Email, loginRegisterBM.ReturnUrl);
+                await _accountService.LoginAsync(loginModel, false);
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                ModelState.AddModelError(string.Empty, e.Message);
-                return View(loginRegisterBM);
+                ModelState.AddModelError(string.Empty, ex.Message);
+                return View(nameof(Login), loginViewModel);
+            }
+
+            return Redirect(loginViewModel.ReturnUrl);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Registration(RegisterViewModel registerViewModel)
+        {
+            if (!ModelState.IsValid)
+                return View(nameof(Registration), registerViewModel);
+
+            var registerModel = _mapper.Map<RegisterDTO>(registerViewModel);
+
+            try
+            {
+                await _accountService.RegisterAsync(registerModel, ClaimRoles.User);
+
+                var confirmToken = await _accountService.GenerateEmailConfirmationAsync(registerModel.Email);
+
+                var callbackUrl = Url.Action("ConfirmEmail", "Account",
+                             new { registerModel.Email, confirmToken, registerViewModel.ReturnUrl }, HttpContext.Request.Scheme);
+
+                await _emailService.SendEmailAsync(registerModel.Email, "Confirm your action",
+                    $"Чтобы завершить регистрацию - перейдите по <a href='{callbackUrl}'>ссылке</a>");
+
+                return View("Notification", "Check your email");
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, ex.Message);
+                return View(nameof(Registration), registerViewModel);
             }
         }
 
@@ -101,42 +115,50 @@ namespace Woodstock.PL.Controllers
         {
             var redirectUrl = Url.Action(nameof(ExternalSignIn), "Account", new { returnUrl });
             var properties = _accountService.ConfigureExternalAuthentication(provider, redirectUrl);
-            
+
             return Challenge(properties, provider);
         }
 
         public async Task<IActionResult> ExternalSignIn(string returnUrl)
         {
-            var signInResult = await _accountService.ExternalLoginAsync();
-
-            if (signInResult.Succeeded)
+            try
+            {
+                await _accountService.ExternalLoginAsync();
                 return Redirect(returnUrl);
-            return View(nameof(ExternalRegistration), new ExternalRegisterBindingModel { ReturnUrl = returnUrl });
+            }
+            catch
+            {
+                return View(nameof(ExternalRegistration), new ExternalRegisterViewModel { ReturnUrl = returnUrl });
+            }
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ExternalRegistration(ExternalRegisterBindingModel extRegisterBM)
+        public async Task<IActionResult> ExternalRegistration(ExternalRegisterViewModel externalRegisterViewModel)
         {
-            var userDTO = _mapper.Map<UserDTO>(extRegisterBM);
-            var extRegisterIdentityResult = await _accountService.ExternalRegisterAsync(userDTO);
+            if (!ModelState.IsValid)
+                return View(externalRegisterViewModel);
 
-            if (!extRegisterIdentityResult.Succeeded)
-            {
-                foreach (var error in extRegisterIdentityResult.Errors)
-                    ModelState.AddModelError(string.Empty, error.Description);
-                return View(extRegisterBM);
-            }
+            var userModel = _mapper.Map<UserDTO>(externalRegisterViewModel);
 
             try
             {
-                var confirmToken = await _accountService.GenerateEmailConfirmationAsync(userDTO.Email);
-                return await SendConfirmEmailAsync(confirmToken, userDTO.Email, extRegisterBM.ReturnUrl);
+                await _accountService.ExternalRegisterAsync(userModel);
+
+                var confirmToken = await _accountService.GenerateEmailConfirmationAsync(userModel.Email);
+
+                var callbackUrl = Url.Action("ConfirmEmail", "Account",
+                             new { userModel.Email, confirmToken, externalRegisterViewModel.ReturnUrl }, HttpContext.Request.Scheme);
+
+                await _emailService.SendEmailAsync(userModel.Email, "Confirm your action",
+                    $"Для подтверждения привязки стороннего сервиса к учетной записи {userModel.Email} - перейдите по <a href='{callbackUrl}'>ссылке</a>");
+
+                return View("Notification", "Check your email");
             }
-            catch(Exception e)
+            catch (Exception ex)
             {
-                ModelState.AddModelError(string.Empty, e.Message);
-                return View(extRegisterBM);
+                ModelState.AddModelError(string.Empty, ex.Message);
+                return View(externalRegisterViewModel);
             }
         }
 
@@ -148,59 +170,54 @@ namespace Woodstock.PL.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ForgotPassword(ForgotPasswordBindingModel forgotPasswordBM)
+        public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel forgotPasswordViewModel)
         {
             if (!ModelState.IsValid)
-                return View(forgotPasswordBM);
+                return View(forgotPasswordViewModel);
 
             try
             {
-                var resetToken = await _accountService.GeneratePasswordResetTokenAsync(forgotPasswordBM.Email);
-                var callbackUrl = Url.Action(nameof(ResetPassword), "Account", 
-                                             new { resetToken, forgotPasswordBM.Email }, HttpContext.Request.Scheme);
+                var resetToken = await _accountService.GeneratePasswordResetTokenAsync(forgotPasswordViewModel.Email);
+                var callbackUrl = Url.Action(nameof(ResetPassword), "Account",
+                                             new { resetToken, forgotPasswordViewModel.Email }, HttpContext.Request.Scheme);
 
-                await _emailService.SendEmailAsync(forgotPasswordBM.Email, "Reset Password",
+                await _emailService.SendEmailAsync(forgotPasswordViewModel.Email, "Reset Password",
                     $"Для сброса пароля пройдите по ссылке: <a href='{callbackUrl}'>link</a>");
-            }
-            catch {}
 
-            return View("Notification", "Check your email");
+                return View("Notification", "Check your email");
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, ex.Message);
+                return View(forgotPasswordViewModel);
+            }
         }
-        
+
         [HttpGet]
         public IActionResult ResetPassword(string resetToken = null, string email = null)
         {
-            return View(new ResetPasswordBindingModel { Email = email, ResetToken = resetToken });
+            return View(new ResetPasswordViewModel { Email = email, ResetToken = resetToken });
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ResetPassword(ResetPasswordBindingModel resetPasswordBM)
+        public async Task<IActionResult> ResetPassword(ResetPasswordViewModel resetPasswordViewModel)
         {
             if (!ModelState.IsValid)
-                return View(resetPasswordBM);
+                return View(resetPasswordViewModel);
 
-            var resetPasswordDTO = _mapper.Map<ResetPasswordDTO>(resetPasswordBM);
-            var identityResult = await _accountService.ResetPasswordAsync(resetPasswordDTO);
-            if (!identityResult.Succeeded)
+            var resetPasswordModel = _mapper.Map<ResetPasswordDTO>(resetPasswordViewModel);
+
+            try
             {
-                foreach (var error in identityResult.Errors)
-                    ModelState.AddModelError(string.Empty, error.Description);
-                return View(resetPasswordBM);
+                await _accountService.ResetPasswordAsync(resetPasswordModel);
+                return View("Notification", "Password changed successfully");
             }
-
-            return View("Notification", "Password changed successfully");
-        }
-        
-        private async Task<IActionResult> SendConfirmEmailAsync(string confirmToken, string email, string returnUrl)
-        {
-            var callbackUrl = Url.Action("ConfirmEmail", "Account",
-                                         new { email, confirmToken, returnUrl }, HttpContext.Request.Scheme);
-
-            await _emailService.SendEmailAsync(email, "Confirm your account",
-                $"Чтобы закончить регистрацию - перейдите по <a href='{callbackUrl}'>ссылке</a>");
-
-            return View("Notification", "Check your email");
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, ex.Message);
+                return View(resetPasswordViewModel);
+            }
         }
     }
 }

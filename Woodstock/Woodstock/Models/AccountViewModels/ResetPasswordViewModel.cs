@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Woodstock.PL.Models.BindingModels
+namespace Woodstock.PL.Models.AccountViewModels
 {
-    public class ResetPasswordBindingModel
+    public class ResetPasswordViewModel
     {
         [Required]
         [StringLength(100, ErrorMessage = "Пароль должен содержать как минимум 6 символов", MinimumLength = 6)]

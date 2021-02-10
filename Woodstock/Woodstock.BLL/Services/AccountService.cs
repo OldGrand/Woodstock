@@ -1,12 +1,16 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using System;
-using System.Linq;
+using System.Security.Authentication;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Woodstock.BLL.DTOs;
+using Woodstock.BLL.DTOs.Account;
+using Woodstock.BLL.Extensions;
 using Woodstock.BLL.Interfaces;
 using Woodstock.DAL.Entities;
+using Woodstock.Infrastructure;
 
 namespace Woodstock.BLL.Services
 {
@@ -14,40 +18,38 @@ namespace Woodstock.BLL.Services
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
+        private readonly IMapper _mapper;
 
-        public AccountService(UserManager<User> userManager, SignInManager<User> signInManager)
+        public AccountService(UserManager<User> userManager, SignInManager<User> signInManager, IMapper mapper)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _mapper = mapper;
         }
 
-        public async Task<SignInResult> LoginAsync(UserDTO userDTO, bool isPersistent, bool lockoutOnFailure)
+        public async Task LoginAsync(LoginDTO loginModel, bool lockoutOnFailure)
         {
-            var user = await _userManager.FindByEmailAsync(userDTO.Email);
+            var user = await _userManager.FindByEmailAsync(loginModel.Email);
 
             if (user is null)
-                user = new User
-                {
-                    Email = userDTO.Email,
-                    UserName = userDTO.UserName
-                };
-            
-            var signInResult = await _signInManager.PasswordSignInAsync(user, userDTO.Password, 
-                                                                        isPersistent, lockoutOnFailure);
+            {
+                throw new AuthenticationException("Wrong login or password");
+            }
 
-            return signInResult;
+            var signInResult = await _signInManager.PasswordSignInAsync(user, loginModel.Password,
+                                                                        loginModel.RememberMe, lockoutOnFailure);
+            signInResult.ThrowExceptionOnFailure();
         }
 
-        public async Task<IdentityResult> RegisterAsync(UserDTO userDTO, string claimRole)
+        public async Task RegisterAsync(RegisterDTO registerModel, string claimRole = ClaimRoles.User)
         {
-            var user = new User
-            {
-                Email = userDTO.Email,
-                UserName = userDTO.UserName
-            };
-            await _userManager.CreateAsync(user, userDTO.Password);
+            var user = _mapper.Map<User>(registerModel);
+
+            var createIdentityResult = await _userManager.CreateAsync(user, registerModel.Password);
+            createIdentityResult.ThrowExceptionOnFailure();
+
             var identityResult = await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, claimRole));
-            return identityResult;
+            identityResult.ThrowExceptionOnFailure();
         }
 
         public async Task CompleteEmailConfirmationAsync(string email, string confirmToken)
@@ -55,8 +57,7 @@ namespace Woodstock.BLL.Services
             var user = await _userManager.FindByEmailAsync(email);
 
             var confirmEmailIdentityResult = await _userManager.ConfirmEmailAsync(user, confirmToken);
-            if (!confirmEmailIdentityResult.Succeeded)
-                throw new Exception(confirmEmailIdentityResult.Errors.FirstOrDefault().Description);
+            confirmEmailIdentityResult.ThrowExceptionOnFailure();
 
             await _signInManager.SignInAsync(user, false);
         }
@@ -71,32 +72,32 @@ namespace Woodstock.BLL.Services
             return _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
         }
 
-        public async Task<SignInResult> ExternalLoginAsync()
+        public async Task ExternalLoginAsync()
         {
             var externalLoginInfo = await _signInManager.GetExternalLoginInfoAsync();
-            var signInResult = await _signInManager.ExternalLoginSignInAsync(externalLoginInfo.LoginProvider, 
-                                                                 externalLoginInfo.ProviderKey, 
+            var signInResult = await _signInManager.ExternalLoginSignInAsync(externalLoginInfo.LoginProvider,
+                                                                 externalLoginInfo.ProviderKey,
                                                                  false, false);
-            return signInResult;
+            signInResult.ThrowExceptionOnFailure();
         }
 
-        public async Task<IdentityResult> ExternalRegisterAsync(UserDTO userDTO)
+        public async Task ExternalRegisterAsync(UserDTO userModel)
         {
             var externalLoginInfo = await _signInManager.GetExternalLoginInfoAsync();
-            var user = await _userManager.FindByEmailAsync(userDTO.Email);
+            var user = await _userManager.FindByEmailAsync(userModel.Email);
 
             if (user is null)
             {
                 user = new User
                 {
-                    Email = userDTO.Email,
-                    UserName = userDTO.UserName
+                    Email = userModel.Email,
+                    UserName = userModel.UserName
                 };
                 await _userManager.CreateAsync(user);
             }
 
             var identityResult = await _userManager.AddLoginAsync(user, externalLoginInfo);
-            return identityResult;
+            identityResult.ThrowExceptionOnFailure();
         }
 
         public async Task<string> GeneratePasswordResetTokenAsync(string email)
@@ -104,7 +105,7 @@ namespace Woodstock.BLL.Services
             var user = await _userManager.FindByEmailAsync(email);
 
             if (user is null || !await _userManager.IsEmailConfirmedAsync(user))
-                throw new Exception("Пользователь с указанной почтой не найден");
+                throw new Exception("User with specified e-mail not found");
 
             return await _userManager.GeneratePasswordResetTokenAsync(user);
         }
@@ -114,16 +115,16 @@ namespace Woodstock.BLL.Services
             var user = await _userManager.FindByEmailAsync(email);
 
             if (user is null)
-                throw new Exception("Пользователь с указанной почтой не найден");
+                throw new Exception("User with specified e-mail not found");
 
             return await _userManager.GenerateEmailConfirmationTokenAsync(user);
         }
 
-        public async Task<IdentityResult> ResetPasswordAsync(ResetPasswordDTO resetPasswordDTO)
+        public async Task ResetPasswordAsync(ResetPasswordDTO resetPasswordModel)
         {
-            var user = await _userManager.FindByEmailAsync(resetPasswordDTO.Email);
-            var identityResult = await _userManager.ResetPasswordAsync(user, resetPasswordDTO.ResetToken, resetPasswordDTO.Password);
-            return identityResult;
+            var user = await _userManager.FindByEmailAsync(resetPasswordModel.Email);
+            var identityResult = await _userManager.ResetPasswordAsync(user, resetPasswordModel.ResetToken, resetPasswordModel.Password);
+            identityResult.ThrowExceptionOnFailure();
         }
     }
 }

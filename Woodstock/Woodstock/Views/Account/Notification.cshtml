@@ -1,11 +1,14 @@
 ﻿@model string
 
-@{ 
-    ViewData["Title"] = "Notification";
-}
+@{ ViewData["Title"] = "Notification"; }
 
 <div class="notification__container">
     <div class="notification__block">
         <h3 class="notification">@Model</h3>
     </div>
 </div>
+
+@section Scripts {
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

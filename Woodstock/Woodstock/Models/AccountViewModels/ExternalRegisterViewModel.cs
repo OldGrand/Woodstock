@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Woodstock.PL.Models.BindingModels
+namespace Woodstock.PL.Models.AccountViewModels
 {
-    public class ExternalRegisterBindingModel
+    public class ExternalRegisterViewModel
     {
         [Required]
         [EmailAddress]

@@ -22,6 +22,8 @@ namespace Woodstock.DAL
 
         public WoodstockDbContext(DbContextOptions options) : base(options)
         {
+            Database.EnsureDeleted();
+            Database.EnsureCreated();
         }
 
         protected override void OnModelCreating(ModelBuilder builder)

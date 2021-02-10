@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Woodstock.PL.Models.BindingModels
+namespace Woodstock.PL.Models.AccountViewModels
 {
-    public class RegisterBindingModel
+    public class RegisterViewModel
     {
         [Required]
         [EmailAddress]
@@ -20,5 +20,6 @@ namespace Woodstock.PL.Models.BindingModels
         [Compare(nameof(Password), ErrorMessage = "Пароли не совпадают")]
         [Display(Name = "Подтвердить пароль")]
         public string PasswordConfirmation { get; set; }
+        public string ReturnUrl { get; set; }
     }
 }
