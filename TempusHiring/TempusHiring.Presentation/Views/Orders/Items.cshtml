@@ -1,0 +1,51 @@
+﻿@model IEnumerable<TempusHiring.Presentation.Models.ViewModels.OrderViewModel>
+
+@{
+    ViewData["Title"] = "Orders";
+}
+
+<div class="orders">
+    <div class="orders__header">
+        <h1 class="orders__header-title">Orders</h1>
+    </div>
+    <div class="orders__list">
+        @if (Model is null || Model.Count() == 0)
+        {
+            <h3>Your Orders is empty</h3>
+        }
+        @foreach (var item in Model)
+        {
+            <div class="order__item">
+                <div class="order__number">
+                    <span>Order number: @item.Id</span>
+                </div>
+                <div class="order__content">
+                    <div class="order__info2">
+                        <span class="order__info-item">Order date: @item.OrderDate</span>
+                        <span class="order__info-item">Total count: @item.TotalCount</span>
+                        <span class="order__info-item">Total price: @item.TotalPrice</span>
+                    </div>
+
+                    <div class="order__zakazi">
+                        @foreach (var watch in item.OrderWatchLinks)
+                        {
+                            <div class="order__watch">
+                                <div class="order__watch-content">
+                                    <img src="/images/Shop/@watch.Watch.Photo" alt="" class="order__item-img">
+                                    <div class="order__watch-block">
+                                        <span class="order__item-title">@watch.Watch.Title</span>
+                                        <span class="order__item-descr">@watch.Watch.Description</span>
+                                        <span class="order__item-price">
+                                            $ @(watch.Watch.Price * watch.Count)
+                                            <span class="price__details">($ @watch.Watch.Price X @watch.Count)</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
