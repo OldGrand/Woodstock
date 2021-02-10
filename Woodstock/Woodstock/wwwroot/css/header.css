@@ -57,6 +57,10 @@
     transition: fill ease .5s;
 }
 
+.list__item {
+    display: flex;
+}
+
 .list__link {
     display: block;
     padding: 16px 15px;

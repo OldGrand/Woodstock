@@ -124,6 +124,10 @@
     transition: fill ease .2s;
 }
 
+.svg__deda {
+    width: 40px !important;
+}
+
 .social-form__link + .social-form__link {
     margin-left: 15px;
 }
@@ -144,4 +148,9 @@
     font-weight: 300;
     font-size: 12px;
     list-style: none;
+}
+
+.extended-references {
+    display: flex;
+    flex-direction: column;
 }

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Woodstock.BLL.DTOs;
-using Woodstock.PL.Models.BindingModels;
+using Woodstock.BLL.DTOs.Account;
+using Woodstock.PL.Models.AccountViewModels;
 using Woodstock.PL.Models.ViewModels;
 
 namespace Woodstock.PL.Profiles
@@ -9,16 +10,19 @@ namespace Woodstock.PL.Profiles
     {
         public ProfilePL()
         {
-            CreateMap<ResetPasswordDTO, ResetPasswordBindingModel>().ReverseMap();
-            CreateMap<ExternalRegisterBindingModel, UserDTO>()
+            CreateMap<ResetPasswordDTO, ResetPasswordViewModel>().ReverseMap();
+            CreateMap<ExternalRegisterViewModel, UserDTO>()
                 .ForMember(dst => dst.UserName, src => src.MapFrom(_ => _.Email))
                 .ReverseMap();
-            CreateMap<LoginBindingModel, UserDTO>()
+
+            CreateMap<LoginViewModel, UserDTO>()
                 .ForMember(dst => dst.UserName, src => src.MapFrom(_ => _.Email))
                 .ReverseMap();
-            CreateMap<RegisterBindingModel, UserDTO>()
+
+            CreateMap<RegisterViewModel, UserDTO>()
                 .ForMember(dst => dst.UserName, src => src.MapFrom(_ => _.Email))
                 .ReverseMap();
+
             CreateMap<WatchDTO, WatchViewModel>().ReverseMap();
             CreateMap<UserDTO, UserViewModel>().ReverseMap();
             CreateMap<ShoppingCartDTO, ShoppingCartViewModel>().ReverseMap();

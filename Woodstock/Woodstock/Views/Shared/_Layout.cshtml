@@ -56,11 +56,14 @@
                                 }
                                 else
                                 {
-                                    <a asp-controller="Account" asp-action="LoginRegister" class="list__link">
+                                    <a asp-controller="Account" asp-action="Login" class="list__link">
                                         <svg class="login-svg svg" viewBox="0 0 512 512">
                                             <use xlink:href="/images/icons/login.svg#login"></use>
                                         </svg>
-                                        LOGIN / REGISTER
+                                        LOGIN
+                                    </a>
+                                    <a asp-controller="Account" asp-action="Registration" class="list__link">
+                                        REGISTER
                                     </a>
                                 }
                             </li>

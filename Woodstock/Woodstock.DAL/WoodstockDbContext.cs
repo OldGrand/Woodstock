@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
+using System;
 using Woodstock.DAL.Entities;
 
 namespace Woodstock.DAL
@@ -26,6 +28,16 @@ namespace Woodstock.DAL
             Database.EnsureCreated();
         }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.LogTo(_ =>
+            {
+                Console.WriteLine(_);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"{Environment.NewLine}{new string('*', 80)}{Environment.NewLine}");
+                Console.ResetColor();
+            }, new[] { RelationalEventId.CommandExecuted });
+        }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Watch>().Property(p => p.Gender)
