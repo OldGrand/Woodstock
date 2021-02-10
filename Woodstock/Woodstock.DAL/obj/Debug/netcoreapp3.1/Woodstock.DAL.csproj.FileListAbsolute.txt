@@ -1,9 +1,0 @@
-C:\Users\Sergey\Desktop\Woodstock\Woodstock\Woodstock.DAL\bin\Debug\netcoreapp3.1\Woodstock.DAL.deps.json
-C:\Users\Sergey\Desktop\Woodstock\Woodstock\Woodstock.DAL\bin\Debug\netcoreapp3.1\Woodstock.DAL.dll
-C:\Users\Sergey\Desktop\Woodstock\Woodstock\Woodstock.DAL\obj\Debug\netcoreapp3.1\Woodstock.DAL.AssemblyInfoInputs.cache
-C:\Users\Sergey\Desktop\Woodstock\Woodstock\Woodstock.DAL\obj\Debug\netcoreapp3.1\Woodstock.DAL.AssemblyInfo.cs
-C:\Users\Sergey\Desktop\Woodstock\Woodstock\Woodstock.DAL\bin\Debug\netcoreapp3.1\Woodstock.DAL.pdb
-C:\Users\Sergey\Desktop\Woodstock\Woodstock\Woodstock.DAL\obj\Debug\netcoreapp3.1\Woodstock.DAL.csproj.CoreCompileInputs.cache
-C:\Users\Sergey\Desktop\Woodstock\Woodstock\Woodstock.DAL\obj\Debug\netcoreapp3.1\Woodstock.DAL.dll
-C:\Users\Sergey\Desktop\Woodstock\Woodstock\Woodstock.DAL\obj\Debug\netcoreapp3.1\Woodstock.DAL.pdb
-C:\Users\Sergey\Desktop\Woodstock\Woodstock\Woodstock.DAL\obj\Debug\netcoreapp3.1\Woodstock.DAL.csprojAssemblyReference.cache
